@@ -13,24 +13,28 @@
       
       
       
+        <link rel="prev" href="../regex/">
+      
+      
+        <link rel="next" href="../../case-studies/green-grid/">
       
       
         
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
-        <title>PySpark Learning Notes</title>
+        <title>Data Masking - PySpark Learning Notes</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#data-masking" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -83,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="PySpark Learning Notes" class="md-header__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
+    <a href="../.." title="PySpark Learning Notes" class="md-header__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -103,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Data Masking
             
           </span>
         </div>
@@ -202,7 +211,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -219,11 +228,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/concepts/unity-catalog/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../unity-catalog/" class="md-tabs__link">
           
   
   
@@ -243,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/case-studies/green-grid/" class="md-tabs__link">
+        <a href="../../case-studies/green-grid/" class="md-tabs__link">
           
   
   
@@ -277,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="PySpark Learning Notes" class="md-nav__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
+    <a href="../.." title="PySpark Learning Notes" class="md-nav__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -295,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -319,26 +330,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -356,7 +372,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -374,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/unity-catalog/" class="md-nav__link">
+      <a href="../unity-catalog/" class="md-nav__link">
         
   
   
@@ -402,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/data-ingestion/" class="md-nav__link">
+      <a href="../data-ingestion/" class="md-nav__link">
         
   
   
@@ -430,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/schema-definition/" class="md-nav__link">
+      <a href="../schema-definition/" class="md-nav__link">
         
   
   
@@ -458,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/data-quality/" class="md-nav__link">
+      <a href="../data-quality/" class="md-nav__link">
         
   
   
@@ -486,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/pii-handling/" class="md-nav__link">
+      <a href="../pii-handling/" class="md-nav__link">
         
   
   
@@ -514,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/joins/" class="md-nav__link">
+      <a href="../joins/" class="md-nav__link">
         
   
   
@@ -542,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/business-logic/" class="md-nav__link">
+      <a href="../business-logic/" class="md-nav__link">
         
   
   
@@ -570,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/wildcards/" class="md-nav__link">
+      <a href="../wildcards/" class="md-nav__link">
         
   
   
@@ -598,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/regex/" class="md-nav__link">
+      <a href="../regex/" class="md-nav__link">
         
   
   
@@ -623,10 +639,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/concepts/data-masking/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Masking
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -642,6 +685,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#youve-seen-this-your-whole-life" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        You've Seen This Your Whole Life
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#masking-vs-hashing-whats-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masking vs Hashing — What's the Difference?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-masking-works-in-pyspark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Masking Works in PySpark
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-query-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Power Query Equivalent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters-in-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters in a Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -713,7 +831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/case-studies/green-grid/" class="md-nav__link">
+      <a href="../../case-studies/green-grid/" class="md-nav__link">
         
   
   
@@ -741,7 +859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/case-studies/santeflux/" class="md-nav__link">
+      <a href="../../case-studies/santeflux/" class="md-nav__link">
         
   
   
@@ -786,6 +904,71 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#youve-seen-this-your-whole-life" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        You've Seen This Your Whole Life
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#masking-vs-hashing-whats-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masking vs Hashing — What's the Difference?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-masking-works-in-pyspark" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Masking Works in PySpark
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-query-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Power Query Equivalent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters-in-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters in a Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -798,8 +981,155 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+
+<h1 id="data-masking">Data Masking<a class="headerlink" href="#data-masking" title="Permanent link">&para;</a></h1>
+<h2 id="youve-seen-this-your-whole-life">You've Seen This Your Whole Life<a class="headerlink" href="#youve-seen-this-your-whole-life" title="Permanent link">&para;</a></h2>
+<p>Look at an ATM receipt. Your card number doesn't show as <code>4567 8901 2345 6789</code>. It shows as <code>XXXX XXXX XXXX 6789</code>.</p>
+<p>That's data masking. The real value exists in the database — but what gets displayed or stored in a report is partially hidden so anyone who accidentally sees it can't misuse it.</p>
+<p><strong>Indian examples you'll instantly recognise:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Real Value</th>
+<th>Masked Version</th>
+<th>Where You See This</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>4567 8901 2345 6789</code></td>
+<td><code>XXXX XXXX XXXX 6789</code></td>
+<td>ATM receipts, bank statements</td>
+</tr>
+<tr>
+<td><code>9876 5432 1098</code> (Aadhaar)</td>
+<td><code>XXXX XXXX 1098</code></td>
+<td>DigiLocker, UIDAI documents</td>
+</tr>
+<tr>
+<td><code>ABCDE1234F</code> (PAN)</td>
+<td><code>XXXXXXX34F</code></td>
+<td>Form 26AS, ITR documents</td>
+</tr>
+<tr>
+<td><code>9876543210</code> (mobile)</td>
+<td><code>98XXXXXX10</code></td>
+<td>OTP screens, delivery apps</td>
+</tr>
+</tbody>
+</table>
+<p>UIDAI actually <strong>legally mandates</strong> Aadhaar masking — you are not allowed to display a full Aadhaar number on any printed or digital document. So data masking isn't just good practice, sometimes it's the law.</p>
+<hr />
+<h2 id="masking-vs-hashing-whats-the-difference">Masking vs Hashing — What's the Difference?<a class="headerlink" href="#masking-vs-hashing-whats-the-difference" title="Permanent link">&para;</a></h2>
+<p>We covered hashing in the <a href="../pii-handling/">PII Handling</a> page. Here's how they compare:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hashing</th>
+<th>Masking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What happens</td>
+<td>Full value replaced with an unreadable code</td>
+<td>Part of the value replaced with X</td>
+</tr>
+<tr>
+<td>Can you read it?</td>
+<td>No — completely unrecognisable</td>
+<td>Partially — last 4 digits still visible</td>
+</tr>
+<tr>
+<td>Reversible?</td>
+<td>No</td>
+<td>Original is still stored safely elsewhere</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Analytics pipelines — you never need the real value</td>
+<td>Reports and documents — humans need to partially verify it</td>
+</tr>
+</tbody>
+</table>
+<p><strong>When to use which:</strong>
+- <strong>Hash</strong> the email address in your billing pipeline — analysts don't need real emails to do their job
+- <strong>Mask</strong> the Aadhaar on a printed report — the person needs to confirm it's their number, but you don't expose all 12 digits</p>
+<hr />
+<h2 id="how-masking-works-in-pyspark">How Masking Works in PySpark<a class="headerlink" href="#how-masking-works-in-pyspark" title="Permanent link">&para;</a></h2>
+<p>You use <code>regexp_replace()</code> — find a pattern in the text, replace it with X's.</p>
+<p><strong>Mask first 8 digits of an Aadhaar number:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">regexp_replace</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df_masked</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">&quot;aadhaar_masked&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">regexp_replace</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">aadhaar</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;^[0-9]</span><span class="si">{8}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;XXXXXXXX&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>987654321098</code></td>
+<td><code>XXXXXXXX1098</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mask middle digits of a mobile number:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df_masked</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;mobile_masked&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">regexp_replace</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mobile</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;([0-9]</span><span class="si">{2}</span><span class="s1">)[0-9]</span><span class="si">{6}</span><span class="s1">([0-9]</span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="p">,</span> <span class="s1">&#39;$1XXXXXX$2&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>9876543210</code></td>
+<td><code>98XXXXXX10</code></td>
+</tr>
+</tbody>
+</table>
+<p>Don't worry about the exact regex pattern yet — that's covered in the <a href="../regex/">Regex</a> page. The point here is that <code>regexp_replace</code> is the PySpark function that does the masking.</p>
+<hr />
+<h2 id="the-power-query-equivalent">The Power Query Equivalent<a class="headerlink" href="#the-power-query-equivalent" title="Permanent link">&para;</a></h2>
+<p>In Power Query you've used <strong>Replace Values</strong> — type the exact value you want to find, type what to replace it with. Masking in PySpark is the same idea, except instead of an exact value you give it a pattern (a regex). That means it works across millions of rows with different values, not just one specific value.</p>
+<hr />
+<h2 id="why-this-matters-in-a-pipeline">Why This Matters in a Pipeline<a class="headerlink" href="#why-this-matters-in-a-pipeline" title="Permanent link">&para;</a></h2>
+<p>In a real data pipeline, raw data comes in with full PII — full Aadhaar, full mobile numbers, full account numbers. By the time that data reaches a report or a downstream team, masking ensures:</p>
+<ul>
+<li>Analysts can work with the data without seeing full sensitive values</li>
+<li>If a report is accidentally shared, the damage is limited</li>
+<li>You stay compliant with regulations like UIDAI's Aadhaar masking mandate</li>
+</ul>
+<p>The rule is simple: <strong>mask at the point where data leaves the secure pipeline and enters a report or shared table.</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -842,10 +1172,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

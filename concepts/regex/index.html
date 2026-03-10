@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../pii-handling/">
+        <link rel="prev" href="../wildcards/">
       
       
-        <link rel="next" href="../business-logic/">
+        <link rel="next" href="../data-masking/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Joins in PySpark - PySpark Learning Notes</title>
+        <title>Regex - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#joins-in-pyspark" class="md-skip">
+        <a href="#regex-regular-expressions" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Joins in PySpark
+              Regex
             
           </span>
         </div>
@@ -527,37 +527,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Joins in PySpark
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../joins/" class="md-nav__link">
         
   
   
@@ -573,103 +546,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#good-news-you-already-know-this" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Good News — You Already Know This
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#join-syntax-breakdown" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Join Syntax Breakdown
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#join-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Join Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#chaining-multiple-joins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Chaining Multiple Joins
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-duplicate-column-problem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Duplicate Column Problem
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#always-check-row-counts-after-a-join" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Always Check Row Counts After a Join
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -735,10 +611,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../regex/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regex
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -754,6 +657,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is Regex?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reading-a-regex-pattern-indian-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading a Regex Pattern — Indian Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading a Regex Pattern — Indian Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-indian-mobile-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1 — Indian Mobile Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-pan-card-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2 — PAN Card Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-aadhaar-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3 — Aadhaar Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-symbols-youll-see-most-often" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Symbols You'll See Most Often
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-do-we-need-regex-in-data-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Do We Need Regex in Data Engineering?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Do We Need Regex in Data Engineering?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validation-is-this-data-actually-valid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validation — Is this data actually valid?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-extraction-pull-a-pattern-out-of-messy-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Extraction — Pull a pattern out of messy text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-masking-hide-parts-of-sensitive-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Masking — Hide parts of sensitive values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-query-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Power Query Comparison
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-thing-to-remember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One Thing to Remember
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -936,10 +1003,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#good-news-you-already-know-this" class="md-nav__link">
+  <a href="#what-is-regex" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Good News — You Already Know This
+        What Is Regex?
       
     </span>
   </a>
@@ -947,10 +1014,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#join-syntax-breakdown" class="md-nav__link">
+  <a href="#reading-a-regex-pattern-indian-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Syntax Breakdown
+        Reading a Regex Pattern — Indian Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reading a Regex Pattern — Indian Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-indian-mobile-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 1 — Indian Mobile Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-pan-card-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 2 — PAN Card Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-aadhaar-number" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3 — Aadhaar Number
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-symbols-youll-see-most-often" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Symbols You'll See Most Often
       
     </span>
   </a>
@@ -958,10 +1075,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#join-types" class="md-nav__link">
+  <a href="#why-do-we-need-regex-in-data-engineering" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Types
+        Why Do We Need Regex in Data Engineering?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Do We Need Regex in Data Engineering?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validation-is-this-data-actually-valid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validation — Is this data actually valid?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-extraction-pull-a-pattern-out-of-messy-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Extraction — Pull a pattern out of messy text
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-masking-hide-parts-of-sensitive-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Masking — Hide parts of sensitive values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-query-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Power Query Comparison
       
     </span>
   </a>
@@ -969,43 +1136,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#chaining-multiple-joins" class="md-nav__link">
+  <a href="#one-thing-to-remember" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Chaining Multiple Joins
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-duplicate-column-problem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Duplicate Column Problem
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#always-check-row-counts-after-a-join" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Always Check Row Counts After a Join
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary
+        One Thing to Remember
       
     </span>
   </a>
@@ -1029,153 +1163,189 @@
 
 
 
-<h1 id="joins-in-pyspark">Joins in PySpark<a class="headerlink" href="#joins-in-pyspark" title="Permanent link">&para;</a></h1>
-<h2 id="good-news-you-already-know-this">Good News — You Already Know This<a class="headerlink" href="#good-news-you-already-know-this" title="Permanent link">&para;</a></h2>
-<p>If you know SQL JOINs, you already understand PySpark joins. The logic is identical. The only thing that changes is how you write it.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- SQL</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FROM</span><span class="w"> </span><span class="n">clean_readings</span><span class="w"> </span><span class="n">r</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">customer_pii</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">meter_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">MeterID</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">pricing_plans</span><span class="w"> </span><span class="n">pl</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">PlanID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pl</span><span class="p">.</span><span class="n">PlanID</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># PySpark — same join, different syntax</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_clean</span> \
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pii</span><span class="p">,</span>   <span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span> <span class="o">==</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">MeterID</span><span class="p">,</span>   <span class="s2">&quot;left&quot;</span><span class="p">)</span> \
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_plans</span><span class="p">,</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">PlanID</span>     <span class="o">==</span> <span class="n">df_plans</span><span class="o">.</span><span class="n">PlanID</span><span class="p">,</span>  <span class="s2">&quot;left&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Same result. Different shape.</p>
+<h1 id="regex-regular-expressions">Regex (Regular Expressions)<a class="headerlink" href="#regex-regular-expressions" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-regex">What Is Regex?<a class="headerlink" href="#what-is-regex" title="Permanent link">&para;</a></h2>
+<p>Regex = Regular Expression. Forget the name — it sounds scarier than it is.</p>
+<p><strong>Regex is a way of writing a pattern so a computer can find, validate, or replace text that matches that pattern.</strong></p>
+<p>Think of it like this. If someone asked you to go through 10,000 forms and circle every mobile number — how would you know what's a mobile number? You'd look for something that:</p>
+<ul>
+<li>Is 10 digits long</li>
+<li>Starts with 6, 7, 8, or 9</li>
+<li>Has no letters in it</li>
+</ul>
+<p>You just described a pattern in your head. Regex is how you write that same pattern in code so the computer does the job in seconds across millions of rows.</p>
 <hr />
-<h2 id="join-syntax-breakdown">Join Syntax Breakdown<a class="headerlink" href="#join-syntax-breakdown" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_left</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_right</span><span class="p">,</span> <span class="n">join_condition</span><span class="p">,</span> <span class="n">join_type</span><span class="p">)</span>
+<h2 id="reading-a-regex-pattern-indian-examples">Reading a Regex Pattern — Indian Examples<a class="headerlink" href="#reading-a-regex-pattern-indian-examples" title="Permanent link">&para;</a></h2>
+<h3 id="example-1-indian-mobile-number">Example 1 — Indian Mobile Number<a class="headerlink" href="#example-1-indian-mobile-number" title="Permanent link">&para;</a></h3>
+<p><strong>The rule:</strong> 10 digits, must start with 6, 7, 8, or 9.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Plain English:   &quot;starts with 6/7/8/9, then 9 more digits&quot;
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Regex:            ^[6-9][0-9]{9}$
+</code></pre></div>
+<p>Breaking it down piece by piece:</p>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^</code></td>
+<td>Start of the text — nothing before this</td>
+</tr>
+<tr>
+<td><code>[6-9]</code></td>
+<td>One digit that is 6, 7, 8, or 9</td>
+</tr>
+<tr>
+<td><code>[0-9]</code></td>
+<td>Any digit from 0 to 9</td>
+</tr>
+<tr>
+<td><code>{9}</code></td>
+<td>Exactly 9 times (applies to the thing before it)</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>End of the text — nothing after this</td>
+</tr>
+</tbody>
+</table>
+<p>So the full pattern says: <em>"Start, then one digit between 6 and 9, then exactly 9 more digits, then end."</em></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>9876543210  →  ✅ valid
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>1234567890  →  ❌ starts with 1
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>98765       →  ❌ only 5 digits
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>98765432101 →  ❌ 11 digits
+</code></pre></div>
+<hr />
+<h3 id="example-2-pan-card-number">Example 2 — PAN Card Number<a class="headerlink" href="#example-2-pan-card-number" title="Permanent link">&para;</a></h3>
+<p><strong>The rule:</strong> 5 uppercase letters, then 4 digits, then 1 uppercase letter → <code>ABCDE1234F</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Plain English:   &quot;5 uppercase letters, 4 digits, 1 uppercase letter&quot;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Regex:            ^[A-Z]{5}[0-9]{4}[A-Z]{1}$
 </code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Part</th>
+<th>Piece</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[A-Z]{5}</code></td>
+<td>Exactly 5 uppercase letters (A through Z)</td>
+</tr>
+<tr>
+<td><code>[0-9]{4}</code></td>
+<td>Exactly 4 digits</td>
+</tr>
+<tr>
+<td><code>[A-Z]{1}</code></td>
+<td>Exactly 1 uppercase letter</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ABCDE1234F  →  ✅ valid PAN
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ABCDE123F   →  ❌ only 3 digits
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>abcde1234f  →  ❌ lowercase not allowed
+</code></pre></div>
+<hr />
+<h3 id="example-3-aadhaar-number">Example 3 — Aadhaar Number<a class="headerlink" href="#example-3-aadhaar-number" title="Permanent link">&para;</a></h3>
+<p><strong>The rule:</strong> Exactly 12 digits.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Regex:   ^[0-9]{12}$
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>987654321098   →  ✅ valid
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>98765432109    →  ❌ only 11 digits
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>9876543210AB   →  ❌ contains letters
+</code></pre></div>
+<hr />
+<h2 id="the-symbols-youll-see-most-often">The Symbols You'll See Most Often<a class="headerlink" href="#the-symbols-youll-see-most-often" title="Permanent link">&para;</a></h2>
+<p>You don't need to memorise all of regex. These 6 building blocks cover 90% of what you'll encounter:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
 <th>Example</th>
-<th>What it is</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>df_left</code></td>
-<td><code>df_clean</code></td>
-<td>Your primary table (like the FROM table in SQL)</td>
+<td><code>[0-9]</code></td>
+<td>Any single digit</td>
+<td><code>[0-9]</code> matches <code>4</code></td>
 </tr>
 <tr>
-<td><code>df_right</code></td>
-<td><code>df_pii</code></td>
-<td>The table you're joining to</td>
+<td><code>[A-Z]</code></td>
+<td>Any single uppercase letter</td>
+<td><code>[A-Z]</code> matches <code>B</code></td>
 </tr>
 <tr>
-<td><code>join_condition</code></td>
-<td><code>df_clean.meter_id == df_pii.MeterID</code></td>
-<td>The ON clause</td>
+<td><code>[a-z]</code></td>
+<td>Any single lowercase letter</td>
+<td><code>[a-z]</code> matches <code>b</code></td>
 </tr>
 <tr>
-<td><code>join_type</code></td>
-<td><code>"left"</code></td>
-<td>INNER, LEFT, RIGHT, OUTER</td>
+<td><code>{n}</code></td>
+<td>Exactly n times</td>
+<td><code>[0-9]{4}</code> matches <code>1234</code></td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>Start of text</td>
+<td><code>^9</code> means must start with 9</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>End of text</td>
+<td><code>0$</code> means must end with 0</td>
 </tr>
 </tbody>
 </table>
-<p>Note: in PySpark the join condition uses <code>==</code> (two equals signs), not <code>=</code> like SQL.</p>
 <hr />
-<h2 id="join-types">Join Types<a class="headerlink" href="#join-types" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>SQL</th>
-<th>PySpark</th>
-<th>Returns</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>INNER JOIN</code></td>
-<td><code>"inner"</code></td>
-<td>Only matching rows from both sides</td>
-</tr>
-<tr>
-<td><code>LEFT JOIN</code></td>
-<td><code>"left"</code></td>
-<td>All rows from left, matching from right (null if no match)</td>
-</tr>
-<tr>
-<td><code>RIGHT JOIN</code></td>
-<td><code>"right"</code></td>
-<td>All rows from right, matching from left</td>
-</tr>
-<tr>
-<td><code>FULL OUTER JOIN</code></td>
-<td><code>"outer"</code></td>
-<td>All rows from both sides</td>
-</tr>
-</tbody>
-</table>
-<p><strong>In most pipelines, you'll use <code>"left"</code>.</strong> You keep all your primary records and attach extra data where it exists.</p>
-<hr />
-<h2 id="chaining-multiple-joins">Chaining Multiple Joins<a class="headerlink" href="#chaining-multiple-joins" title="Permanent link">&para;</a></h2>
-<p>In SQL you write multiple JOINs in one query. In PySpark you chain them — each <code>.join()</code> adds another join:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_clean</span> \
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pii</span><span class="p">,</span>   <span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span> <span class="o">==</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">MeterID</span><span class="p">,</span>   <span class="s2">&quot;left&quot;</span><span class="p">)</span> \
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_plans</span><span class="p">,</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">PlanID</span>     <span class="o">==</span> <span class="n">df_plans</span><span class="o">.</span><span class="n">PlanID</span><span class="p">,</span>  <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<h2 id="why-do-we-need-regex-in-data-engineering">Why Do We Need Regex in Data Engineering?<a class="headerlink" href="#why-do-we-need-regex-in-data-engineering" title="Permanent link">&para;</a></h2>
+<p>Three jobs regex does in every real pipeline:</p>
+<h3 id="1-validation-is-this-data-actually-valid">1. Validation — Is this data actually valid?<a class="headerlink" href="#1-validation-is-this-data-actually-valid" title="Permanent link">&para;</a></h3>
+<p>Before processing a million rows, check that the mobile number column actually contains mobile numbers. Catch junk data before it corrupts your results.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># In PySpark — keep only rows with valid Indian mobile numbers</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df_valid</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mobile</span><span class="o">.</span><span class="n">rlike</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[6-9][0-9]</span><span class="si">{9}</span><span class="s1">$&#39;</span><span class="p">))</span>
 </code></pre></div>
-<p>The <code>\</code> at the end of each line is just a line continuation — it tells Python "the code continues on the next line". Same result as writing it all on one line, just more readable.</p>
-<hr />
-<h2 id="the-duplicate-column-problem">The Duplicate Column Problem<a class="headerlink" href="#the-duplicate-column-problem" title="Permanent link">&para;</a></h2>
-<p>This is the one thing PySpark handles differently from SQL — and it will catch you out if you're not ready for it.</p>
-<p><strong>The problem:</strong> When you join two DataFrames that both have a column called <code>meter_id</code>, both copies end up in the result. PySpark keeps both, and when you try to reference <code>meter_id</code> later, it doesn't know which one you mean.</p>
-<p>In SQL this would just be an ambiguous column error. In PySpark it's the same — but you have to resolve it yourself by explicitly dropping the duplicate.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_clean</span> \
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pii</span><span class="p">,</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span> <span class="o">==</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">MeterID</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span><span class="p">)</span>    <span class="c1"># ← drop the copy from df_clean</span>
+<p><code>rlike()</code> is PySpark's "does this match the regex pattern?" function.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Keep only rows with valid PAN numbers</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df_valid_pan</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">pan</span><span class="o">.</span><span class="n">rlike</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Z]</span><span class="si">{5}</span><span class="s1">[0-9]</span><span class="si">{4}</span><span class="s1">[A-Z]</span><span class="si">{1}</span><span class="s1">$&#39;</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Use <code>df_name.column_name</code> when dropping, not just the column name as a string.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Safe — drops only the meter_id from df_clean</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Risky — drops ALL columns named meter_id (both copies)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;meter_id&quot;</span><span class="p">)</span>
+<p>In SQL terms, this is equivalent to:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">mobile</span><span class="w"> </span><span class="n">REGEXP</span><span class="w"> </span><span class="s1">&#39;^[6-9][0-9]{9}$&#39;</span>
+</code></pre></div></p>
+<h3 id="2-extraction-pull-a-pattern-out-of-messy-text">2. Extraction — Pull a pattern out of messy text<a class="headerlink" href="#2-extraction-pull-a-pattern-out-of-messy-text" title="Permanent link">&para;</a></h3>
+<p>Imagine a freeform notes column: <code>"Customer called, Aadhaar 987654321098 submitted for KYC"</code>. Regex can pull the 12-digit Aadhaar number out of that sentence automatically.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">regexp_extract</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="s2">&quot;aadhaar_extracted&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">regexp_extract</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;[0-9]</span><span class="si">{12}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">)</span>
 </code></pre></div>
-<hr />
-<h2 id="always-check-row-counts-after-a-join">Always Check Row Counts After a Join<a class="headerlink" href="#always-check-row-counts-after-a-join" title="Permanent link">&para;</a></h2>
-<p>This is the PySpark equivalent of checking your SQL result set:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before join: </span><span class="si">{</span><span class="n">df_clean</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After join:  </span><span class="si">{</span><span class="n">df_joined</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<p><code>regexp_extract</code> finds the first match of the pattern in the text and returns it as a new column.</p>
+<h3 id="3-masking-hide-parts-of-sensitive-values">3. Masking — Hide parts of sensitive values<a class="headerlink" href="#3-masking-hide-parts-of-sensitive-values" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">regexp_replace</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Mask first 8 digits of Aadhaar</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">df_masked</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="s2">&quot;aadhaar_masked&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">regexp_replace</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">aadhaar</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;^[0-9]</span><span class="si">{8}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;XXXXXXXX&#39;</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># 987654321098 → XXXXXXXX1098</span>
 </code></pre></div>
-<p>For a LEFT JOIN: the after count should be <strong>equal to or greater than</strong> the before count.
-- Equal = every row matched exactly once (ideal)
-- Greater = some rows matched multiple times (duplicate keys on the right side — investigate)
-- Less = impossible with a left join (if this happens, something went wrong)</p>
+<p><code>regexp_replace</code> finds the pattern and replaces it — like Find &amp; Replace in Excel, but working on a pattern across millions of rows instead of one exact value.</p>
 <hr />
-<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>SQL</th>
-<th>PySpark</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>FROM a LEFT JOIN b ON a.id = b.id</code></td>
-<td><code>a.join(b, a.id == b.id, "left")</code></td>
-</tr>
-<tr>
-<td>Multiple JOINs</td>
-<td>Chain <code>.join()</code> calls</td>
-</tr>
-<tr>
-<td>Ambiguous columns</td>
-<td>Drop duplicates explicitly with <code>.drop(df.column)</code></td>
-</tr>
-<tr>
-<td>Check row counts</td>
-<td><code>df.count()</code> before and after</td>
-</tr>
-</tbody>
-</table>
+<h2 id="the-power-query-comparison">The Power Query Comparison<a class="headerlink" href="#the-power-query-comparison" title="Permanent link">&para;</a></h2>
+<p>In Power Query you've used <strong>Text Filters</strong> — "begins with", "contains", "ends with". Those are basic pattern checks done through a UI. Regex is the same idea written as a pattern in code — it's more powerful because you can describe complex rules like "exactly 12 digits" or "5 letters then 4 digits then 1 letter" that no dropdown menu can express.</p>
+<hr />
+<h2 id="one-thing-to-remember">One Thing to Remember<a class="headerlink" href="#one-thing-to-remember" title="Permanent link">&para;</a></h2>
+<p>Regex feels confusing at first because it looks like random symbols. The trick is to <strong>read it left to right, one piece at a time.</strong> Every symbol means something specific. Once you know the 6 building blocks above, you can read most patterns you'll encounter in the real world.</p>
+<p>You don't need to memorise regex — you look it up when you need it. What matters is understanding <em>what it's for</em> and <em>where to use it</em> in a pipeline.</p>
 
 
 
