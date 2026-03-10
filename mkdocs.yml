@@ -46,6 +46,7 @@ nav:
     - PII Handling: concepts/pii-handling.md
     - Joins in PySpark: concepts/joins.md
     - Business Logic: concepts/business-logic.md
+    - Wildcards: concepts/wildcards.md
   - Case Studies:
     - Case Study 1 — Green Grid: case-studies/green-grid.md
     - Case Study 2 — SantéFlux: case-studies/santeflux.md

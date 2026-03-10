@@ -21,6 +21,7 @@ Standalone explanations of core ideas — written to be understood once and revi
 | [PII Handling](concepts/pii-handling.md) | What PII is, SHA-256 hashing with `sha2()`, privacy patterns |
 | [Joins in PySpark](concepts/joins.md) | Join types, chaining joins, handling ambiguous columns |
 | [Business Logic](concepts/business-logic.md) | `when().otherwise()`, timestamp functions, rounding |
+| [Wildcards](concepts/wildcards.md) | Pattern matching with `%`, `*`, and `like()` — in SQL, file paths, and filters |
 
 ### Case Studies
 End-to-end projects worked through in the bootcamp — what was built, what decisions were made, and what was learned.
