@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../business-logic/">
       
       
-        <link rel="next" href="../data-ingestion/">
+        <link rel="next" href="../../case-studies/green-grid/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Unity Catalog - PySpark Learning Notes</title>
+        <title>Wildcards - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#unity-catalog" class="md-skip">
+        <a href="#wildcards" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Unity Catalog
+              Wildcards
             
           </span>
         </div>
@@ -234,7 +234,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../unity-catalog/" class="md-tabs__link">
           
   
   
@@ -387,37 +387,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Unity Catalog
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../unity-catalog/" class="md-nav__link">
         
   
   
@@ -433,92 +406,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#think-of-it-like-a-filing-cabinet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Think of It Like a Filing Cabinet
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-you-reference-things" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How You Reference Things
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-a-volume" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Is a Volume?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#managed-vs-external-volume-the-simple-version" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Managed vs External Volume — The Simple Version
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#if-you-know-microsoft-fabric" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        If You Know Microsoft Fabric...
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-three-commands-youll-use-most" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Three Commands You'll Use Most
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -696,10 +583,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../wildcards/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wildcards
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -715,6 +629,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-wildcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is a Wildcard?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#you-already-know-this-sql-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        You Already Know This — SQL LIKE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wildcards-in-pyspark-two-places-youll-use-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wildcards in PySpark — Two Places You'll Use Them
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wildcards in PySpark — Two Places You&#39;ll Use Them">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-when-reading-files-load-multiple-files-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. When Reading Files — Load Multiple Files at Once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-when-filtering-data-like-same-as-sql-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. When Filtering Data — like() (Same as SQL LIKE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters-in-real-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters in Real Pipelines
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-select-wildcard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The SELECT * Wildcard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-thing-to-watch-out-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One Thing to Watch Out For
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -869,10 +908,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#think-of-it-like-a-filing-cabinet" class="md-nav__link">
+  <a href="#what-is-a-wildcard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like a Filing Cabinet
+        What Is a Wildcard?
       
     </span>
   </a>
@@ -880,10 +919,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-you-reference-things" class="md-nav__link">
+  <a href="#you-already-know-this-sql-like" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How You Reference Things
+        You Already Know This — SQL LIKE
       
     </span>
   </a>
@@ -891,10 +930,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-a-volume" class="md-nav__link">
+  <a href="#wildcards-in-pyspark-two-places-youll-use-them" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is a Volume?
+        Wildcards in PySpark — Two Places You'll Use Them
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Wildcards in PySpark — Two Places You&#39;ll Use Them">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-when-reading-files-load-multiple-files-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. When Reading Files — Load Multiple Files at Once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-when-filtering-data-like-same-as-sql-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. When Filtering Data — like() (Same as SQL LIKE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-matters-in-real-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters in Real Pipelines
       
     </span>
   </a>
@@ -902,10 +980,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managed-vs-external-volume-the-simple-version" class="md-nav__link">
+  <a href="#the-select-wildcard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Managed vs External Volume — The Simple Version
+        The SELECT * Wildcard
       
     </span>
   </a>
@@ -913,10 +991,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#if-you-know-microsoft-fabric" class="md-nav__link">
+  <a href="#quick-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        If You Know Microsoft Fabric...
+        Quick Reference
       
     </span>
   </a>
@@ -924,10 +1002,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-three-commands-youll-use-most" class="md-nav__link">
+  <a href="#one-thing-to-watch-out-for" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Three Commands You'll Use Most
+        One Thing to Watch Out For
       
     </span>
   </a>
@@ -951,106 +1029,147 @@
 
 
 
-<h1 id="unity-catalog">Unity Catalog<a class="headerlink" href="#unity-catalog" title="Permanent link">&para;</a></h1>
-<h2 id="think-of-it-like-a-filing-cabinet">Think of It Like a Filing Cabinet<a class="headerlink" href="#think-of-it-like-a-filing-cabinet" title="Permanent link">&para;</a></h2>
-<p>Imagine a big filing cabinet at work.</p>
-<ul>
-<li>The <strong>cabinet itself</strong> = the Catalog</li>
-<li>Each <strong>drawer</strong> in the cabinet = a Schema</li>
-<li>Each <strong>folder</strong> inside a drawer = a Table or a Volume (for raw files)</li>
-</ul>
-<p>In Databricks, this is called the <strong>Unity Catalog</strong> — it's just the organised structure for storing all your data and files.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Catalog  (the whole cabinet)
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └── Schema  (one drawer)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        └── Tables, Views, Volumes  (folders inside that drawer)
-</code></pre></div>
+<h1 id="wildcards">Wildcards<a class="headerlink" href="#wildcards" title="Permanent link">&para;</a></h1>
+<h2 id="what-is-a-wildcard">What Is a Wildcard?<a class="headerlink" href="#what-is-a-wildcard" title="Permanent link">&para;</a></h2>
+<p>A wildcard is a <strong>stand-in character that means "anything can go here"</strong>.</p>
+<p>Think of it like a blank tile in Scrabble — it can represent anything. In data, you use a wildcard when you want to match a pattern rather than an exact value.</p>
 <hr />
-<h2 id="how-you-reference-things">How You Reference Things<a class="headerlink" href="#how-you-reference-things" title="Permanent link">&para;</a></h2>
-<p>Just like a full address — you always write it as three parts:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>catalog.schema.table_name
+<h2 id="you-already-know-this-sql-like">You Already Know This — SQL <code>LIKE</code><a class="headerlink" href="#you-already-know-this-sql-like" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Find all customers with a Gmail address</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">customers</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%@gmail.com&#39;</span>
 </code></pre></div>
-<p><strong>Example from Green Grid:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>workspace.green_grid_case_study.Silver_SmartBill
-</code></pre></div></p>
-<p>Read that as: <em>"In the workspace cabinet, open the green_grid_case_study drawer, find the Silver_SmartBill folder."</em></p>
-<hr />
-<h2 id="what-is-a-volume">What Is a Volume?<a class="headerlink" href="#what-is-a-volume" title="Permanent link">&para;</a></h2>
-<p>A Volume is just a folder for <strong>raw files</strong> — CSVs, JSONs, Excel files, etc. It is NOT a table. You can't query it with SQL. It's just file storage, like the Files section in a Fabric Lakehouse.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>workspace
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  └── green_grid_case_study
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        └── raw_files  ← this is the Volume (a folder)
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>              ├── customer_pii.csv
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>              ├── meter_readings.json
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>              └── pricing_plans.csv
-</code></pre></div>
-<p>To read a file from a Volume, you use its path:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/Volumes/workspace/green_grid_case_study/raw_files/customer_pii.csv
-</code></pre></div></p>
-<p>Think of it as the file path on your laptop — just structured the same way as the catalog hierarchy.</p>
-<hr />
-<h2 id="managed-vs-external-volume-the-simple-version">Managed vs External Volume — The Simple Version<a class="headerlink" href="#managed-vs-external-volume-the-simple-version" title="Permanent link">&para;</a></h2>
+<p>The <code>%</code> is the wildcard. It means <em>"I don't care what comes before @gmail.com — match anything."</em></p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Managed</th>
-<th>External</th>
+<th>Pattern</th>
+<th>Matches</th>
+<th>Doesn't Match</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Where files live</td>
-<td>Databricks looks after it</td>
-<td>Your own storage (ADLS, S3)</td>
+<td><code>'%@gmail.com'</code></td>
+<td><code>john@gmail.com</code>, <code>x@gmail.com</code></td>
+<td><code>john@hotmail.com</code></td>
 </tr>
 <tr>
-<td>When to use</td>
-<td>Learning, most projects</td>
-<td>Production when you control the storage</td>
+<td><code>'john%'</code></td>
+<td><code>john</code>, <code>johnny</code>, <code>johnson</code></td>
+<td><code>mr.john</code></td>
+</tr>
+<tr>
+<td><code>'%error%'</code></td>
+<td><code>critical_error_log</code>, <code>my_error_2</code></td>
+<td><code>warning</code></td>
 </tr>
 </tbody>
 </table>
-<p>In the bootcamp we use <strong>managed</strong> — Databricks handles everything, you just upload files and use them.</p>
+<p>There's also <code>_</code> — which means exactly <strong>one</strong> character:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;A_C&#39;</span><span class="w">   </span><span class="c1">-- matches ABC, A1C, ACC — not AC, not ABBC</span>
+</code></pre></div>
 <hr />
-<h2 id="if-you-know-microsoft-fabric">If You Know Microsoft Fabric...<a class="headerlink" href="#if-you-know-microsoft-fabric" title="Permanent link">&para;</a></h2>
+<h2 id="wildcards-in-pyspark-two-places-youll-use-them">Wildcards in PySpark — Two Places You'll Use Them<a class="headerlink" href="#wildcards-in-pyspark-two-places-youll-use-them" title="Permanent link">&para;</a></h2>
+<h3 id="1-when-reading-files-load-multiple-files-at-once">1. When Reading Files — Load Multiple Files at Once<a class="headerlink" href="#1-when-reading-files-load-multiple-files-at-once" title="Permanent link">&para;</a></h3>
+<p>Instead of loading files one by one, use <code>*</code> to say "match everything with this pattern":</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Load just one specific file</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/Volumes/workspace/project/raw_files/sales_jan.csv&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Load ALL csv files in the folder</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/Volumes/workspace/project/raw_files/*.csv&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Load only files that start with &quot;sales_&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/Volumes/workspace/project/raw_files/sales_*.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Think of it like selecting files in Windows Explorer — instead of Ctrl+clicking each one, you just say "give me everything ending in <code>.csv</code>."</p>
+<p>Spark loads all matching files and combines them into <strong>one DataFrame automatically</strong>.</p>
+<h3 id="2-when-filtering-data-like-same-as-sql-like">2. When Filtering Data — <code>like()</code> (Same as SQL <code>LIKE</code>)<a class="headerlink" href="#2-when-filtering-data-like-same-as-sql-like" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># SQL:     WHERE email LIKE &#39;%@gmail.com&#39;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># PySpark:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;%@gmail.com&#39;</span><span class="p">))</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># SQL:     WHERE status LIKE &#39;ERR%&#39;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># PySpark:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;ERR%&#39;</span><span class="p">))</span>
+</code></pre></div>
+<p>Exact same logic as SQL — just written as a method on the column instead of a keyword.</p>
+<hr />
+<h2 id="why-this-matters-in-real-pipelines">Why This Matters in Real Pipelines<a class="headerlink" href="#why-this-matters-in-real-pipelines" title="Permanent link">&para;</a></h2>
+<p>Imagine Green Grid delivers a new meter readings file every single day:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>meter_readings_2024_01_01.json
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>meter_readings_2024_01_02.json
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>meter_readings_2024_01_03.json
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>... (365 files a year)
+</code></pre></div>
+<p>Without wildcards you'd write 365 separate read statements. With a wildcard:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Load an entire year of data in one line</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df_readings</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="s2">&quot;/Volumes/workspace/green_grid/raw_files/meter_readings_*.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">multiLine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">schema</span><span class="o">=</span><span class="n">schema_readings</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>Spark finds every file matching that pattern and combines them all into one DataFrame. This is how production pipelines actually work — files land daily and the pipeline picks them all up without you changing any code.</p>
+<hr />
+<h2 id="the-select-wildcard">The <code>SELECT *</code> Wildcard<a class="headerlink" href="#the-select-wildcard" title="Permanent link">&para;</a></h2>
+<p>You use this one without thinking about it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- SQL</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="c1">-- * means &quot;give me all columns&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># PySpark — all columns</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># In practice, display(df) already shows all columns</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="quick-reference">Quick Reference<a class="headerlink" href="#quick-reference" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Databricks</th>
-<th>Microsoft Fabric</th>
+<th>Context</th>
+<th>Wildcard</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Catalog</td>
-<td>Workspace</td>
+<td>SQL <code>LIKE</code></td>
+<td><code>%</code></td>
+<td>Zero or more of any character</td>
 </tr>
 <tr>
-<td>Schema</td>
-<td>Lakehouse</td>
+<td>SQL <code>LIKE</code></td>
+<td><code>_</code></td>
+<td>Exactly one character</td>
 </tr>
 <tr>
-<td>Volume</td>
-<td>Files section in Lakehouse</td>
+<td>PySpark <code>like()</code></td>
+<td><code>%</code></td>
+<td>Same as SQL <code>%</code></td>
 </tr>
 <tr>
-<td>Managed Table</td>
-<td>Delta Table</td>
+<td>PySpark <code>like()</code></td>
+<td><code>_</code></td>
+<td>Same as SQL <code>_</code></td>
+</tr>
+<tr>
+<td>File paths</td>
+<td><code>*</code></td>
+<td>Any file matching the pattern</td>
+</tr>
+<tr>
+<td>Column selection</td>
+<td><code>*</code></td>
+<td>All columns</td>
 </tr>
 </tbody>
 </table>
-<p>Same idea, different names.</p>
 <hr />
-<h2 id="the-three-commands-youll-use-most">The Three Commands You'll Use Most<a class="headerlink" href="#the-three-commands-youll-use-most" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Read a file from a volume</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/Volumes/catalog/schema/volume/file.csv&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Write data as a table</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;catalog.schema.table_name&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Read a table back (like SELECT * FROM table)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;catalog.schema.table_name&quot;</span><span class="p">)</span>
-</code></pre></div>
+<h2 id="one-thing-to-watch-out-for">One Thing to Watch Out For<a class="headerlink" href="#one-thing-to-watch-out-for" title="Permanent link">&para;</a></h2>
+<p>When using <code>*</code> to load multiple files, <strong>all files must have the same structure</strong> — same columns, same types. If one file has an extra column or a different column name, Spark will either error or fill missing columns with nulls.</p>
+<p>This is another reason explicit schemas matter — when loading 365 files at once, you want Spark enforcing the structure, not guessing it from each file.</p>
 
 
 
