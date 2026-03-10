@@ -22,6 +22,8 @@ Standalone explanations of core ideas — written to be understood once and revi
 | [Joins in PySpark](concepts/joins.md) | Join types, chaining joins, handling ambiguous columns |
 | [Business Logic](concepts/business-logic.md) | `when().otherwise()`, timestamp functions, rounding |
 | [Wildcards](concepts/wildcards.md) | Pattern matching with `%`, `*`, and `like()` — in SQL, file paths, and filters |
+| [Regex](concepts/regex.md) | What regular expressions are, how to read them, and why pipelines need them — with Aadhaar, PAN, and mobile examples |
+| [Data Masking](concepts/data-masking.md) | Hiding sensitive data like Aadhaar and PAN numbers — masking vs hashing, and how to do it in PySpark |
 
 ### Case Studies
 End-to-end projects worked through in the bootcamp — what was built, what decisions were made, and what was learned.
