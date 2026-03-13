@@ -49,6 +49,7 @@ nav:
     - Wildcards: concepts/wildcards.md
     - Regex: concepts/regex.md
     - Data Masking: concepts/data-masking.md
+    - Hashing & Salting: concepts/hashing.md
   - Case Studies:
     - Case Study 1 — Green Grid: case-studies/green-grid.md
     - Case Study 2 — SantéFlux: case-studies/santeflux.md

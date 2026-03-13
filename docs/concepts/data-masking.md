@@ -78,6 +78,37 @@ In Power Query you've used **Replace Values** — type the exact value you want 
 
 ---
 
+## Masking names — SantéFlux use case
+
+The CPO flagged full names in shared folders as a GDPR violation. The fix is masking names at ingestion so no raw name reaches a downstream report.
+
+```python
+from pyspark.sql.functions import col, regexp_replace
+
+df = df_vitals.withColumn(
+    "masked_name",
+    regexp_replace("Full_Name", r"^(\w+)\s(\w)(.*)", "$1 $2****")
+)
+```
+
+| Before | After |
+|--------|-------|
+| `Maria Woods` | `Maria W****` |
+| `Jean-Luc Moreau` | `Jean-Luc M****` |
+
+The regex has three capture groups:
+
+| Group | Pattern | What it keeps |
+|-------|---------|--------------|
+| `$1` | `(\w+)` | Full first name |
+| space | `\s` | The space between names |
+| `$2` | `(\w)` | First letter of last name only |
+| — | `(.*)` | Rest of last name — replaced with `****` |
+
+Fixed stars are acceptable for GDPR. The requirement is that the full name cannot be reconstructed — not that the star count matches the original length.
+
+---
+
 ## Why This Matters in a Pipeline
 
 In a real data pipeline, raw data comes in with full PII — full Aadhaar, full mobile numbers, full account numbers. By the time that data reaches a report or a downstream team, masking ensures:
