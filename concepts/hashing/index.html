@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../data-ingestion/">
+        <link rel="prev" href="../data-masking/">
       
       
-        <link rel="next" href="../data-quality/">
+        <link rel="next" href="../../case-studies/green-grid/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Schema Definition - PySpark Learning Notes</title>
+        <title>Hashing & Salting - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#schema-definition" class="md-skip">
+        <a href="#hashing-salting-data-protection" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Schema Definition
+              Hashing & Salting
             
           </span>
         </div>
@@ -443,37 +443,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Schema Definition
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../schema-definition/" class="md-nav__link">
         
   
   
@@ -489,92 +462,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-problem-spark-is-guessing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Problem — Spark Is Guessing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#think-of-it-like-column-definitions-in-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Think of It Like Column Definitions in SQL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-write-an-explicit-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to Write an Explicit Schema
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-data-types-sql-vs-pyspark" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Common Data Types — SQL vs PySpark
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#when-to-use-which" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        When to Use Which
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-this-matters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why This Matters
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -780,10 +667,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../hashing/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hashing & Salting
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -799,6 +713,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#one-way-means-exactly-that" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One-way means exactly that
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#md5-vs-sha-256-what-you-actually-heard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MD5 vs SHA-256 — what you actually heard
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-hashing-alone-isnt-enough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why hashing alone isn't enough
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-salting-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What salting does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-salt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Types of salt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-sits-in-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this sits in the pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -953,10 +964,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-problem-spark-is-guessing" class="md-nav__link">
+  <a href="#one-way-means-exactly-that" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Problem — Spark Is Guessing
+        One-way means exactly that
       
     </span>
   </a>
@@ -964,10 +975,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#think-of-it-like-column-definitions-in-sql" class="md-nav__link">
+  <a href="#md5-vs-sha-256-what-you-actually-heard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like Column Definitions in SQL
+        MD5 vs SHA-256 — what you actually heard
       
     </span>
   </a>
@@ -975,10 +986,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-to-write-an-explicit-schema" class="md-nav__link">
+  <a href="#why-hashing-alone-isnt-enough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How to Write an Explicit Schema
+        Why hashing alone isn't enough
       
     </span>
   </a>
@@ -986,10 +997,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-data-types-sql-vs-pyspark" class="md-nav__link">
+  <a href="#what-salting-does" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Data Types — SQL vs PySpark
+        What salting does
       
     </span>
   </a>
@@ -997,10 +1008,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#when-to-use-which" class="md-nav__link">
+  <a href="#types-of-salt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to Use Which
+        Types of salt
       
     </span>
   </a>
@@ -1008,10 +1019,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-this-matters" class="md-nav__link">
+  <a href="#the-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why This Matters
+        The code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-sits-in-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this sits in the pipeline
       
     </span>
   </a>
@@ -1035,123 +1057,187 @@
 
 
 
-<h1 id="schema-definition">Schema Definition<a class="headerlink" href="#schema-definition" title="Permanent link">&para;</a></h1>
-<h2 id="the-problem-spark-is-guessing">The Problem — Spark Is Guessing<a class="headerlink" href="#the-problem-spark-is-guessing" title="Permanent link">&para;</a></h2>
-<p>When you use <code>inferSchema=True</code>, Spark reads through your entire file and <strong>guesses</strong> what type each column should be. Sometimes it guesses right. Sometimes it doesn't.</p>
-<p>The most common failure: timestamps come in as <code>string</code> instead of <code>TimestampType</code>. You only find out later when a date calculation fails and you're wondering why.</p>
-<p>It also means Spark reads the file <strong>twice</strong> — once to guess types, once to actually load the data. On large files, that matters.</p>
-<p>The fix is to just tell Spark exactly what types you want. No guessing.</p>
-<hr />
-<h2 id="think-of-it-like-column-definitions-in-sql">Think of It Like Column Definitions in SQL<a class="headerlink" href="#think-of-it-like-column-definitions-in-sql" title="Permanent link">&para;</a></h2>
-<p>In SQL, when you create a table you define what type each column is:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">meter_readings</span><span class="w"> </span><span class="p">(</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">kwh</span><span class="w">        </span><span class="nb">FLOAT</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">meter_id</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">status</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">timestamp</span><span class="w">  </span><span class="n">DATETIME</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
-</code></pre></div>
-<p>An explicit schema in PySpark is exactly the same thing — you're defining the columns and their types before loading the data.</p>
-<hr />
-<h2 id="how-to-write-an-explicit-schema">How to Write an Explicit Schema<a class="headerlink" href="#how-to-write-an-explicit-schema" title="Permanent link">&para;</a></h2>
-<p>You use two things: <code>StructType</code> (the whole schema) and <code>StructField</code> (one column).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">schema_readings</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;kwh&quot;</span><span class="p">,</span>       <span class="n">DoubleType</span><span class="p">(),</span>    <span class="kc">True</span><span class="p">),</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;meter_id&quot;</span><span class="p">,</span>  <span class="n">StringType</span><span class="p">(),</span>    <span class="kc">True</span><span class="p">),</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span>    <span class="n">StringType</span><span class="p">(),</span>    <span class="kc">True</span><span class="p">),</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">])</span>
-</code></pre></div>
-<p>Each <code>StructField</code> has three things:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>StructField( &quot;column_name&quot; ,  DataType() ,  nullable? )
-</code></pre></div>
-<ul>
-<li><strong>column_name</strong> — must match exactly what's in the file</li>
-<li><strong>DataType()</strong> — what type you want</li>
-<li><strong>True/False</strong> — <code>True</code> means nulls are allowed, <code>False</code> means they're not</li>
-</ul>
-<p>Then pass the schema when you read the file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df_readings</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s2">&quot;/Volumes/workspace/green_grid_case_study/raw_files/meter_readings.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">multiLine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">schema</span><span class="o">=</span><span class="n">schema_readings</span>   <span class="c1"># ← just add this</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">)</span>
-</code></pre></div>
-<p>Spark now reads the file once, applies your types, done.</p>
-<hr />
-<h2 id="common-data-types-sql-vs-pyspark">Common Data Types — SQL vs PySpark<a class="headerlink" href="#common-data-types-sql-vs-pyspark" title="Permanent link">&para;</a></h2>
+<h1 id="hashing-salting-data-protection">Hashing, Salting &amp; Data Protection<a class="headerlink" href="#hashing-salting-data-protection" title="Permanent link">&para;</a></h1>
+<h2 id="one-way-means-exactly-that">One-way means exactly that<a class="headerlink" href="#one-way-means-exactly-that" title="Permanent link">&para;</a></h2>
+<p>You send a WhatsApp message. The receiver reads it, but WhatsApp itself can't. Now imagine there's no receiver — the message turns into a fixed string of characters with no way back. That's what hashing is.</p>
+<p>You put a value in, you get a code out. You cannot reverse it.</p>
 <table>
 <thead>
 <tr>
-<th>SQL</th>
-<th>PySpark</th>
-<th>Use For</th>
+<th>Input</th>
+<th>SHA-256 Hash</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>VARCHAR</code> / <code>NVARCHAR</code></td>
-<td><code>StringType()</code></td>
-<td>Text, IDs, codes</td>
+<td><code>1000</code></td>
+<td><code>a866c6b58d...</code></td>
 </tr>
 <tr>
-<td><code>INT</code></td>
-<td><code>IntegerType()</code></td>
-<td>Whole numbers</td>
+<td><code>1001</code></td>
+<td><code>9d4b77cc1f...</code></td>
 </tr>
 <tr>
-<td><code>FLOAT</code> / <code>DECIMAL</code></td>
-<td><code>DoubleType()</code></td>
-<td>kWh, prices, amounts</td>
-</tr>
-<tr>
-<td><code>DATE</code></td>
-<td><code>DateType()</code></td>
-<td>Dates only (no time)</td>
-</tr>
-<tr>
-<td><code>DATETIME</code> / <code>TIMESTAMP</code></td>
-<td><code>TimestampType()</code></td>
-<td>Date + time</td>
-</tr>
-<tr>
-<td><code>BIT</code> / <code>BOOLEAN</code></td>
-<td><code>BooleanType()</code></td>
-<td>True/False flags</td>
+<td><code>1000</code></td>
+<td><code>a866c6b58d...</code></td>
 </tr>
 </tbody>
 </table>
+<p>Same input, same hash every time. Change one character anywhere and the entire output changes.</p>
 <hr />
-<h2 id="when-to-use-which">When to Use Which<a class="headerlink" href="#when-to-use-which" title="Permanent link">&para;</a></h2>
+<h2 id="md5-vs-sha-256-what-you-actually-heard">MD5 vs SHA-256 — what you actually heard<a class="headerlink" href="#md5-vs-sha-256-what-you-actually-heard" title="Permanent link">&para;</a></h2>
+<p>"128-bit" and "256-bit" don't come from the same algorithm. That's where the confusion starts.</p>
 <table>
 <thead>
 <tr>
-<th>Situation</th>
-<th>Use</th>
+<th>Algorithm</th>
+<th>Bits</th>
+<th>Hash length</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Exploring a new file for the first time</td>
-<td><code>inferSchema=True</code> — quick look</td>
+<td>MD5</td>
+<td>128-bit</td>
+<td>32 characters</td>
+<td>Broken — don't use it</td>
 </tr>
 <tr>
-<td>Any pipeline you're actually building</td>
-<td>Explicit schema — every time</td>
+<td>SHA-1</td>
+<td>160-bit</td>
+<td>40 characters</td>
+<td>Deprecated — don't use it</td>
 </tr>
 <tr>
-<td>File has timestamps or specific decimal precision</td>
-<td>Explicit schema — always</td>
+<td>SHA-256</td>
+<td>256-bit</td>
+<td>64 characters</td>
+<td>Current standard</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>512-bit</td>
+<td>128 characters</td>
+<td>High-security use cases</td>
 </tr>
 </tbody>
 </table>
-<p>The rule of thumb: <code>inferSchema</code> for exploration, explicit schema for anything you'll run again.</p>
+<p>MD5 is not part of SHA-2. It's an older algorithm from a different family, and it was cracked years ago. If you see MD5 in a pipeline today, that's worth a conversation.</p>
+<p>SHA-256 is the default because it hasn't been broken in 30 years, runs fast enough for production, and every major regulation — GDPR, HIPAA, PCI-DSS — accepts it. Spark has it built in via <code>sha2(..., 256)</code>.</p>
+<p>The "2" in SHA-2 is the generation number, not the bit size. SHA-256 is second-generation SHA with 256-bit output.</p>
 <hr />
-<h2 id="why-this-matters">Why This Matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
-<p>In Green Grid, <code>meter_readings.json</code> had a <code>timestamp</code> column. Without an explicit schema, it would have loaded as <code>string</code>. Then when we tried to extract the hour (<code>hour(df.timestamp)</code>), it would have failed — because <code>hour()</code> only works on <code>TimestampType</code>, not text.</p>
-<p>Defining the schema upfront saved us from a confusing error three steps later.</p>
+<h2 id="why-hashing-alone-isnt-enough">Why hashing alone isn't enough<a class="headerlink" href="#why-hashing-alone-isnt-enough" title="Permanent link">&para;</a></h2>
+<p>Because the same input always gives the same hash, a hacker doesn't need to crack anything.</p>
+<p>User_ID is 1000. Before touching your database, the hacker hashes every number from 1 to 1,000,000 and stores the results. When they steal the data, they look up the hash and find 1000 in under a second. The work was done before the attack even started. That's a rainbow table attack.</p>
+<p>Brute force is the slower version — no pre-built table, so they hash values one by one until something matches. Same result, just takes longer.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Brute force</th>
+<th>Rainbow table</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When does the work happen?</td>
+<td>During the attack</td>
+<td>Before the attack</td>
+</tr>
+<tr>
+<td>Speed</td>
+<td>Slow</td>
+<td>Instant</td>
+</tr>
+<tr>
+<td>Does salt stop it?</td>
+<td>Slows it significantly</td>
+<td>Stops it completely</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-salting-does">What salting does<a class="headerlink" href="#what-salting-does" title="Permanent link">&para;</a></h2>
+<p>You attach a secret string to the value before hashing it.</p>
+<p>Without salt: <code>Hash(1000)</code> produces something the hacker's table already has an entry for.</p>
+<p>With salt: <code>Hash("1000santeflux_secret_2025")</code> produces something that table has never seen. To crack it, they'd need to rebuild the entire table using your exact salt — which they don't know.</p>
+<p>Mobile number as an example: there are roughly 10 billion possible 10-digit numbers. That's achievable to pre-hash. Add a salt and now every number has to be combined with every possible secret string before hashing. The problem goes from big to not realistic.</p>
+<hr />
+<h2 id="types-of-salt">Types of salt<a class="headerlink" href="#types-of-salt" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>How it works</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Static salt</td>
+<td>One secret for all records</td>
+<td>Small teams, single pipeline</td>
+</tr>
+<tr>
+<td>Per-record salt</td>
+<td>Different salt per row, stored alongside</td>
+<td>Maximum security</td>
+</tr>
+<tr>
+<td>Per-team salt</td>
+<td>Each team holds their own secret</td>
+<td>Multi-team setups</td>
+</tr>
+<tr>
+<td>Time-based salt</td>
+<td>Salt rotates on a schedule</td>
+<td>Regulatory environments</td>
+</tr>
+</tbody>
+</table>
+<p>For SantéFlux on Databricks Free Edition, static salt is the call. The pipeline joins data across Paris, Lyon, and Marseille — per-team salt would break those joins. One shared salt keeps everything connected.</p>
+<hr />
+<h2 id="the-code">The code<a class="headerlink" href="#the-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">sha2</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">lit</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">SALT</span> <span class="o">=</span> <span class="s2">&quot;santeflux_secret_2025&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df_vitals</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">sha2</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;User_ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="n">SALT</span><span class="p">)),</span> <span class="mi">256</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span>
+</code></pre></div>
+<p>What happens to User_ID 1000, step by step:</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original</td>
+<td><code>1000</code></td>
+</tr>
+<tr>
+<td>After adding salt</td>
+<td><code>1000santeflux_secret_2025</code></td>
+</tr>
+<tr>
+<td>After sha2(..., 256)</td>
+<td><code>f3c92a1148...</code> (64 characters)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>256</code> in <code>sha2(..., 256)</code> picks which SHA-2 variant Spark uses. Always use 256 unless you have a specific reason not to.</p>
+<hr />
+<h2 id="where-this-sits-in-the-pipeline">Where this sits in the pipeline<a class="headerlink" href="#where-this-sits-in-the-pipeline" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Raw ingest → mask names → hash + salt IDs → aggregate → report
+</code></pre></div>
+<p>Names get masked at ingestion. IDs get hashed before anything downstream sees them. By the time data hits a report, there's no PII left — just city-level averages Moreau can approve.</p>
+<p>See <a href="../data-masking/">Data Masking</a> for the name masking code and <a href="../pii-handling/">PII Handling</a> for the full GDPR pipeline setup.</p>
 
 
 
