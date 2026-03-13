@@ -50,6 +50,9 @@ nav:
     - Regex: concepts/regex.md
     - Data Masking: concepts/data-masking.md
     - Hashing & Salting: concepts/hashing.md
+    - Window Functions: concepts/window-functions.md
+    - Select & Drop: concepts/select.md
+    - Pivot: concepts/pivot.md
   - Case Studies:
     - Case Study 1 — Green Grid: case-studies/green-grid.md
     - Case Study 2 — SantéFlux: case-studies/santeflux.md

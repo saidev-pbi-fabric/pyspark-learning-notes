@@ -109,6 +109,37 @@ For a LEFT JOIN: the after count should be **equal to or greater than** the befo
 
 ---
 
+## Left anti join
+
+Left anti join returns rows from the left table that don't exist in the right table. It's the `NOT IN` of PySpark joins.
+
+```python
+# SQL
+SELECT * FROM df_all WHERE User_ID NOT IN (SELECT User_ID FROM df_clean)
+
+# PySpark — same result
+df_result = df_all.join(df_clean, "User_ID", "left_anti")
+```
+
+SantéFlux use case: after cleaning out frozen readings, find users whose every reading was frozen — nothing made it through.
+
+```python
+df_all_users = df_hashed.select("hashed_id").distinct()
+df_clean_users = df_clean.select("hashed_id").distinct()
+
+df_fully_frozen = df_all_users.join(df_clean_users, "hashed_id", "left_anti")
+```
+
+If User 2045 had 150 readings and all 150 were frozen, they show up here. Users with at least one clean reading don't.
+
+| Join type | Returns |
+|-----------|---------|
+| inner | matching rows from both sides |
+| left | all left rows, null where no right match |
+| left_anti | left rows with no match on the right side |
+
+---
+
 ## Summary
 
 | SQL | PySpark |

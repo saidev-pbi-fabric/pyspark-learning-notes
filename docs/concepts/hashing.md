@@ -101,6 +101,54 @@ The `256` in `sha2(..., 256)` picks which SHA-2 variant Spark uses. Always use 2
 
 ---
 
+## col(), lit() and concat()
+
+These three always show up together in the hashing step.
+
+`col("User_ID")` tells Spark to pull a column from the DataFrame. Different value per row. `lit(SALT)` says treat this as a fixed constant — same value every row. Without `lit()`, Spark can't tell if your string is a column name or just text. `concat()` joins them before hashing runs.
+
+```python
+sha2(concat(col("User_ID").cast("string"), lit(SALT)), 256)
+```
+
+Read it inside out: get the ID as text → attach the salt → hash the result.
+
+SQL equivalent: `SHA2(CONCAT(CAST(User_ID AS STRING), 'SanteFlux_Salt_2025'), 256)`
+
+---
+
+## Hash on the ID, never the name
+
+Full_Name fails as a hash key. Names aren't unique — two users can share one. Hash `Full_Name` and groupBy that hash, and their records land in the same bucket. A frozen sensor for User 2045 goes undetected because User 3891, same name, has normal fluctuating readings. The min and max spread apart and nothing gets flagged.
+
+User_ID is unique by design. One ID, one person, consistent hash across the whole pipeline.
+
+| | Full_Name | User_ID |
+|--|-----------|---------|
+| Unique? | No | Yes |
+| Safe to group by? | No | Yes |
+| Changes over time? | Yes (name changes) | No |
+
+Don't combine name and ID in the hash either. If the name changes, the hash changes, and you lose the ability to track the same person across time. The ID alone is enough.
+
+Mask the name for display. Hash the ID for computation. They're solving different problems.
+
+---
+
+## Shared salt vs per-team salt
+
+Chloe's question: one company-wide salt for joins, or one per team to contain a breach?
+
+For SantéFlux: shared salt. The Health Trends Report joins Paris, Lyon and Marseille. Per-team salts mean User 2045 hashes differently in each city's data — the join breaks and the report can't be built.
+
+Shared salt means a single breach exposes everything. That's the real cost. Production answer: Azure Key Vault, centrally managed, rotatable, audited. On Databricks Free Edition, a hardcoded variable is the starting point.
+
+```python
+SALT = "SanteFlux_Salt_2025"  # move to Key Vault in production
+```
+
+---
+
 ## Where this sits in the pipeline
 
 ```
