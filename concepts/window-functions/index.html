@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../wildcards/">
+        <link rel="prev" href="../hashing/">
       
       
-        <link rel="next" href="../data-masking/">
+        <link rel="next" href="../select/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Regex - PySpark Learning Notes</title>
+        <title>Window Functions - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#regex-regular-expressions" class="md-skip">
+        <a href="#window-functions" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Regex
+              Window Functions
             
           </span>
         </div>
@@ -611,37 +611,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Regex
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../regex/" class="md-nav__link">
         
   
   
@@ -657,170 +630,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-regex" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Is Regex?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reading-a-regex-pattern-indian-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reading a Regex Pattern — Indian Examples
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Reading a Regex Pattern — Indian Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-1-indian-mobile-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 1 — Indian Mobile Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-2-pan-card-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 2 — PAN Card Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-3-aadhaar-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 3 — Aadhaar Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-symbols-youll-see-most-often" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Symbols You'll See Most Often
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-do-we-need-regex-in-data-engineering" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why Do We Need Regex in Data Engineering?
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Why Do We Need Regex in Data Engineering?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-validation-is-this-data-actually-valid" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Validation — Is this data actually valid?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-extraction-pull-a-pattern-out-of-messy-text" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Extraction — Pull a pattern out of messy text
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-masking-hide-parts-of-sensitive-values" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Masking — Hide parts of sensitive values
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-power-query-comparison" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Power Query Comparison
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#one-thing-to-remember" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        One Thing to Remember
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -886,10 +695,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../window-functions/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Window Functions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -905,6 +741,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#already-familiar-from-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Already familiar from SQL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-frozen-sensor-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The frozen sensor problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detecting-frozen-sensors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecting frozen sensors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#one-gotcha-use-window-directly-in-groupby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One gotcha — use window() directly in groupBy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groupby-vs-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupBy vs window()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-fits-in-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this fits in the pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1115,10 +1037,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-regex" class="md-nav__link">
+  <a href="#already-familiar-from-sql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is Regex?
+        Already familiar from SQL
       
     </span>
   </a>
@@ -1126,60 +1048,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-a-regex-pattern-indian-examples" class="md-nav__link">
+  <a href="#the-frozen-sensor-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a Regex Pattern — Indian Examples
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Reading a Regex Pattern — Indian Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-1-indian-mobile-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 1 — Indian Mobile Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-2-pan-card-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 2 — PAN Card Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-3-aadhaar-number" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example 3 — Aadhaar Number
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-symbols-youll-see-most-often" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Symbols You'll See Most Often
+        The frozen sensor problem
       
     </span>
   </a>
@@ -1187,60 +1059,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-do-we-need-regex-in-data-engineering" class="md-nav__link">
+  <a href="#detecting-frozen-sensors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why Do We Need Regex in Data Engineering?
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Why Do We Need Regex in Data Engineering?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-validation-is-this-data-actually-valid" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Validation — Is this data actually valid?
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-extraction-pull-a-pattern-out-of-messy-text" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Extraction — Pull a pattern out of messy text
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-masking-hide-parts-of-sensitive-values" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Masking — Hide parts of sensitive values
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-power-query-comparison" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Power Query Comparison
+        Detecting frozen sensors
       
     </span>
   </a>
@@ -1248,10 +1070,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#one-thing-to-remember" class="md-nav__link">
+  <a href="#one-gotcha-use-window-directly-in-groupby" class="md-nav__link">
     <span class="md-ellipsis">
       
-        One Thing to Remember
+        One gotcha — use window() directly in groupBy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#groupby-vs-window" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        groupBy vs window()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-fits-in-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this fits in the pipeline
       
     </span>
   </a>
@@ -1275,189 +1119,80 @@
 
 
 
-<h1 id="regex-regular-expressions">Regex (Regular Expressions)<a class="headerlink" href="#regex-regular-expressions" title="Permanent link">&para;</a></h1>
-<h2 id="what-is-regex">What Is Regex?<a class="headerlink" href="#what-is-regex" title="Permanent link">&para;</a></h2>
-<p>Regex = Regular Expression. Forget the name — it sounds scarier than it is.</p>
-<p><strong>Regex is a way of writing a pattern so a computer can find, validate, or replace text that matches that pattern.</strong></p>
-<p>Think of it like this. If someone asked you to go through 10,000 forms and circle every mobile number — how would you know what's a mobile number? You'd look for something that:</p>
-<ul>
-<li>Is 10 digits long</li>
-<li>Starts with 6, 7, 8, or 9</li>
-<li>Has no letters in it</li>
-</ul>
-<p>You just described a pattern in your head. Regex is how you write that same pattern in code so the computer does the job in seconds across millions of rows.</p>
-<hr />
-<h2 id="reading-a-regex-pattern-indian-examples">Reading a Regex Pattern — Indian Examples<a class="headerlink" href="#reading-a-regex-pattern-indian-examples" title="Permanent link">&para;</a></h2>
-<h3 id="example-1-indian-mobile-number">Example 1 — Indian Mobile Number<a class="headerlink" href="#example-1-indian-mobile-number" title="Permanent link">&para;</a></h3>
-<p><strong>The rule:</strong> 10 digits, must start with 6, 7, 8, or 9.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Plain English:   &quot;starts with 6/7/8/9, then 9 more digits&quot;
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Regex:            ^[6-9][0-9]{9}$
+<h1 id="window-functions">Window functions<a class="headerlink" href="#window-functions" title="Permanent link">&para;</a></h1>
+<h2 id="already-familiar-from-sql">Already familiar from SQL<a class="headerlink" href="#already-familiar-from-sql" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">AVG</span><span class="p">(</span><span class="n">Heart_Rate</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">User_ID</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">Timestamp</span><span class="p">)</span>
 </code></pre></div>
-<p>Breaking it down piece by piece:</p>
+<p>PySpark's window functions work the same way. They look at rows related to the current row without collapsing them into one. That's what separates them from <code>groupBy</code>.</p>
+<hr />
+<h2 id="the-frozen-sensor-problem">The frozen sensor problem<a class="headerlink" href="#the-frozen-sensor-problem" title="Permanent link">&para;</a></h2>
+<p>A sensor freezes when it gets stuck sending the same heart rate over and over. SantéFlux had 150 frozen readings out of 750,000.</p>
+<p>A working sensor moves. A frozen one flatlines. Detection: bucket readings into 10-minute windows per user. If <code>min == max</code> inside a bucket, the sensor didn't change. Those records skew the city averages and need to be removed before the report runs.</p>
+<hr />
+<h2 id="detecting-frozen-sensors">Detecting frozen sensors<a class="headerlink" href="#detecting-frozen-sensors" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">window</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">col</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_hashed</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="nb">min</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">),</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="nb">max</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># frozen windows</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">df_frozen</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">))</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">df_frozen</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1"># clean data for reporting</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p><code>window("Timestamp", "10 minutes")</code> creates buckets: 08:00–08:10, 08:10–08:20, and so on. Same user, same bucket, same group. A frozen sensor — same reading ten times in a row — comes out with identical min and max.</p>
+<hr />
+<h2 id="one-gotcha-use-window-directly-in-groupby">One gotcha — use window() directly in groupBy<a class="headerlink" href="#one-gotcha-use-window-directly-in-groupby" title="Permanent link">&para;</a></h2>
+<p><code>window()</code> creates a struct with <code>start</code> and <code>end</code> inside it. If you attach it with <code>withColumn</code> first and try to reference it by name in <code>groupBy</code>, Spark can't find it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Fails — CANNOT_RESOLVE_DATAFRAME_COLUMN</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;tw&quot;</span><span class="p">,</span> <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">))</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span> <span class="s2">&quot;tw&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Works</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span> <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>Put <code>window()</code> directly in the <code>groupBy</code>. No intermediate column needed.</p>
+<hr />
+<h2 id="groupby-vs-window">groupBy vs window()<a class="headerlink" href="#groupby-vs-window" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Piece</th>
-<th>Meaning</th>
+<th></th>
+<th>groupBy</th>
+<th>window()</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>^</code></td>
-<td>Start of the text — nothing before this</td>
+<td>Rows returned</td>
+<td>One per group</td>
+<td>Same count as input</td>
 </tr>
 <tr>
-<td><code>[6-9]</code></td>
-<td>One digit that is 6, 7, 8, or 9</td>
+<td>Collapses data?</td>
+<td>Yes</td>
+<td>No</td>
 </tr>
 <tr>
-<td><code>[0-9]</code></td>
-<td>Any digit from 0 to 9</td>
-</tr>
-<tr>
-<td><code>{9}</code></td>
-<td>Exactly 9 times (applies to the thing before it)</td>
-</tr>
-<tr>
-<td><code>$</code></td>
-<td>End of the text — nothing after this</td>
-</tr>
-</tbody>
-</table>
-<p>So the full pattern says: <em>"Start, then one digit between 6 and 9, then exactly 9 more digits, then end."</em></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>9876543210  →  ✅ valid
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>1234567890  →  ❌ starts with 1
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>98765       →  ❌ only 5 digits
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>98765432101 →  ❌ 11 digits
-</code></pre></div>
-<hr />
-<h3 id="example-2-pan-card-number">Example 2 — PAN Card Number<a class="headerlink" href="#example-2-pan-card-number" title="Permanent link">&para;</a></h3>
-<p><strong>The rule:</strong> 5 uppercase letters, then 4 digits, then 1 uppercase letter → <code>ABCDE1234F</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Plain English:   &quot;5 uppercase letters, 4 digits, 1 uppercase letter&quot;
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Regex:            ^[A-Z]{5}[0-9]{4}[A-Z]{1}$
-</code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Piece</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[A-Z]{5}</code></td>
-<td>Exactly 5 uppercase letters (A through Z)</td>
-</tr>
-<tr>
-<td><code>[0-9]{4}</code></td>
-<td>Exactly 4 digits</td>
-</tr>
-<tr>
-<td><code>[A-Z]{1}</code></td>
-<td>Exactly 1 uppercase letter</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ABCDE1234F  →  ✅ valid PAN
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ABCDE123F   →  ❌ only 3 digits
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>abcde1234f  →  ❌ lowercase not allowed
-</code></pre></div>
-<hr />
-<h3 id="example-3-aadhaar-number">Example 3 — Aadhaar Number<a class="headerlink" href="#example-3-aadhaar-number" title="Permanent link">&para;</a></h3>
-<p><strong>The rule:</strong> Exactly 12 digits.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Regex:   ^[0-9]{12}$
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>987654321098   →  ✅ valid
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>98765432109    →  ❌ only 11 digits
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>9876543210AB   →  ❌ contains letters
-</code></pre></div>
-<hr />
-<h2 id="the-symbols-youll-see-most-often">The Symbols You'll See Most Often<a class="headerlink" href="#the-symbols-youll-see-most-often" title="Permanent link">&para;</a></h2>
-<p>You don't need to memorise all of regex. These 6 building blocks cover 90% of what you'll encounter:</p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Meaning</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[0-9]</code></td>
-<td>Any single digit</td>
-<td><code>[0-9]</code> matches <code>4</code></td>
-</tr>
-<tr>
-<td><code>[A-Z]</code></td>
-<td>Any single uppercase letter</td>
-<td><code>[A-Z]</code> matches <code>B</code></td>
-</tr>
-<tr>
-<td><code>[a-z]</code></td>
-<td>Any single lowercase letter</td>
-<td><code>[a-z]</code> matches <code>b</code></td>
-</tr>
-<tr>
-<td><code>{n}</code></td>
-<td>Exactly n times</td>
-<td><code>[0-9]{4}</code> matches <code>1234</code></td>
-</tr>
-<tr>
-<td><code>^</code></td>
-<td>Start of text</td>
-<td><code>^9</code> means must start with 9</td>
-</tr>
-<tr>
-<td><code>$</code></td>
-<td>End of text</td>
-<td><code>0$</code> means must end with 0</td>
+<td>Use case</td>
+<td>Final aggregation (avg by city)</td>
+<td>Pattern detection (frozen per bucket)</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="why-do-we-need-regex-in-data-engineering">Why Do We Need Regex in Data Engineering?<a class="headerlink" href="#why-do-we-need-regex-in-data-engineering" title="Permanent link">&para;</a></h2>
-<p>Three jobs regex does in every real pipeline:</p>
-<h3 id="1-validation-is-this-data-actually-valid">1. Validation — Is this data actually valid?<a class="headerlink" href="#1-validation-is-this-data-actually-valid" title="Permanent link">&para;</a></h3>
-<p>Before processing a million rows, check that the mobile number column actually contains mobile numbers. Catch junk data before it corrupts your results.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># In PySpark — keep only rows with valid Indian mobile numbers</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df_valid</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mobile</span><span class="o">.</span><span class="n">rlike</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[6-9][0-9]</span><span class="si">{9}</span><span class="s1">$&#39;</span><span class="p">))</span>
+<h2 id="where-this-fits-in-the-pipeline">Where this fits in the pipeline<a class="headerlink" href="#where-this-fits-in-the-pipeline" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Raw ingest → mask names → hash + salt IDs → detect frozen sensors → aggregate → report
 </code></pre></div>
-<p><code>rlike()</code> is PySpark's "does this match the regex pattern?" function.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Keep only rows with valid PAN numbers</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">df_valid_pan</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">pan</span><span class="o">.</span><span class="n">rlike</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Z]</span><span class="si">{5}</span><span class="s1">[0-9]</span><span class="si">{4}</span><span class="s1">[A-Z]</span><span class="si">{1}</span><span class="s1">$&#39;</span><span class="p">))</span>
-</code></pre></div>
-<p>In SQL terms, this is equivalent to:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">mobile</span><span class="w"> </span><span class="n">REGEXP</span><span class="w"> </span><span class="s1">&#39;^[6-9][0-9]{9}$&#39;</span>
-</code></pre></div></p>
-<h3 id="2-extraction-pull-a-pattern-out-of-messy-text">2. Extraction — Pull a pattern out of messy text<a class="headerlink" href="#2-extraction-pull-a-pattern-out-of-messy-text" title="Permanent link">&para;</a></h3>
-<p>Imagine a freeform notes column: <code>"Customer called, Aadhaar 987654321098 submitted for KYC"</code>. Regex can pull the 12-digit Aadhaar number out of that sentence automatically.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">regexp_extract</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="s2">&quot;aadhaar_extracted&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">regexp_extract</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;[0-9]</span><span class="si">{12}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">)</span>
-</code></pre></div>
-<p><code>regexp_extract</code> finds the first match of the pattern in the text and returns it as a new column.</p>
-<h3 id="3-masking-hide-parts-of-sensitive-values">3. Masking — Hide parts of sensitive values<a class="headerlink" href="#3-masking-hide-parts-of-sensitive-values" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">regexp_replace</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Mask first 8 digits of Aadhaar</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">df_masked</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="s2">&quot;aadhaar_masked&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">regexp_replace</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">aadhaar</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;^[0-9]</span><span class="si">{8}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;XXXXXXXX&#39;</span><span class="p">)</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">)</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># 987654321098 → XXXXXXXX1098</span>
-</code></pre></div>
-<p><code>regexp_replace</code> finds the pattern and replaces it — like Find &amp; Replace in Excel, but working on a pattern across millions of rows instead of one exact value.</p>
-<hr />
-<h2 id="the-power-query-comparison">The Power Query Comparison<a class="headerlink" href="#the-power-query-comparison" title="Permanent link">&para;</a></h2>
-<p>In Power Query you've used <strong>Text Filters</strong> — "begins with", "contains", "ends with". Those are basic pattern checks done through a UI. Regex is the same idea written as a pattern in code — it's more powerful because you can describe complex rules like "exactly 12 digits" or "5 letters then 4 digits then 1 letter" that no dropdown menu can express.</p>
-<hr />
-<h2 id="one-thing-to-remember">One Thing to Remember<a class="headerlink" href="#one-thing-to-remember" title="Permanent link">&para;</a></h2>
-<p>Regex feels confusing at first because it looks like random symbols. The trick is to <strong>read it left to right, one piece at a time.</strong> Every symbol means something specific. Once you know the 6 building blocks above, you can read most patterns you'll encounter in the real world.</p>
-<p>You don't need to memorise regex — you look it up when you need it. What matters is understanding <em>what it's for</em> and <em>where to use it</em> in a pipeline.</p>
+<p>The frozen sensor check sits between hashing and final aggregation. Clean data only goes into the Health Trends Report.</p>
+<p>See <a href="../hashing/">Hashing &amp; Salting</a> for why <code>hashed_id</code> is used instead of <code>User_ID</code> directly.</p>
 
 
 

@@ -16,7 +16,7 @@
         <link rel="prev" href="../data-masking/">
       
       
-        <link rel="next" href="../../case-studies/green-grid/">
+        <link rel="next" href="../window-functions/">
       
       
         
@@ -796,6 +796,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#col-lit-and-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        col(), lit() and concat()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hash-on-the-id-never-the-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hash on the ID, never the name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-salt-vs-per-team-salt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared salt vs per-team salt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-this-sits-in-the-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -810,6 +843,90 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../window-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Window Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Select & Drop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pivot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1030,6 +1147,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#col-lit-and-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        col(), lit() and concat()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hash-on-the-id-never-the-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hash on the ID, never the name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shared-salt-vs-per-team-salt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared salt vs per-team salt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-this-sits-in-the-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1233,8 +1383,55 @@
 </table>
 <p>The <code>256</code> in <code>sha2(..., 256)</code> picks which SHA-2 variant Spark uses. Always use 256 unless you have a specific reason not to.</p>
 <hr />
+<h2 id="col-lit-and-concat">col(), lit() and concat()<a class="headerlink" href="#col-lit-and-concat" title="Permanent link">&para;</a></h2>
+<p>These three always show up together in the hashing step.</p>
+<p><code>col("User_ID")</code> tells Spark to pull a column from the DataFrame. Different value per row. <code>lit(SALT)</code> says treat this as a fixed constant — same value every row. Without <code>lit()</code>, Spark can't tell if your string is a column name or just text. <code>concat()</code> joins them before hashing runs.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">sha2</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;User_ID&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">),</span> <span class="n">lit</span><span class="p">(</span><span class="n">SALT</span><span class="p">)),</span> <span class="mi">256</span><span class="p">)</span>
+</code></pre></div>
+<p>Read it inside out: get the ID as text → attach the salt → hash the result.</p>
+<p>SQL equivalent: <code>SHA2(CONCAT(CAST(User_ID AS STRING), 'SanteFlux_Salt_2025'), 256)</code></p>
+<hr />
+<h2 id="hash-on-the-id-never-the-name">Hash on the ID, never the name<a class="headerlink" href="#hash-on-the-id-never-the-name" title="Permanent link">&para;</a></h2>
+<p>Full_Name fails as a hash key. Names aren't unique — two users can share one. Hash <code>Full_Name</code> and groupBy that hash, and their records land in the same bucket. A frozen sensor for User 2045 goes undetected because User 3891, same name, has normal fluctuating readings. The min and max spread apart and nothing gets flagged.</p>
+<p>User_ID is unique by design. One ID, one person, consistent hash across the whole pipeline.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Full_Name</th>
+<th>User_ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unique?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Safe to group by?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Changes over time?</td>
+<td>Yes (name changes)</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Don't combine name and ID in the hash either. If the name changes, the hash changes, and you lose the ability to track the same person across time. The ID alone is enough.</p>
+<p>Mask the name for display. Hash the ID for computation. They're solving different problems.</p>
+<hr />
+<h2 id="shared-salt-vs-per-team-salt">Shared salt vs per-team salt<a class="headerlink" href="#shared-salt-vs-per-team-salt" title="Permanent link">&para;</a></h2>
+<p>Chloe's question: one company-wide salt for joins, or one per team to contain a breach?</p>
+<p>For SantéFlux: shared salt. The Health Trends Report joins Paris, Lyon and Marseille. Per-team salts mean User 2045 hashes differently in each city's data — the join breaks and the report can't be built.</p>
+<p>Shared salt means a single breach exposes everything. That's the real cost. Production answer: Azure Key Vault, centrally managed, rotatable, audited. On Databricks Free Edition, a hardcoded variable is the starting point.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">SALT</span> <span class="o">=</span> <span class="s2">&quot;SanteFlux_Salt_2025&quot;</span>  <span class="c1"># move to Key Vault in production</span>
+</code></pre></div>
+<hr />
 <h2 id="where-this-sits-in-the-pipeline">Where this sits in the pipeline<a class="headerlink" href="#where-this-sits-in-the-pipeline" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Raw ingest → mask names → hash + salt IDs → aggregate → report
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Raw ingest → mask names → hash + salt IDs → aggregate → report
 </code></pre></div>
 <p>Names get masked at ingestion. IDs get hashed before anything downstream sees them. By the time data hits a report, there's no PII left — just city-level averages Moreau can approve.</p>
 <p>See <a href="../data-masking/">Data Masking</a> for the name masking code and <a href="../pii-handling/">PII Handling</a> for the full GDPR pipeline setup.</p>

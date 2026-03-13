@@ -13,24 +13,28 @@
       
       
       
+        <link rel="prev" href="../select/">
+      
+      
+        <link rel="next" href="../../case-studies/green-grid/">
       
       
         
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
-        <title>PySpark Learning Notes</title>
+        <title>Pivot - PySpark Learning Notes</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -49,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -73,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#pivot-in-pyspark" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -83,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="PySpark Learning Notes" class="md-header__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
+    <a href="../.." title="PySpark Learning Notes" class="md-header__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -103,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Pivot
             
           </span>
         </div>
@@ -202,7 +211,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -219,11 +228,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/concepts/unity-catalog/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../unity-catalog/" class="md-tabs__link">
           
   
   
@@ -243,7 +254,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/case-studies/green-grid/" class="md-tabs__link">
+        <a href="../../case-studies/green-grid/" class="md-tabs__link">
           
   
   
@@ -277,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="PySpark Learning Notes" class="md-nav__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
+    <a href="../.." title="PySpark Learning Notes" class="md-nav__button md-logo" aria-label="PySpark Learning Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -295,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -319,26 +330,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -356,7 +372,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -374,7 +390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/unity-catalog/" class="md-nav__link">
+      <a href="../unity-catalog/" class="md-nav__link">
         
   
   
@@ -402,7 +418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/data-ingestion/" class="md-nav__link">
+      <a href="../data-ingestion/" class="md-nav__link">
         
   
   
@@ -430,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/schema-definition/" class="md-nav__link">
+      <a href="../schema-definition/" class="md-nav__link">
         
   
   
@@ -458,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/data-quality/" class="md-nav__link">
+      <a href="../data-quality/" class="md-nav__link">
         
   
   
@@ -486,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/pii-handling/" class="md-nav__link">
+      <a href="../pii-handling/" class="md-nav__link">
         
   
   
@@ -514,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/joins/" class="md-nav__link">
+      <a href="../joins/" class="md-nav__link">
         
   
   
@@ -542,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/business-logic/" class="md-nav__link">
+      <a href="../business-logic/" class="md-nav__link">
         
   
   
@@ -570,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/wildcards/" class="md-nav__link">
+      <a href="../wildcards/" class="md-nav__link">
         
   
   
@@ -598,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/regex/" class="md-nav__link">
+      <a href="../regex/" class="md-nav__link">
         
   
   
@@ -626,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/data-masking/" class="md-nav__link">
+      <a href="../data-masking/" class="md-nav__link">
         
   
   
@@ -654,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/hashing/" class="md-nav__link">
+      <a href="../hashing/" class="md-nav__link">
         
   
   
@@ -682,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/window-functions/" class="md-nav__link">
+      <a href="../window-functions/" class="md-nav__link">
         
   
   
@@ -710,7 +726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/select/" class="md-nav__link">
+      <a href="../select/" class="md-nav__link">
         
   
   
@@ -735,10 +751,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/concepts/pivot/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -754,6 +797,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rows-into-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rows into columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-second-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a second dimension
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL equivalent
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -825,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/case-studies/green-grid/" class="md-nav__link">
+      <a href="../../case-studies/green-grid/" class="md-nav__link">
         
   
   
@@ -853,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/case-studies/santeflux/" class="md-nav__link">
+      <a href="../../case-studies/santeflux/" class="md-nav__link">
         
   
   
@@ -898,6 +1005,60 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rows-into-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rows into columns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-second-dimension" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add a second dimension
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL equivalent
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -910,8 +1071,111 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+
+<h1 id="pivot-in-pyspark">Pivot in PySpark<a class="headerlink" href="#pivot-in-pyspark" title="Permanent link">&para;</a></h1>
+<h2 id="rows-into-columns">Rows into columns<a class="headerlink" href="#rows-into-columns" title="Permanent link">&para;</a></h2>
+<p>You know this from Excel pivot tables and Power Query. Same idea — take unique values from a column and spread them out as separate columns.</p>
+<p>Average heart rate by city normally looks like this:</p>
+<table>
+<thead>
+<tr>
+<th>ville</th>
+<th>avg_heart_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paris</td>
+<td>79.2</td>
+</tr>
+<tr>
+<td>Lyon</td>
+<td>81.4</td>
+</tr>
+<tr>
+<td>Marseille</td>
+<td>77.8</td>
+</tr>
+</tbody>
+</table>
+<p>After pivot:</p>
+<table>
+<thead>
+<tr>
+<th>Paris</th>
+<th>Lyon</th>
+<th>Marseille</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>79.2</td>
+<td>81.4</td>
+<td>77.8</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-code">The code<a class="headerlink" href="#the-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">avg</span><span class="p">,</span> <span class="nb">round</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">groupBy</span><span class="p">()</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;ville&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">display</span><span class="p">(</span><span class="n">df_pivot</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>groupBy()</code></td>
+<td>No row grouping — whole dataset, one output row</td>
+</tr>
+<tr>
+<td><code>pivot("ville")</code></td>
+<td>Each city becomes a column</td>
+</tr>
+<tr>
+<td><code>agg(avg(...))</code></td>
+<td>Average heart rate per city column</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="add-a-second-dimension">Add a second dimension<a class="headerlink" href="#add-a-second-dimension" title="Permanent link">&para;</a></h2>
+<p>Put something in <code>groupBy()</code> to get one row per value of that column:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;ville&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<p>One row per Status, one column per city.</p>
+<hr />
+<h2 id="sql-equivalent">SQL equivalent<a class="headerlink" href="#sql-equivalent" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">df_clean</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">PIVOT</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">AVG</span><span class="p">(</span><span class="n">Heart_Rate</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="n">ville</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Paris&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Lyon&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Marseille&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>PySpark doesn't need the value list — it reads the distinct values from the data automatically. SQL requires you to hard-code them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -954,10 +1218,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

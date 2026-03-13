@@ -656,6 +656,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#left-anti-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Left anti join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -802,6 +813,90 @@
     
   
     Hashing & Salting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../window-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Window Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Select & Drop
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pivot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pivot
   
 
     
@@ -1030,6 +1125,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#left-anti-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Left anti join
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#summary" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1176,6 +1282,44 @@
 - Equal = every row matched exactly once (ideal)
 - Greater = some rows matched multiple times (duplicate keys on the right side — investigate)
 - Less = impossible with a left join (if this happens, something went wrong)</p>
+<hr />
+<h2 id="left-anti-join">Left anti join<a class="headerlink" href="#left-anti-join" title="Permanent link">&para;</a></h2>
+<p>Left anti join returns rows from the left table that don't exist in the right table. It's the <code>NOT IN</code> of PySpark joins.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># SQL</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">SELECT</span> <span class="o">*</span> <span class="n">FROM</span> <span class="n">df_all</span> <span class="n">WHERE</span> <span class="n">User_ID</span> <span class="n">NOT</span> <span class="n">IN</span> <span class="p">(</span><span class="n">SELECT</span> <span class="n">User_ID</span> <span class="n">FROM</span> <span class="n">df_clean</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># PySpark — same result</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_all</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_clean</span><span class="p">,</span> <span class="s2">&quot;User_ID&quot;</span><span class="p">,</span> <span class="s2">&quot;left_anti&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>SantéFlux use case: after cleaning out frozen readings, find users whose every reading was frozen — nothing made it through.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">df_all_users</span> <span class="o">=</span> <span class="n">df_hashed</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">df_clean_users</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">df_fully_frozen</span> <span class="o">=</span> <span class="n">df_all_users</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_clean_users</span><span class="p">,</span> <span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span> <span class="s2">&quot;left_anti&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>If User 2045 had 150 readings and all 150 were frozen, they show up here. Users with at least one clean reading don't.</p>
+<table>
+<thead>
+<tr>
+<th>Join type</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inner</td>
+<td>matching rows from both sides</td>
+</tr>
+<tr>
+<td>left</td>
+<td>all left rows, null where no right match</td>
+</tr>
+<tr>
+<td>left_anti</td>
+<td>left rows with no match on the right side</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
 <table>
