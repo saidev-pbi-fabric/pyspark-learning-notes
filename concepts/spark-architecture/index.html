@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../data-quality/">
+        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../pii-handling/">
+        <link rel="next" href="../schema-definition/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Business Logic - PySpark Learning Notes</title>
+        <title>How Spark Works - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#business-logic-in-pyspark" class="md-skip">
+        <a href="#how-spark-works-architecture-compute" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Business Logic
+              How Spark Works
             
           </span>
         </div>
@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../spark-architecture/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -399,6 +399,8 @@
                 
   
   
+    
+  
   
   
     
@@ -414,11 +416,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
@@ -439,7 +441,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -454,10 +456,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../spark-architecture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How Spark Works
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -473,6 +502,164 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-one-idea-everything-else-builds-on" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The one idea everything else builds on
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spark-engine-compute-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spark Engine → Compute Engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classic-compute-vs-serverless-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classic Compute vs Serverless Compute
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classic Compute vs Serverless Compute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classic-compute-cluster-you-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classic Compute (Cluster you control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serverless-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serverless Compute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a Cluster?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#driver-node-the-tech-lead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Driver Node — the Tech Lead
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worker-nodes-the-development-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worker Nodes — the development team
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-tasks-get-distributed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How tasks get distributed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale-up-vs-scale-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale Up vs Scale Down
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Putting it all together
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classic-vs-serverless-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classic vs Serverless — quick reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -784,8 +971,6 @@
                 
   
   
-    
-  
   
   
     
@@ -801,11 +986,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
         
           
           <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
@@ -826,7 +1011,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -897,37 +1082,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Business Logic
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../business-logic/" class="md-nav__link">
         
   
   
@@ -943,92 +1101,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#whenotherwise-case-when" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        when().otherwise() = CASE WHEN
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#multiple-conditions-multiple-when-clauses" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Multiple conditions (multiple WHEN clauses)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-column-with-withcolumn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a new column with withColumn()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extracting-parts-of-a-timestamp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extracting parts of a timestamp
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rounding-numbers-with-round" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Rounding numbers with round()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-green-grid-bill-calculation-all-together" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Green Grid bill calculation — all together
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1485,10 +1557,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whenotherwise-case-when" class="md-nav__link">
+  <a href="#the-one-idea-everything-else-builds-on" class="md-nav__link">
     <span class="md-ellipsis">
       
-        when().otherwise() = CASE WHEN
+        The one idea everything else builds on
       
     </span>
   </a>
@@ -1496,10 +1568,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#multiple-conditions-multiple-when-clauses" class="md-nav__link">
+  <a href="#spark-engine-compute-engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Multiple conditions (multiple WHEN clauses)
+        Spark Engine → Compute Engine
       
     </span>
   </a>
@@ -1507,10 +1579,49 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-column-with-withcolumn" class="md-nav__link">
+  <a href="#classic-compute-vs-serverless-compute" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new column with withColumn()
+        Classic Compute vs Serverless Compute
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classic Compute vs Serverless Compute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classic-compute-cluster-you-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classic Compute (Cluster you control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serverless-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serverless Compute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is a Cluster?
       
     </span>
   </a>
@@ -1518,10 +1629,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extracting-parts-of-a-timestamp" class="md-nav__link">
+  <a href="#driver-node-the-tech-lead" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extracting parts of a timestamp
+        Driver Node — the Tech Lead
       
     </span>
   </a>
@@ -1529,10 +1640,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rounding-numbers-with-round" class="md-nav__link">
+  <a href="#worker-nodes-the-development-team" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rounding numbers with round()
+        Worker Nodes — the development team
       
     </span>
   </a>
@@ -1540,10 +1651,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-green-grid-bill-calculation-all-together" class="md-nav__link">
+  <a href="#how-tasks-get-distributed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Green Grid bill calculation — all together
+        How tasks get distributed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale-up-vs-scale-down" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale Up vs Scale Down
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Putting it all together
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classic-vs-serverless-quick-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classic vs Serverless — quick reference
       
     </span>
   </a>
@@ -1567,150 +1711,225 @@
 
 
 
-<h1 id="business-logic-in-pyspark">Business logic in PySpark<a class="headerlink" href="#business-logic-in-pyspark" title="Permanent link">&para;</a></h1>
-<h2 id="whenotherwise-case-when"><code>when().otherwise()</code> = CASE WHEN<a class="headerlink" href="#whenotherwise-case-when" title="Permanent link">&para;</a></h2>
-<p>If you know <code>CASE WHEN</code> in SQL, you already know this. PySpark's version is <code>when().otherwise()</code> — it does the exact same thing.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- SQL</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">CASE</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">base_price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="n">base_price</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">END</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">FinalRate</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># PySpark — same logic</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">when</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="s2">&quot;FinalRate&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">when</span><span class="p">(</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Hour</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Hour</span> <span class="o">&lt;=</span> <span class="mi">21</span><span class="p">),</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">df</span><span class="o">.</span><span class="n">BasePricePerKwh</span> <span class="o">*</span> <span class="mi">2</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">BasePricePerKwh</span><span class="p">)</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">)</span>
-</code></pre></div>
-<p>Direct mapping:
-- <code>CASE WHEN condition THEN value</code> → <code>when(condition, value)</code>
-- <code>ELSE value</code> → <code>.otherwise(value)</code>
-- <code>END</code> → nothing needed, <code>.otherwise()</code> closes it</p>
+<h1 id="how-spark-works-architecture-compute">How Spark Works — Architecture &amp; Compute<a class="headerlink" href="#how-spark-works-architecture-compute" title="Permanent link">&para;</a></h1>
+<h2 id="the-one-idea-everything-else-builds-on">The one idea everything else builds on<a class="headerlink" href="#the-one-idea-everything-else-builds-on" title="Permanent link">&para;</a></h2>
+<p>Think about counting votes in a general election. One person counting 90 crore votes would take forever. So instead you have counting centers across every constituency — each center handles its local votes, and the final tally gets combined at the end.</p>
+<p>That's distributed computing. Instead of one powerful machine doing all the work sequentially, you split the data across many machines, process in parallel, and combine the results. Spark is the engine that manages this entire operation.</p>
 <hr />
-<h2 id="multiple-conditions-multiple-when-clauses">Multiple conditions (multiple WHEN clauses)<a class="headerlink" href="#multiple-conditions-multiple-when-clauses" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- SQL</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">CASE</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">kwh</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Low&#39;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">kwh</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">50</span><span class="w">  </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Medium&#39;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;High&#39;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">END</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># PySpark</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;Tier&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">when</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">&quot;High&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">)</span>
-</code></pre></div>
-<p>Spark evaluates top to bottom and stops at the first match — same as SQL.</p>
-<hr />
-<h2 id="adding-a-new-column-with-withcolumn">Adding a new column with <code>withColumn()</code><a class="headerlink" href="#adding-a-new-column-with-withcolumn" title="Permanent link">&para;</a></h2>
-<p>In SQL, calculated columns live in the SELECT:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">kwh</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Bill_Amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">...</span>
-</code></pre></div></p>
-<p>In PySpark, you add columns using <code>withColumn()</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Bill_Amount&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">FinalRate</span><span class="p">)</span>
-</code></pre></div></p>
-<p><code>withColumn</code> takes two things:
-1. The name of the new column (in quotes)
-2. The expression to calculate it</p>
-<p>It doesn't change the original DataFrame — it returns a new one with the extra column added. That's why you write <code>df = df.withColumn(...)</code> — you're reassigning <code>df</code> to the new version.</p>
-<hr />
-<h2 id="extracting-parts-of-a-timestamp">Extracting parts of a timestamp<a class="headerlink" href="#extracting-parts-of-a-timestamp" title="Permanent link">&para;</a></h2>
-<p>This is like <code>DATEPART()</code> in SQL:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- SQL</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">DATEPART</span><span class="p">(</span><span class="n">HOUR</span><span class="p">,</span><span class="w"> </span><span class="k">timestamp</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Hour</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># PySpark</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">hour</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Hour&quot;</span><span class="p">,</span> <span class="n">hour</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">timestamp</span><span class="p">))</span>
-</code></pre></div>
-<p>Other equivalents:</p>
+<h2 id="spark-engine-compute-engine">Spark Engine → Compute Engine<a class="headerlink" href="#spark-engine-compute-engine" title="Permanent link">&para;</a></h2>
+<p>Spark is not a database. It does not store data. It is a <strong>compute engine</strong> — its only job is to process data that lives somewhere else (a data lake, cloud storage, Delta tables) and return results.</p>
 <table>
 <thead>
 <tr>
-<th>SQL</th>
-<th>PySpark</th>
-<th>Returns</th>
+<th></th>
+<th>Database (e.g. SQL Server)</th>
+<th>Spark</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>DATEPART(HOUR, col)</code></td>
-<td><code>hour(col)</code></td>
-<td>0–23</td>
+<td>Stores data?</td>
+<td>Yes</td>
+<td>No</td>
 </tr>
 <tr>
-<td><code>DATEPART(MINUTE, col)</code></td>
-<td><code>minute(col)</code></td>
-<td>0–59</td>
+<td>Processes data?</td>
+<td>Yes</td>
+<td>Yes</td>
 </tr>
 <tr>
-<td><code>DATEPART(MONTH, col)</code></td>
-<td><code>month(col)</code></td>
-<td>1–12</td>
+<td>Where data lives</td>
+<td>On the same server</td>
+<td>External storage (ADLS, S3, OneLake)</td>
 </tr>
 <tr>
-<td><code>DATEPART(YEAR, col)</code></td>
-<td><code>year(col)</code></td>
-<td>e.g. 2024</td>
-</tr>
-<tr>
-<td><code>DATEPART(WEEKDAY, col)</code></td>
-<td><code>dayofweek(col)</code></td>
-<td>1=Sunday</td>
-</tr>
-<tr>
-<td><code>FORMAT(col, 'yyyy-MM-dd')</code></td>
-<td><code>date_format(col, 'yyyy-MM-dd')</code></td>
-<td>"2024-03-15"</td>
+<td>Scales how?</td>
+<td>Bigger server</td>
+<td>More machines in the cluster</td>
 </tr>
 </tbody>
 </table>
-<p>These functions only work if the column is <code>TimestampType</code>. If it's a string (which happens when you don't define a schema), they'll fail or return null. This is one of the main reasons we define schemas explicitly.</p>
+<p>When you run a PySpark notebook on Databricks, you're not running code on your laptop. You're sending instructions to a Spark engine running on a cluster of machines in the cloud. Spark reads from storage, processes, and writes back to storage.</p>
 <hr />
-<h2 id="rounding-numbers-with-round">Rounding numbers with <code>round()</code><a class="headerlink" href="#rounding-numbers-with-round" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- SQL</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">ROUND</span><span class="p">(</span><span class="n">kwh</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Bill_Amount</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># PySpark</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="nb">round</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="s2">&quot;Bill_Amount&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">FinalRate</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># 2 decimal places</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">)</span>
-</code></pre></div>
-<p>Same behaviour as SQL <code>ROUND()</code>. Always round at the final calculation step — not in intermediate steps — to avoid accumulated rounding errors.</p>
+<h2 id="classic-compute-vs-serverless-compute">Classic Compute vs Serverless Compute<a class="headerlink" href="#classic-compute-vs-serverless-compute" title="Permanent link">&para;</a></h2>
+<p>There are two ways Spark compute is provisioned in Databricks.</p>
+<h3 id="classic-compute-cluster-you-control">Classic Compute (Cluster you control)<a class="headerlink" href="#classic-compute-cluster-you-control" title="Permanent link">&para;</a></h3>
+<p>You create a cluster manually. You choose how many machines, how much RAM, which Spark version. The cluster starts up (takes 3–5 minutes), runs until you stop it or it auto-terminates, and you're billed for every minute it's alive — whether it's actively processing data or sitting idle.</p>
+<p>Think of it like renting an office. The office is yours from 9am to 6pm regardless of whether your team is working or not.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[You create cluster] --&gt; B[Cluster running]
+    B --&gt; C["You pay\n(idle or active)"]</code></pre>
+<p><strong>You control:</strong>
+- Number of workers
+- Machine type (memory/CPU)
+- Auto-scaling rules
+- Databricks Runtime version</p>
+<p><strong>Use Classic when:</strong>
+- You need specific cluster configurations
+- You're running long, continuous jobs
+- You need to install custom libraries on the cluster</p>
+<h3 id="serverless-compute">Serverless Compute<a class="headerlink" href="#serverless-compute" title="Permanent link">&para;</a></h3>
+<p>No cluster to configure. You write your notebook, hit run, and Databricks figures out the compute. Behind the scenes it spins up resources, runs your code, and tears everything down when done. You pay only for the time your code is actually executing.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[You run code] --&gt; B[Databricks manages everything]
+    B --&gt; C["You pay\n(execution time only)"]</code></pre>
+<p><strong>Databricks manages:</strong>
+- Provisioning machines
+- Scaling up and down
+- Cluster configuration
+- Teardown after job completes</p>
+<p><strong>Use Serverless when:</strong>
+- You want zero cluster management
+- You run intermittent jobs (not continuous)
+- You're on a cost-sensitive setup (no idle billing)
+- You're on Databricks Free Edition or a trial</p>
+<p>The trade-off: serverless gives you less control over configuration. For learning and most standard pipelines, serverless is the better default.</p>
 <hr />
-<h2 id="the-green-grid-bill-calculation-all-together">The Green Grid bill calculation — all together<a class="headerlink" href="#the-green-grid-bill-calculation-all-together" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">hour</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="nb">round</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Step 1: Extract the hour from the timestamp</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">df_final1</span> <span class="o">=</span> <span class="n">df_hashed</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;Hour&quot;</span><span class="p">,</span> <span class="n">hour</span><span class="p">(</span><span class="n">df_hashed</span><span class="o">.</span><span class="n">timestamp</span><span class="p">))</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1"># Step 2: Determine the rate (double during peak hours)</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">df_finalrate</span> <span class="o">=</span> <span class="n">df_final1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="s2">&quot;FinalRate&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="n">when</span><span class="p">(</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        <span class="p">(</span><span class="n">df_final1</span><span class="o">.</span><span class="n">Hour</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_final1</span><span class="o">.</span><span class="n">Hour</span> <span class="o">&lt;=</span> <span class="mi">21</span><span class="p">),</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        <span class="n">df_final1</span><span class="o">.</span><span class="n">BasePricePerKwh</span> <span class="o">*</span> <span class="mi">2</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="p">)</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">df_final1</span><span class="o">.</span><span class="n">BasePricePerKwh</span><span class="p">)</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="p">)</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="c1"># Step 3: Calculate the bill (kWh × rate, 2 decimal places)</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="n">df_billamount</span> <span class="o">=</span> <span class="n">df_finalrate</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    <span class="s2">&quot;Bill_Amount&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    <span class="nb">round</span><span class="p">(</span><span class="n">df_finalrate</span><span class="o">.</span><span class="n">kwh</span> <span class="o">*</span> <span class="n">df_finalrate</span><span class="o">.</span><span class="n">FinalRate</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="p">)</span>
+<h2 id="what-is-a-cluster">What is a Cluster?<a class="headerlink" href="#what-is-a-cluster" title="Permanent link">&para;</a></h2>
+<p>A cluster is a group of machines that work together as one unit. When you submit a Spark job, it runs on the cluster.</p>
+<p>Every cluster has two types of machines:</p>
+<pre class="mermaid"><code>graph TD
+    D["🖥️ Driver Node\n(coordinates everything)"]
+    W1["⚙️ Worker Node 1\nTask 1"]
+    W2["⚙️ Worker Node 2\nTask 2"]
+    W3["⚙️ Worker Node 3\nTask 3"]
+    D --&gt; W1
+    D --&gt; W2
+    D --&gt; W3</code></pre>
+<hr />
+<h2 id="driver-node-the-tech-lead">Driver Node — the Tech Lead<a class="headerlink" href="#driver-node-the-tech-lead" title="Permanent link">&para;</a></h2>
+<p>The Driver is the coordinator. There is exactly one Driver per cluster. It:</p>
+<ul>
+<li>Receives your code (the PySpark instructions you write)</li>
+<li>Builds an execution plan (decides how to break the job into tasks)</li>
+<li>Assigns tasks to Worker nodes</li>
+<li>Monitors progress</li>
+<li>Collects and assembles the final result</li>
+</ul>
+<p>The Driver does not process your data. It manages the workers who do.</p>
+<p>If your class used the Tech Lead analogy — that's exactly right. The Tech Lead reads the requirements, breaks the work into tickets, assigns them to developers, reviews what comes back, and produces the final output. The Tech Lead doesn't write every line of code.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># When you call .collect() or .show(), the Driver is what gets the result</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># The heavy lifting happened on the workers</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Driver asked workers → workers sent results back → Driver displays it</span>
 </code></pre></div>
+<p><strong>What lives on the Driver:</strong>
+- Your PySpark application code
+- The execution plan (DAG)
+- Metadata and aggregated results</p>
+<p><strong>What does NOT live on the Driver:</strong>
+- Your actual data (that's distributed across workers)</p>
+<hr />
+<h2 id="worker-nodes-the-development-team">Worker Nodes — the development team<a class="headerlink" href="#worker-nodes-the-development-team" title="Permanent link">&para;</a></h2>
+<p>Workers are the machines that actually process data. A cluster can have 2, 10, or 100+ workers depending on the workload. Each worker:</p>
+<ul>
+<li>Gets assigned a subset of the data (called a partition)</li>
+<li>Runs its task independently of other workers</li>
+<li>Sends results back to the Driver</li>
+</ul>
+<p>Using the class analogy: the Driver (Tech Lead) gives each Worker (developer) a specific ticket to handle. The developer does their work independently and reports back. No worker waits for another worker to finish before starting.</p>
+<hr />
+<h2 id="how-tasks-get-distributed">How tasks get distributed<a class="headerlink" href="#how-tasks-get-distributed" title="Permanent link">&para;</a></h2>
+<p>When you run a Spark operation on a large DataFrame, Spark doesn't process the entire dataset in one go. It splits the data into <strong>partitions</strong> — chunks of rows. Each partition becomes a task, and each task goes to a worker.</p>
+<pre class="mermaid"><code>flowchart TD
+    A["100 crore rows of transaction data"]
+    B["Split into 200 partitions\n(5 lakh rows each)"]
+    C["200 tasks distributed to workers"]
+    D["10 workers run in parallel\n(each handles 20 tasks)"]
+    E["Driver assembles final result"]
+    A --&gt; B --&gt; C --&gt; D --&gt; E</code></pre>
+<p>You never write this split logic yourself — Spark handles it automatically. This is why PySpark is fast on large data: the work runs in parallel across all workers instead of sequentially on one machine.</p>
+<hr />
+<h2 id="scale-up-vs-scale-down">Scale Up vs Scale Down<a class="headerlink" href="#scale-up-vs-scale-down" title="Permanent link">&para;</a></h2>
+<p>A cluster can adjust the number of workers based on load.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>What happens</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Scale up</strong></td>
+<td>More workers are added to the cluster</td>
+<td>Job is complex, queue of tasks is building up</td>
+</tr>
+<tr>
+<td><strong>Scale down</strong></td>
+<td>Workers are removed when they're idle</td>
+<td>Job is finished or lighter, no point paying for idle machines</td>
+</tr>
+</tbody>
+</table>
+<p>In Classic Compute, you configure auto-scaling rules (min workers, max workers). In Serverless, Databricks handles all of this automatically — you don't set anything.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Heavy job arrives] --&gt; B["Workers added\n(scale up)"]
+    C[Job completes] --&gt; D["Idle workers removed\n(scale down)"]
+    D --&gt; E["Serverless: cluster\nterminates entirely"]</code></pre>
+<hr />
+<h2 id="putting-it-all-together">Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+    A["📓 Your PySpark code\n(notebook)"]
+    B["🖥️ Driver Node\nparses code · builds plan · assigns tasks"]
+    W1["⚙️ Worker 1\npartition 1–20"]
+    W2["⚙️ Worker 2\npartition 21–40"]
+    W3["⚙️ Worker 3\npartition 41–60"]
+    R["🖥️ Driver assembles results"]
+    S["💾 Output written to storage\n(Delta table, file, etc.)"]
+    A --&gt; B
+    B --&gt; W1 &amp; W2 &amp; W3
+    W1 &amp; W2 &amp; W3 --&gt; R
+    R --&gt; S</code></pre>
+<p>This is why PySpark code looks so different from regular Python. You're not writing instructions for one machine running top to bottom. You're writing a plan that Spark will execute in parallel across many machines, with the Driver coordinating everything.</p>
+<hr />
+<h2 id="classic-vs-serverless-quick-reference">Classic vs Serverless — quick reference<a class="headerlink" href="#classic-vs-serverless-quick-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Classic Compute</th>
+<th>Serverless Compute</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster setup</td>
+<td>Manual</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Startup time</td>
+<td>3–5 minutes</td>
+<td>Near-instant</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>Configure auto-scale rules</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Idle billing</td>
+<td>Yes — cluster runs until stopped</td>
+<td>No — pay only when executing</td>
+</tr>
+<tr>
+<td>Config control</td>
+<td>Full control</td>
+<td>Limited</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Custom configs, long-running jobs</td>
+<td>Standard pipelines, learning, cost efficiency</td>
+</tr>
+<tr>
+<td>Who manages infra</td>
+<td>You</td>
+<td>Databricks</td>
+</tr>
+</tbody>
+</table>
 
 
 
