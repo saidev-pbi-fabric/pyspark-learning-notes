@@ -537,7 +537,7 @@
   <a href="#the-real-world-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Real-World Problem
+        The real-world problem
       
     </span>
   </a>
@@ -548,7 +548,7 @@
   <a href="#the-quarantine-pattern-the-bouncer-analogy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Quarantine Pattern — The Bouncer Analogy
+        The quarantine pattern: the bouncer analogy
       
     </span>
   </a>
@@ -559,7 +559,7 @@
   <a href="#in-sql-terms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In SQL Terms
+        In SQL terms
       
     </span>
   </a>
@@ -570,7 +570,7 @@
   <a href="#the-pyspark-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The PySpark Code
+        The PySpark code
       
     </span>
   </a>
@@ -581,7 +581,7 @@
   <a href="#the-null-trap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Null Trap
+        The null trap
       
     </span>
   </a>
@@ -592,7 +592,7 @@
   <a href="#always-validate-your-writes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always Validate Your Writes
+        Always validate your writes
       
     </span>
   </a>
@@ -603,7 +603,7 @@
   <a href="#filter-quick-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filter Quick Reference
+        Filter quick reference
       
     </span>
   </a>
@@ -899,6 +899,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1051,7 +1079,7 @@
   <a href="#the-real-world-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Real-World Problem
+        The real-world problem
       
     </span>
   </a>
@@ -1062,7 +1090,7 @@
   <a href="#the-quarantine-pattern-the-bouncer-analogy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Quarantine Pattern — The Bouncer Analogy
+        The quarantine pattern: the bouncer analogy
       
     </span>
   </a>
@@ -1073,7 +1101,7 @@
   <a href="#in-sql-terms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        In SQL Terms
+        In SQL terms
       
     </span>
   </a>
@@ -1084,7 +1112,7 @@
   <a href="#the-pyspark-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The PySpark Code
+        The PySpark code
       
     </span>
   </a>
@@ -1095,7 +1123,7 @@
   <a href="#the-null-trap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Null Trap
+        The null trap
       
     </span>
   </a>
@@ -1106,7 +1134,7 @@
   <a href="#always-validate-your-writes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always Validate Your Writes
+        Always validate your writes
       
     </span>
   </a>
@@ -1117,7 +1145,7 @@
   <a href="#filter-quick-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filter Quick Reference
+        Filter quick reference
       
     </span>
   </a>
@@ -1141,13 +1169,13 @@
 
 
 
-<h1 id="data-quality-quarantine">Data Quality &amp; Quarantine<a class="headerlink" href="#data-quality-quarantine" title="Permanent link">&para;</a></h1>
-<h2 id="the-real-world-problem">The Real-World Problem<a class="headerlink" href="#the-real-world-problem" title="Permanent link">&para;</a></h2>
+<h1 id="data-quality-quarantine">Data quality &amp; quarantine<a class="headerlink" href="#data-quality-quarantine" title="Permanent link">&para;</a></h1>
+<h2 id="the-real-world-problem">The real-world problem<a class="headerlink" href="#the-real-world-problem" title="Permanent link">&para;</a></h2>
 <p>Imagine a smart meter on someone's wall. It sends a reading every hour. But sometimes the sensor glitches — it sends <code>-500 kWh</code> or <code>9999 kWh</code>. Those numbers aren't real. If you use them to calculate a bill, the customer gets charged nonsense.</p>
-<p>You can't control what comes in from the real world. You CAN control what you let through into your pipeline.</p>
+<p>You can't control what comes in from the real world. You can control what you let through into your pipeline.</p>
 <hr />
-<h2 id="the-quarantine-pattern-the-bouncer-analogy">The Quarantine Pattern — The Bouncer Analogy<a class="headerlink" href="#the-quarantine-pattern-the-bouncer-analogy" title="Permanent link">&para;</a></h2>
-<p>Think of a nightclub bouncer. They check everyone at the door. People who don't meet the rules don't get in — but they're not disappeared. They go on a list (for the venue's records). The people inside are all legitimate.</p>
+<h2 id="the-quarantine-pattern-the-bouncer-analogy">The quarantine pattern: the bouncer analogy<a class="headerlink" href="#the-quarantine-pattern-the-bouncer-analogy" title="Permanent link">&para;</a></h2>
+<p>Think of a nightclub bouncer. They check everyone at the door. People who don't meet the rules don't get in — but they're not disappeared. They go on a list for the venue's records. The people inside are all legitimate.</p>
 <p>That's the quarantine pattern:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>All incoming records
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>      │
@@ -1155,10 +1183,9 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>      │
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>      └──  Good records  →  Continue the pipeline
 </code></pre></div>
-<p>The bad records don't get deleted. They get written to a separate table so you can audit them later. This is important — someone might need to investigate why 200 records were rejected.</p>
+<p>The bad records don't get deleted. They get written to a separate table so you can audit them later. Someone might need to investigate why 200 records were rejected.</p>
 <hr />
-<h2 id="in-sql-terms">In SQL Terms<a class="headerlink" href="#in-sql-terms" title="Permanent link">&para;</a></h2>
-<p>This is equivalent to:</p>
+<h2 id="in-sql-terms">In SQL terms<a class="headerlink" href="#in-sql-terms" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">-- Bad records → quarantine table</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">quarantine_readings</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">meter_readings</span>
@@ -1173,7 +1200,7 @@
 </code></pre></div>
 <p>In PySpark, you do the same thing with <code>.filter()</code>:</p>
 <hr />
-<h2 id="the-pyspark-code">The PySpark Code<a class="headerlink" href="#the-pyspark-code" title="Permanent link">&para;</a></h2>
+<h2 id="the-pyspark-code">The PySpark code<a class="headerlink" href="#the-pyspark-code" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Step 1: Capture the bad records</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df_quarantine</span> <span class="o">=</span> <span class="n">df_readings</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="p">(</span><span class="n">df_readings</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df_readings</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&gt;=</span> <span class="mi">100</span><span class="p">)</span>
@@ -1191,16 +1218,15 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="p">(</span><span class="n">df_readings</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">)</span>
 </code></pre></div>
-<p><strong>Important — always wrap each condition in parentheses <code>()</code>.</strong>
-Without them, PySpark's operator order gets confused. This is one of those "just always do it" rules.</p>
+<p>Always wrap each condition in parentheses <code>()</code>. Without them, PySpark's operator order gets confused. This is one of those "just always do it" rules.</p>
 <hr />
-<h2 id="the-null-trap">The Null Trap<a class="headerlink" href="#the-null-trap" title="Permanent link">&para;</a></h2>
+<h2 id="the-null-trap">The null trap<a class="headerlink" href="#the-null-trap" title="Permanent link">&para;</a></h2>
 <p>Here's something that surprises people:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># This does NOT filter out nulls</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
-<p>In SQL: <code>WHERE kwh &gt;= 0</code> also silently excludes nulls. It's the same behaviour.</p>
-<p>A null compared to a number returns null — not True, not False. So the row just disappears silently.</p>
+<p>In SQL: <code>WHERE kwh &gt;= 0</code> also silently excludes nulls. Same behaviour.</p>
+<p>A null compared to a number returns null — not True, not False. So the row disappears silently.</p>
 <p>If you want to be explicit about what you're keeping, always add <code>.isNotNull()</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">df_readings</span><span class="o">.</span><span class="n">kwh</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">()</span> <span class="o">&amp;</span>   <span class="c1"># explicitly keep only non-nulls</span>
@@ -1209,20 +1235,19 @@ Without them, PySpark's operator order gets confused. This is one of those "just
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="always-validate-your-writes">Always Validate Your Writes<a class="headerlink" href="#always-validate-your-writes" title="Permanent link">&para;</a></h2>
+<h2 id="always-validate-your-writes">Always validate your writes<a class="headerlink" href="#always-validate-your-writes" title="Permanent link">&para;</a></h2>
 <p>After writing any table, read it back and check the row count matches. This catches cases where the write failed silently.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Read the table back</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df_test</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;workspace.green_grid_case_study.Quarantine_Readings&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Count should match — if False, something went wrong</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">df_quarantine</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="n">df_test</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">df_test</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;workspace.green_grid_case_study.Quarantine_Readings&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Should return True — if False, something went wrong</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">df_quarantine</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="n">df_test</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
-<p>This is the equivalent of:
+<p>The SQL equivalent:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">quarantine_readings</span><span class="w">  </span><span class="c1">-- should match what you inserted</span>
 </code></pre></div></p>
 <p>Make it a habit. It takes 2 seconds and saves you from debugging a corrupt table later.</p>
 <hr />
-<h2 id="filter-quick-reference">Filter Quick Reference<a class="headerlink" href="#filter-quick-reference" title="Permanent link">&para;</a></h2>
+<h2 id="filter-quick-reference">Filter quick reference<a class="headerlink" href="#filter-quick-reference" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>

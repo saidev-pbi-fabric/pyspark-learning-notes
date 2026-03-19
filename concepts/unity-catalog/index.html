@@ -453,7 +453,7 @@
   <a href="#think-of-it-like-a-filing-cabinet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like a Filing Cabinet
+        Think of it like a filing cabinet
       
     </span>
   </a>
@@ -464,7 +464,7 @@
   <a href="#how-you-reference-things" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How You Reference Things
+        How you reference things
       
     </span>
   </a>
@@ -475,7 +475,7 @@
   <a href="#what-is-a-volume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is a Volume?
+        What is a Volume?
       
     </span>
   </a>
@@ -483,10 +483,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managed-vs-external-volume-the-simple-version" class="md-nav__link">
+  <a href="#managed-vs-external-volume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Managed vs External Volume — The Simple Version
+        Managed vs External Volume
       
     </span>
   </a>
@@ -497,7 +497,7 @@
   <a href="#if-you-know-microsoft-fabric" class="md-nav__link">
     <span class="md-ellipsis">
       
-        If You Know Microsoft Fabric...
+        If you know Microsoft Fabric
       
     </span>
   </a>
@@ -505,10 +505,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-three-commands-youll-use-most" class="md-nav__link">
+  <a href="#three-commands-youll-use-constantly" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Three Commands You'll Use Most
+        Three commands you'll use constantly
       
     </span>
   </a>
@@ -888,6 +888,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1040,7 +1068,7 @@
   <a href="#think-of-it-like-a-filing-cabinet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like a Filing Cabinet
+        Think of it like a filing cabinet
       
     </span>
   </a>
@@ -1051,7 +1079,7 @@
   <a href="#how-you-reference-things" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How You Reference Things
+        How you reference things
       
     </span>
   </a>
@@ -1062,7 +1090,7 @@
   <a href="#what-is-a-volume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is a Volume?
+        What is a Volume?
       
     </span>
   </a>
@@ -1070,10 +1098,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#managed-vs-external-volume-the-simple-version" class="md-nav__link">
+  <a href="#managed-vs-external-volume" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Managed vs External Volume — The Simple Version
+        Managed vs External Volume
       
     </span>
   </a>
@@ -1084,7 +1112,7 @@
   <a href="#if-you-know-microsoft-fabric" class="md-nav__link">
     <span class="md-ellipsis">
       
-        If You Know Microsoft Fabric...
+        If you know Microsoft Fabric
       
     </span>
   </a>
@@ -1092,10 +1120,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-three-commands-youll-use-most" class="md-nav__link">
+  <a href="#three-commands-youll-use-constantly" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Three Commands You'll Use Most
+        Three commands you'll use constantly
       
     </span>
   </a>
@@ -1120,30 +1148,30 @@
 
 
 <h1 id="unity-catalog">Unity Catalog<a class="headerlink" href="#unity-catalog" title="Permanent link">&para;</a></h1>
-<h2 id="think-of-it-like-a-filing-cabinet">Think of It Like a Filing Cabinet<a class="headerlink" href="#think-of-it-like-a-filing-cabinet" title="Permanent link">&para;</a></h2>
+<h2 id="think-of-it-like-a-filing-cabinet">Think of it like a filing cabinet<a class="headerlink" href="#think-of-it-like-a-filing-cabinet" title="Permanent link">&para;</a></h2>
 <p>Imagine a big filing cabinet at work.</p>
 <ul>
-<li>The <strong>cabinet itself</strong> = the Catalog</li>
-<li>Each <strong>drawer</strong> in the cabinet = a Schema</li>
-<li>Each <strong>folder</strong> inside a drawer = a Table or a Volume (for raw files)</li>
+<li>Cabinet = the Catalog</li>
+<li>Each drawer = a Schema</li>
+<li>Each folder inside a drawer = a Table or a Volume (for raw files)</li>
 </ul>
-<p>In Databricks, this is called the <strong>Unity Catalog</strong> — it's just the organised structure for storing all your data and files.</p>
+<p>In Databricks, this is the Unity Catalog. It's the organised structure for storing all your data and files.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Catalog  (the whole cabinet)
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  └── Schema  (one drawer)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        └── Tables, Views, Volumes  (folders inside that drawer)
 </code></pre></div>
 <hr />
-<h2 id="how-you-reference-things">How You Reference Things<a class="headerlink" href="#how-you-reference-things" title="Permanent link">&para;</a></h2>
-<p>Just like a full address — you always write it as three parts:</p>
+<h2 id="how-you-reference-things">How you reference things<a class="headerlink" href="#how-you-reference-things" title="Permanent link">&para;</a></h2>
+<p>Always three parts, dot-separated:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>catalog.schema.table_name
 </code></pre></div>
-<p><strong>Example from Green Grid:</strong>
+<p>Example from Green Grid:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>workspace.green_grid_case_study.Silver_SmartBill
 </code></pre></div></p>
-<p>Read that as: <em>"In the workspace cabinet, open the green_grid_case_study drawer, find the Silver_SmartBill folder."</em></p>
+<p>Read that as: "In the workspace cabinet, open the green_grid_case_study drawer, find the Silver_SmartBill folder."</p>
 <hr />
-<h2 id="what-is-a-volume">What Is a Volume?<a class="headerlink" href="#what-is-a-volume" title="Permanent link">&para;</a></h2>
-<p>A Volume is just a folder for <strong>raw files</strong> — CSVs, JSONs, Excel files, etc. It is NOT a table. You can't query it with SQL. It's just file storage, like the Files section in a Fabric Lakehouse.</p>
+<h2 id="what-is-a-volume">What is a Volume?<a class="headerlink" href="#what-is-a-volume" title="Permanent link">&para;</a></h2>
+<p>A Volume is a folder for raw files — CSVs, JSONs, Excel files, etc. It is not a table. You can't query it with SQL. It's just file storage, same as the Files section in a Fabric Lakehouse.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>workspace
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  └── green_grid_case_study
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        └── raw_files  ← this is the Volume (a folder)
@@ -1154,9 +1182,9 @@
 <p>To read a file from a Volume, you use its path:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/Volumes/workspace/green_grid_case_study/raw_files/customer_pii.csv
 </code></pre></div></p>
-<p>Think of it as the file path on your laptop — just structured the same way as the catalog hierarchy.</p>
+<p>Same structure as the catalog hierarchy. Same logic as a file path on your laptop.</p>
 <hr />
-<h2 id="managed-vs-external-volume-the-simple-version">Managed vs External Volume — The Simple Version<a class="headerlink" href="#managed-vs-external-volume-the-simple-version" title="Permanent link">&para;</a></h2>
+<h2 id="managed-vs-external-volume">Managed vs External Volume<a class="headerlink" href="#managed-vs-external-volume" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1178,9 +1206,9 @@
 </tr>
 </tbody>
 </table>
-<p>In the bootcamp we use <strong>managed</strong> — Databricks handles everything, you just upload files and use them.</p>
+<p>In the bootcamp we use managed. Databricks handles everything, you just upload files and use them.</p>
 <hr />
-<h2 id="if-you-know-microsoft-fabric">If You Know Microsoft Fabric...<a class="headerlink" href="#if-you-know-microsoft-fabric" title="Permanent link">&para;</a></h2>
+<h2 id="if-you-know-microsoft-fabric">If you know Microsoft Fabric<a class="headerlink" href="#if-you-know-microsoft-fabric" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1209,7 +1237,7 @@
 </table>
 <p>Same idea, different names.</p>
 <hr />
-<h2 id="the-three-commands-youll-use-most">The Three Commands You'll Use Most<a class="headerlink" href="#the-three-commands-youll-use-most" title="Permanent link">&para;</a></h2>
+<h2 id="three-commands-youll-use-constantly">Three commands you'll use constantly<a class="headerlink" href="#three-commands-youll-use-constantly" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Read a file from a volume</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">&quot;/Volumes/catalog/schema/volume/file.csv&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>

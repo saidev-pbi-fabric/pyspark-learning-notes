@@ -632,7 +632,7 @@
   <a href="#multiple-conditions-multiple-when-clauses" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Multiple Conditions (Multiple WHEN clauses)
+        Multiple conditions (multiple WHEN clauses)
       
     </span>
   </a>
@@ -640,10 +640,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-column-withcolumn" class="md-nav__link">
+  <a href="#adding-a-new-column-with-withcolumn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a New Column — withColumn()
+        Adding a new column with withColumn()
       
     </span>
   </a>
@@ -654,7 +654,7 @@
   <a href="#extracting-parts-of-a-timestamp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extracting Parts of a Timestamp
+        Extracting parts of a timestamp
       
     </span>
   </a>
@@ -662,10 +662,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rounding-numbers-round" class="md-nav__link">
+  <a href="#rounding-numbers-with-round" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rounding Numbers — round()
+        Rounding numbers with round()
       
     </span>
   </a>
@@ -676,7 +676,7 @@
   <a href="#the-green-grid-bill-calculation-all-together" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Green Grid Bill Calculation — All Together
+        The Green Grid bill calculation — all together
       
     </span>
   </a>
@@ -888,6 +888,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1051,7 +1079,7 @@
   <a href="#multiple-conditions-multiple-when-clauses" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Multiple Conditions (Multiple WHEN clauses)
+        Multiple conditions (multiple WHEN clauses)
       
     </span>
   </a>
@@ -1059,10 +1087,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-column-withcolumn" class="md-nav__link">
+  <a href="#adding-a-new-column-with-withcolumn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a New Column — withColumn()
+        Adding a new column with withColumn()
       
     </span>
   </a>
@@ -1073,7 +1101,7 @@
   <a href="#extracting-parts-of-a-timestamp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Extracting Parts of a Timestamp
+        Extracting parts of a timestamp
       
     </span>
   </a>
@@ -1081,10 +1109,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#rounding-numbers-round" class="md-nav__link">
+  <a href="#rounding-numbers-with-round" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Rounding Numbers — round()
+        Rounding numbers with round()
       
     </span>
   </a>
@@ -1095,7 +1123,7 @@
   <a href="#the-green-grid-bill-calculation-all-together" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Green Grid Bill Calculation — All Together
+        The Green Grid bill calculation — all together
       
     </span>
   </a>
@@ -1119,9 +1147,9 @@
 
 
 
-<h1 id="business-logic-in-pyspark">Business Logic in PySpark<a class="headerlink" href="#business-logic-in-pyspark" title="Permanent link">&para;</a></h1>
+<h1 id="business-logic-in-pyspark">Business logic in PySpark<a class="headerlink" href="#business-logic-in-pyspark" title="Permanent link">&para;</a></h1>
 <h2 id="whenotherwise-case-when"><code>when().otherwise()</code> = CASE WHEN<a class="headerlink" href="#whenotherwise-case-when" title="Permanent link">&para;</a></h2>
-<p>If you know <code>CASE WHEN</code> in SQL, you already know this. PySpark's version is called <code>when().otherwise()</code> — it does the exact same thing.</p>
+<p>If you know <code>CASE WHEN</code> in SQL, you already know this. PySpark's version is <code>when().otherwise()</code> — it does the exact same thing.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">CASE</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">base_price</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span>
@@ -1144,7 +1172,7 @@
 - <code>ELSE value</code> → <code>.otherwise(value)</code>
 - <code>END</code> → nothing needed, <code>.otherwise()</code> closes it</p>
 <hr />
-<h2 id="multiple-conditions-multiple-when-clauses">Multiple Conditions (Multiple WHEN clauses)<a class="headerlink" href="#multiple-conditions-multiple-when-clauses" title="Permanent link">&para;</a></h2>
+<h2 id="multiple-conditions-multiple-when-clauses">Multiple conditions (multiple WHEN clauses)<a class="headerlink" href="#multiple-conditions-multiple-when-clauses" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">CASE</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">WHEN</span><span class="w"> </span><span class="n">kwh</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Low&#39;</span>
@@ -1162,7 +1190,7 @@
 </code></pre></div>
 <p>Spark evaluates top to bottom and stops at the first match — same as SQL.</p>
 <hr />
-<h2 id="adding-a-new-column-withcolumn">Adding a New Column — <code>withColumn()</code><a class="headerlink" href="#adding-a-new-column-withcolumn" title="Permanent link">&para;</a></h2>
+<h2 id="adding-a-new-column-with-withcolumn">Adding a new column with <code>withColumn()</code><a class="headerlink" href="#adding-a-new-column-with-withcolumn" title="Permanent link">&para;</a></h2>
 <p>In SQL, calculated columns live in the SELECT:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">kwh</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Bill_Amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">...</span>
 </code></pre></div></p>
@@ -1174,8 +1202,8 @@
 2. The expression to calculate it</p>
 <p>It doesn't change the original DataFrame — it returns a new one with the extra column added. That's why you write <code>df = df.withColumn(...)</code> — you're reassigning <code>df</code> to the new version.</p>
 <hr />
-<h2 id="extracting-parts-of-a-timestamp">Extracting Parts of a Timestamp<a class="headerlink" href="#extracting-parts-of-a-timestamp" title="Permanent link">&para;</a></h2>
-<p>This is like <code>DATEPART()</code> or <code>HOUR()</code> in SQL:</p>
+<h2 id="extracting-parts-of-a-timestamp">Extracting parts of a timestamp<a class="headerlink" href="#extracting-parts-of-a-timestamp" title="Permanent link">&para;</a></h2>
+<p>This is like <code>DATEPART()</code> in SQL:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">DATEPART</span><span class="p">(</span><span class="n">HOUR</span><span class="p">,</span><span class="w"> </span><span class="k">timestamp</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Hour</span>
 </code></pre></div>
@@ -1226,9 +1254,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Important:</strong> These functions only work if the column is <code>TimestampType</code>. If it's a string (which happens when you don't define a schema), they'll fail or return null. This is one of the main reasons we define schemas explicitly.</p>
+<p>These functions only work if the column is <code>TimestampType</code>. If it's a string (which happens when you don't define a schema), they'll fail or return null. This is one of the main reasons we define schemas explicitly.</p>
 <hr />
-<h2 id="rounding-numbers-round">Rounding Numbers — <code>round()</code><a class="headerlink" href="#rounding-numbers-round" title="Permanent link">&para;</a></h2>
+<h2 id="rounding-numbers-with-round">Rounding numbers with <code>round()</code><a class="headerlink" href="#rounding-numbers-with-round" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">ROUND</span><span class="p">(</span><span class="n">kwh</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rate</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">Bill_Amount</span>
 </code></pre></div>
@@ -1240,9 +1268,9 @@
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">kwh</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">FinalRate</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># 2 decimal places</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">)</span>
 </code></pre></div>
-<p>Exact same behaviour as SQL <code>ROUND()</code>. Always round at the final calculation step — not in intermediate steps — to avoid accumulated rounding errors.</p>
+<p>Same behaviour as SQL <code>ROUND()</code>. Always round at the final calculation step — not in intermediate steps — to avoid accumulated rounding errors.</p>
 <hr />
-<h2 id="the-green-grid-bill-calculation-all-together">The Green Grid Bill Calculation — All Together<a class="headerlink" href="#the-green-grid-bill-calculation-all-together" title="Permanent link">&para;</a></h2>
+<h2 id="the-green-grid-bill-calculation-all-together">The Green Grid bill calculation — all together<a class="headerlink" href="#the-green-grid-bill-calculation-all-together" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">hour</span><span class="p">,</span> <span class="n">when</span><span class="p">,</span> <span class="nb">round</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Step 1: Extract the hour from the timestamp</span>

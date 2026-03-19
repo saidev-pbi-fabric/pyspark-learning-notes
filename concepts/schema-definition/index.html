@@ -509,7 +509,7 @@
   <a href="#the-problem-spark-is-guessing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Problem — Spark Is Guessing
+        The problem: Spark is guessing
       
     </span>
   </a>
@@ -520,7 +520,7 @@
   <a href="#think-of-it-like-column-definitions-in-sql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like Column Definitions in SQL
+        Think of it like column definitions in SQL
       
     </span>
   </a>
@@ -531,7 +531,7 @@
   <a href="#how-to-write-an-explicit-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How to Write an Explicit Schema
+        How to write an explicit schema
       
     </span>
   </a>
@@ -542,10 +542,27 @@
   <a href="#common-data-types-sql-vs-pyspark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Data Types — SQL vs PySpark
+        Common data types: SQL vs PySpark
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Common data types: SQL vs PySpark">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-thing-to-watch-out-for-with-id-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One thing to watch out for with ID columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -553,7 +570,7 @@
   <a href="#when-to-use-which" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to Use Which
+        When to use which
       
     </span>
   </a>
@@ -564,7 +581,7 @@
   <a href="#why-this-matters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why This Matters
+        Why this matters
       
     </span>
   </a>
@@ -888,6 +905,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1040,7 +1085,7 @@
   <a href="#the-problem-spark-is-guessing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Problem — Spark Is Guessing
+        The problem: Spark is guessing
       
     </span>
   </a>
@@ -1051,7 +1096,7 @@
   <a href="#think-of-it-like-column-definitions-in-sql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Think of It Like Column Definitions in SQL
+        Think of it like column definitions in SQL
       
     </span>
   </a>
@@ -1062,7 +1107,7 @@
   <a href="#how-to-write-an-explicit-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How to Write an Explicit Schema
+        How to write an explicit schema
       
     </span>
   </a>
@@ -1073,10 +1118,27 @@
   <a href="#common-data-types-sql-vs-pyspark" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Data Types — SQL vs PySpark
+        Common data types: SQL vs PySpark
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Common data types: SQL vs PySpark">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#one-thing-to-watch-out-for-with-id-columns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One thing to watch out for with ID columns
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1084,7 +1146,7 @@
   <a href="#when-to-use-which" class="md-nav__link">
     <span class="md-ellipsis">
       
-        When to Use Which
+        When to use which
       
     </span>
   </a>
@@ -1095,7 +1157,7 @@
   <a href="#why-this-matters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why This Matters
+        Why this matters
       
     </span>
   </a>
@@ -1119,14 +1181,14 @@
 
 
 
-<h1 id="schema-definition">Schema Definition<a class="headerlink" href="#schema-definition" title="Permanent link">&para;</a></h1>
-<h2 id="the-problem-spark-is-guessing">The Problem — Spark Is Guessing<a class="headerlink" href="#the-problem-spark-is-guessing" title="Permanent link">&para;</a></h2>
-<p>When you use <code>inferSchema=True</code>, Spark reads through your entire file and <strong>guesses</strong> what type each column should be. Sometimes it guesses right. Sometimes it doesn't.</p>
+<h1 id="schema-definition">Schema definition<a class="headerlink" href="#schema-definition" title="Permanent link">&para;</a></h1>
+<h2 id="the-problem-spark-is-guessing">The problem: Spark is guessing<a class="headerlink" href="#the-problem-spark-is-guessing" title="Permanent link">&para;</a></h2>
+<p>When you use <code>inferSchema=True</code>, Spark reads through your entire file and guesses what type each column should be. Sometimes it guesses right. Sometimes it doesn't.</p>
 <p>The most common failure: timestamps come in as <code>string</code> instead of <code>TimestampType</code>. You only find out later when a date calculation fails and you're wondering why.</p>
-<p>It also means Spark reads the file <strong>twice</strong> — once to guess types, once to actually load the data. On large files, that matters.</p>
+<p>It also means Spark reads the file twice — once to guess types, once to actually load the data. On large files, that matters.</p>
 <p>The fix is to just tell Spark exactly what types you want. No guessing.</p>
 <hr />
-<h2 id="think-of-it-like-column-definitions-in-sql">Think of It Like Column Definitions in SQL<a class="headerlink" href="#think-of-it-like-column-definitions-in-sql" title="Permanent link">&para;</a></h2>
+<h2 id="think-of-it-like-column-definitions-in-sql">Think of it like column definitions in SQL<a class="headerlink" href="#think-of-it-like-column-definitions-in-sql" title="Permanent link">&para;</a></h2>
 <p>In SQL, when you create a table you define what type each column is:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">meter_readings</span><span class="w"> </span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">kwh</span><span class="w">        </span><span class="nb">FLOAT</span><span class="p">,</span>
@@ -1137,7 +1199,7 @@
 </code></pre></div>
 <p>An explicit schema in PySpark is exactly the same thing — you're defining the columns and their types before loading the data.</p>
 <hr />
-<h2 id="how-to-write-an-explicit-schema">How to Write an Explicit Schema<a class="headerlink" href="#how-to-write-an-explicit-schema" title="Permanent link">&para;</a></h2>
+<h2 id="how-to-write-an-explicit-schema">How to write an explicit schema<a class="headerlink" href="#how-to-write-an-explicit-schema" title="Permanent link">&para;</a></h2>
 <p>You use two things: <code>StructType</code> (the whole schema) and <code>StructField</code> (one column).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -1152,9 +1214,9 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>StructField( &quot;column_name&quot; ,  DataType() ,  nullable? )
 </code></pre></div>
 <ul>
-<li><strong>column_name</strong> — must match exactly what's in the file</li>
-<li><strong>DataType()</strong> — what type you want</li>
-<li><strong>True/False</strong> — <code>True</code> means nulls are allowed, <code>False</code> means they're not</li>
+<li><code>"column_name"</code> — must match exactly what's in the file</li>
+<li><code>DataType()</code> — what type you want</li>
+<li><code>True/False</code> — <code>True</code> means nulls are allowed, <code>False</code> means they're not</li>
 </ul>
 <p>Then pass the schema when you read the file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df_readings</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span>
@@ -1165,13 +1227,13 @@
 </code></pre></div>
 <p>Spark now reads the file once, applies your types, done.</p>
 <hr />
-<h2 id="common-data-types-sql-vs-pyspark">Common Data Types — SQL vs PySpark<a class="headerlink" href="#common-data-types-sql-vs-pyspark" title="Permanent link">&para;</a></h2>
+<h2 id="common-data-types-sql-vs-pyspark">Common data types: SQL vs PySpark<a class="headerlink" href="#common-data-types-sql-vs-pyspark" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>SQL</th>
 <th>PySpark</th>
-<th>Use For</th>
+<th>Use for</th>
 </tr>
 </thead>
 <tbody>
@@ -1208,7 +1270,12 @@
 </tbody>
 </table>
 <hr />
-<h2 id="when-to-use-which">When to Use Which<a class="headerlink" href="#when-to-use-which" title="Permanent link">&para;</a></h2>
+<h3 id="one-thing-to-watch-out-for-with-id-columns">One thing to watch out for with ID columns<a class="headerlink" href="#one-thing-to-watch-out-for-with-id-columns" title="Permanent link">&para;</a></h3>
+<p>If your data has a <code>user_id</code> like <code>00123</code>, and you define it as <code>IntegerType()</code>, Spark stores it as <code>123</code>. The leading zeros are gone — silently, no error.</p>
+<p>Same problem with any ID that looks numeric but isn't really a number: account numbers, meter IDs, postal codes, IFSC codes.</p>
+<p>Rule: if a column is an ID or code — even if it contains only digits — use <code>StringType()</code>. You'll never do maths on a user_id, so there's no reason to store it as a number.</p>
+<hr />
+<h2 id="when-to-use-which">When to use which<a class="headerlink" href="#when-to-use-which" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1231,10 +1298,10 @@
 </tr>
 </tbody>
 </table>
-<p>The rule of thumb: <code>inferSchema</code> for exploration, explicit schema for anything you'll run again.</p>
+<p>Rule of thumb: <code>inferSchema</code> for exploration, explicit schema for anything you'll run again.</p>
 <hr />
-<h2 id="why-this-matters">Why This Matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
-<p>In Green Grid, <code>meter_readings.json</code> had a <code>timestamp</code> column. Without an explicit schema, it would have loaded as <code>string</code>. Then when we tried to extract the hour (<code>hour(df.timestamp)</code>), it would have failed — because <code>hour()</code> only works on <code>TimestampType</code>, not text.</p>
+<h2 id="why-this-matters">Why this matters<a class="headerlink" href="#why-this-matters" title="Permanent link">&para;</a></h2>
+<p>In Green Grid, <code>meter_readings.json</code> had a <code>timestamp</code> column. Without an explicit schema, it would have loaded as <code>string</code>. Then when we tried to extract the hour with <code>hour(df.timestamp)</code>, it would have failed — because <code>hour()</code> only works on <code>TimestampType</code>, not text.</p>
 <p>Defining the schema upfront saved us from a confusing error three steps later.</p>
 
 

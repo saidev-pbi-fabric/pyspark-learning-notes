@@ -593,7 +593,7 @@
   <a href="#good-news-you-already-know-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Good News — You Already Know This
+        Good news: you already know this
       
     </span>
   </a>
@@ -604,7 +604,7 @@
   <a href="#join-syntax-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Syntax Breakdown
+        Join syntax breakdown
       
     </span>
   </a>
@@ -615,7 +615,7 @@
   <a href="#join-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Types
+        Join types
       
     </span>
   </a>
@@ -626,7 +626,7 @@
   <a href="#chaining-multiple-joins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Chaining Multiple Joins
+        Chaining multiple joins
       
     </span>
   </a>
@@ -637,7 +637,7 @@
   <a href="#the-duplicate-column-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Duplicate Column Problem
+        The duplicate column problem
       
     </span>
   </a>
@@ -648,7 +648,7 @@
   <a href="#always-check-row-counts-after-a-join" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always Check Row Counts After a Join
+        Always check row counts after a join
       
     </span>
   </a>
@@ -910,6 +910,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1062,7 +1090,7 @@
   <a href="#good-news-you-already-know-this" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Good News — You Already Know This
+        Good news: you already know this
       
     </span>
   </a>
@@ -1073,7 +1101,7 @@
   <a href="#join-syntax-breakdown" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Syntax Breakdown
+        Join syntax breakdown
       
     </span>
   </a>
@@ -1084,7 +1112,7 @@
   <a href="#join-types" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Join Types
+        Join types
       
     </span>
   </a>
@@ -1095,7 +1123,7 @@
   <a href="#chaining-multiple-joins" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Chaining Multiple Joins
+        Chaining multiple joins
       
     </span>
   </a>
@@ -1106,7 +1134,7 @@
   <a href="#the-duplicate-column-problem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Duplicate Column Problem
+        The duplicate column problem
       
     </span>
   </a>
@@ -1117,7 +1145,7 @@
   <a href="#always-check-row-counts-after-a-join" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always Check Row Counts After a Join
+        Always check row counts after a join
       
     </span>
   </a>
@@ -1164,7 +1192,7 @@
 
 
 <h1 id="joins-in-pyspark">Joins in PySpark<a class="headerlink" href="#joins-in-pyspark" title="Permanent link">&para;</a></h1>
-<h2 id="good-news-you-already-know-this">Good News — You Already Know This<a class="headerlink" href="#good-news-you-already-know-this" title="Permanent link">&para;</a></h2>
+<h2 id="good-news-you-already-know-this">Good news: you already know this<a class="headerlink" href="#good-news-you-already-know-this" title="Permanent link">&para;</a></h2>
 <p>If you know SQL JOINs, you already understand PySpark joins. The logic is identical. The only thing that changes is how you write it.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
@@ -1179,7 +1207,7 @@
 </code></pre></div>
 <p>Same result. Different shape.</p>
 <hr />
-<h2 id="join-syntax-breakdown">Join Syntax Breakdown<a class="headerlink" href="#join-syntax-breakdown" title="Permanent link">&para;</a></h2>
+<h2 id="join-syntax-breakdown">Join syntax breakdown<a class="headerlink" href="#join-syntax-breakdown" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_left</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_right</span><span class="p">,</span> <span class="n">join_condition</span><span class="p">,</span> <span class="n">join_type</span><span class="p">)</span>
 </code></pre></div>
 <table>
@@ -1209,13 +1237,13 @@
 <tr>
 <td><code>join_type</code></td>
 <td><code>"left"</code></td>
-<td>INNER, LEFT, RIGHT, OUTER</td>
+<td>inner, left, right, outer</td>
 </tr>
 </tbody>
 </table>
 <p>Note: in PySpark the join condition uses <code>==</code> (two equals signs), not <code>=</code> like SQL.</p>
 <hr />
-<h2 id="join-types">Join Types<a class="headerlink" href="#join-types" title="Permanent link">&para;</a></h2>
+<h2 id="join-types">Join types<a class="headerlink" href="#join-types" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1247,9 +1275,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>In most pipelines, you'll use <code>"left"</code>.</strong> You keep all your primary records and attach extra data where it exists.</p>
+<p>In most pipelines, you'll use <code>"left"</code>. You keep all your primary records and attach extra data where it exists.</p>
 <hr />
-<h2 id="chaining-multiple-joins">Chaining Multiple Joins<a class="headerlink" href="#chaining-multiple-joins" title="Permanent link">&para;</a></h2>
+<h2 id="chaining-multiple-joins">Chaining multiple joins<a class="headerlink" href="#chaining-multiple-joins" title="Permanent link">&para;</a></h2>
 <p>In SQL you write multiple JOINs in one query. In PySpark you chain them — each <code>.join()</code> adds another join:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_clean</span> \
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pii</span><span class="p">,</span>   <span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span> <span class="o">==</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">MeterID</span><span class="p">,</span>   <span class="s2">&quot;left&quot;</span><span class="p">)</span> \
@@ -1257,15 +1285,15 @@
 </code></pre></div>
 <p>The <code>\</code> at the end of each line is just a line continuation — it tells Python "the code continues on the next line". Same result as writing it all on one line, just more readable.</p>
 <hr />
-<h2 id="the-duplicate-column-problem">The Duplicate Column Problem<a class="headerlink" href="#the-duplicate-column-problem" title="Permanent link">&para;</a></h2>
+<h2 id="the-duplicate-column-problem">The duplicate column problem<a class="headerlink" href="#the-duplicate-column-problem" title="Permanent link">&para;</a></h2>
 <p>This is the one thing PySpark handles differently from SQL — and it will catch you out if you're not ready for it.</p>
-<p><strong>The problem:</strong> When you join two DataFrames that both have a column called <code>meter_id</code>, both copies end up in the result. PySpark keeps both, and when you try to reference <code>meter_id</code> later, it doesn't know which one you mean.</p>
+<p>When you join two DataFrames that both have a column called <code>meter_id</code>, both copies end up in the result. PySpark keeps both, and when you try to reference <code>meter_id</code> later, it doesn't know which one you mean.</p>
 <p>In SQL this would just be an ambiguous column error. In PySpark it's the same — but you have to resolve it yourself by explicitly dropping the duplicate.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">df_clean</span> \
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_pii</span><span class="p">,</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span> <span class="o">==</span> <span class="n">df_pii</span><span class="o">.</span><span class="n">MeterID</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span> \
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span><span class="p">)</span>    <span class="c1"># ← drop the copy from df_clean</span>
 </code></pre></div>
-<p><strong>Use <code>df_name.column_name</code> when dropping, not just the column name as a string.</strong></p>
+<p>Use <code>df_name.column_name</code> when dropping, not just the column name as a string:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Safe — drops only the meter_id from df_clean</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">meter_id</span><span class="p">)</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
@@ -1273,12 +1301,11 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;meter_id&quot;</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="always-check-row-counts-after-a-join">Always Check Row Counts After a Join<a class="headerlink" href="#always-check-row-counts-after-a-join" title="Permanent link">&para;</a></h2>
-<p>This is the PySpark equivalent of checking your SQL result set:</p>
+<h2 id="always-check-row-counts-after-a-join">Always check row counts after a join<a class="headerlink" href="#always-check-row-counts-after-a-join" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before join: </span><span class="si">{</span><span class="n">df_clean</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After join:  </span><span class="si">{</span><span class="n">df_joined</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p>For a LEFT JOIN: the after count should be <strong>equal to or greater than</strong> the before count.
+<p>For a left join, the after count should be equal to or greater than the before count:
 - Equal = every row matched exactly once (ideal)
 - Greater = some rows matched multiple times (duplicate keys on the right side — investigate)
 - Less = impossible with a left join (if this happens, something went wrong)</p>

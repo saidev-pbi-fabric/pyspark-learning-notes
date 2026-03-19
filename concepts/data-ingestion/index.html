@@ -481,7 +481,7 @@
   <a href="#what-does-ingestion-actually-mean" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Does "Ingestion" Actually Mean?
+        What does "ingestion" actually mean?
       
     </span>
   </a>
@@ -492,7 +492,7 @@
   <a href="#reading-a-csv-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a CSV File
+        Reading a CSV file
       
     </span>
   </a>
@@ -503,7 +503,7 @@
   <a href="#reading-a-json-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a JSON File
+        Reading a JSON file
       
     </span>
   </a>
@@ -514,7 +514,7 @@
   <a href="#csv-vs-json-what-gets-inferred-correctly" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CSV vs JSON — What Gets Inferred Correctly?
+        CSV vs JSON — what gets inferred correctly?
       
     </span>
   </a>
@@ -525,7 +525,7 @@
   <a href="#the-sql-equivalent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The SQL Equivalent
+        The SQL equivalent
       
     </span>
   </a>
@@ -877,6 +877,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../column-operations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Column Operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1029,7 +1057,7 @@
   <a href="#what-does-ingestion-actually-mean" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Does "Ingestion" Actually Mean?
+        What does "ingestion" actually mean?
       
     </span>
   </a>
@@ -1040,7 +1068,7 @@
   <a href="#reading-a-csv-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a CSV File
+        Reading a CSV file
       
     </span>
   </a>
@@ -1051,7 +1079,7 @@
   <a href="#reading-a-json-file" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a JSON File
+        Reading a JSON file
       
     </span>
   </a>
@@ -1062,7 +1090,7 @@
   <a href="#csv-vs-json-what-gets-inferred-correctly" class="md-nav__link">
     <span class="md-ellipsis">
       
-        CSV vs JSON — What Gets Inferred Correctly?
+        CSV vs JSON — what gets inferred correctly?
       
     </span>
   </a>
@@ -1073,7 +1101,7 @@
   <a href="#the-sql-equivalent" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The SQL Equivalent
+        The SQL equivalent
       
     </span>
   </a>
@@ -1097,13 +1125,13 @@
 
 
 
-<h1 id="data-ingestion">Data Ingestion<a class="headerlink" href="#data-ingestion" title="Permanent link">&para;</a></h1>
-<h2 id="what-does-ingestion-actually-mean">What Does "Ingestion" Actually Mean?<a class="headerlink" href="#what-does-ingestion-actually-mean" title="Permanent link">&para;</a></h2>
-<p>It just means <strong>reading a file and loading it into PySpark</strong> so you can work with it.</p>
-<p>Think of it like opening a spreadsheet in Excel — except instead of Excel, it's PySpark, and instead of clicking File → Open, you write one line of code.</p>
+<h1 id="data-ingestion">Data ingestion<a class="headerlink" href="#data-ingestion" title="Permanent link">&para;</a></h1>
+<h2 id="what-does-ingestion-actually-mean">What does "ingestion" actually mean?<a class="headerlink" href="#what-does-ingestion-actually-mean" title="Permanent link">&para;</a></h2>
+<p>It just means reading a file and loading it into PySpark so you can work with it.</p>
+<p>Think of it like opening a spreadsheet in Excel — except instead of clicking File → Open, you write one line of code.</p>
 <p>In SQL terms: it's like doing a bulk import or loading data into a staging table. Once it's loaded, you can query and transform it.</p>
 <hr />
-<h2 id="reading-a-csv-file">Reading a CSV File<a class="headerlink" href="#reading-a-csv-file" title="Permanent link">&para;</a></h2>
+<h2 id="reading-a-csv-file">Reading a CSV file<a class="headerlink" href="#reading-a-csv-file" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">df_pii</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="s2">&quot;/Volumes/workspace/green_grid_case_study/raw_files/customer_pii.csv&quot;</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1137,25 +1165,25 @@
 </tr>
 </tbody>
 </table>
-<p>After loading, <strong>always run these two lines:</strong>
+<p>After loading, always run these two lines:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">display</span><span class="p">(</span><span class="n">df_pii</span><span class="p">)</span>       <span class="c1"># preview the data — like SELECT TOP 10</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df_pii</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>  <span class="c1"># check what types Spark assigned to each column</span>
 </code></pre></div></p>
 <p><code>printSchema()</code> is your best friend. Run it every single time after loading a file.</p>
 <hr />
-<h2 id="reading-a-json-file">Reading a JSON File<a class="headerlink" href="#reading-a-json-file" title="Permanent link">&para;</a></h2>
+<h2 id="reading-a-json-file">Reading a JSON file<a class="headerlink" href="#reading-a-json-file" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">df_readings</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;/Volumes/workspace/green_grid_case_study/raw_files/meter_readings.json&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">multiLine</span><span class="o">=</span><span class="kc">True</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">)</span>
 </code></pre></div>
 <p>The only extra thing here is <code>multiLine=True</code>.</p>
-<p><strong>Why?</strong> JSON files come in two formats:</p>
-<p><strong>Format 1 — One record per line</strong> (Spark reads this by default):
+<p>Why? JSON files come in two formats:</p>
+<p>Format 1 — one record per line (Spark reads this by default):
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;kwh&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">}</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;kwh&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">30.1</span><span class="p">}</span>
 </code></pre></div></p>
-<p><strong>Format 2 — Standard JSON array</strong> (needs <code>multiLine=True</code>):
+<p>Format 2 — standard JSON array (needs <code>multiLine=True</code>):
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">[</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;kwh&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.2</span><span class="p">},</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;kwh&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">30.1</span><span class="p">}</span>
@@ -1163,12 +1191,12 @@
 </code></pre></div></p>
 <p>The Green Grid file was a standard JSON array, so we needed <code>multiLine=True</code>. If you forget it and the file is an array, Spark will either error or return garbage. Just always add it when reading JSON.</p>
 <hr />
-<h2 id="csv-vs-json-what-gets-inferred-correctly">CSV vs JSON — What Gets Inferred Correctly?<a class="headerlink" href="#csv-vs-json-what-gets-inferred-correctly" title="Permanent link">&para;</a></h2>
+<h2 id="csv-vs-json-what-gets-inferred-correctly">CSV vs JSON — what gets inferred correctly?<a class="headerlink" href="#csv-vs-json-what-gets-inferred-correctly" title="Permanent link">&para;</a></h2>
 <p>This trips people up. Here's the honest truth:</p>
 <table>
 <thead>
 <tr>
-<th>Data Type</th>
+<th>Data type</th>
 <th>CSV</th>
 <th>JSON</th>
 </tr>
@@ -1186,8 +1214,8 @@
 </tr>
 <tr>
 <td>Dates/Timestamps</td>
-<td><strong>Comes in as text</strong></td>
-<td><strong>Comes in as text</strong></td>
+<td>Comes in as text</td>
+<td>Comes in as text</td>
 </tr>
 <tr>
 <td>True/False</td>
@@ -1196,10 +1224,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>The big one to remember:</strong> Timestamps almost always come in as text (string), regardless of the file format. You'll need to either cast them manually or use an explicit schema (see <a href="../schema-definition/">Schema Definition</a>).</p>
+<p>Timestamps almost always come in as text (string), regardless of the file format. You'll need to either cast them manually or use an explicit schema — see <a href="../schema-definition/">Schema Definition</a>.</p>
 <hr />
-<h2 id="the-sql-equivalent">The SQL Equivalent<a class="headerlink" href="#the-sql-equivalent" title="Permanent link">&para;</a></h2>
-<p>Loading a file in PySpark is like this in SQL:</p>
+<h2 id="the-sql-equivalent">The SQL equivalent<a class="headerlink" href="#the-sql-equivalent" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">-- SQL</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">staging_readings</span><span class="w"> </span><span class="k">AS</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">OPENROWSET</span><span class="p">(</span><span class="n">BULK</span><span class="w"> </span><span class="s1">&#39;meter_readings.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span>
