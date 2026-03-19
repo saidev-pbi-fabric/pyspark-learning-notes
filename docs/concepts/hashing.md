@@ -63,16 +63,91 @@ Mobile number as an example: there are roughly 10 billion possible 10-digit numb
 
 ---
 
-## Types of salt
+## Fixed salt vs random salt
+
+This is the decision that determines whether your hashed data can be joined across tables.
+
+### Fixed salt (one constant for all rows)
+
+One secret string. Applied the same way to every row. Same input always produces the same hash.
+
+```python
+SALT = "myapp_secret_2025"
+
+df = df.withColumn(
+    "hashed_id",
+    sha2(concat(col("User_ID").cast("string"), lit(SALT)), 256)
+)
+```
+
+User 1000 hashes to the same value every time this runs — whether in today's pipeline or next month's. That means you can JOIN across DataFrames, match records across tables, and track the same person over time without ever storing their real ID.
+
+**The downside:** if someone discovers your salt, they can rebuild the rainbow table for your exact salt and crack every record at once. One breach, everything exposed.
+
+---
+
+### Random salt (unique salt per row)
+
+A fresh random value is generated for every row at hash time. The salt is stored alongside the hash in the table.
+
+```python
+from pyspark.sql.functions import sha2, concat, col, lit, expr
+
+# Generate a random UUID as the salt for each row
+df = df.withColumn("salt", expr("uuid()"))
+
+df = df.withColumn(
+    "hashed_id",
+    sha2(concat(col("User_ID").cast("string"), col("salt")), 256)
+)
+```
+
+Even if two users have the same User_ID (which shouldn't happen, but if it did), their hashes would differ because each row has its own salt. A breach of one row doesn't help an attacker crack any other row.
+
+**The downside:** User 1000 hashes to a different value every time, because the salt is different every time. You cannot JOIN this hash across tables. You cannot track the same person across pipelines unless you carry the salt forward and re-hash consistently.
+
+---
+
+### The core trade-off
+
+| | Fixed salt | Random salt |
+|--|------------|-------------|
+| Same input → same hash? | Yes | No |
+| Can you JOIN across tables? | Yes | No |
+| One breach exposes all records? | Yes | No — each row is independent |
+| Where is the salt stored? | In your code / Key Vault | In the table, alongside the hash |
+| Typical use case | Data pipelines, cross-table joins | Password storage, user credentials |
+
+---
+
+### How to decide
+
+**Use fixed salt when:**
+- You need to join hashed IDs across two DataFrames
+- The same entity (person, account) appears in multiple tables and needs to match
+- You're building a pipeline where consistency across runs matters
+
+**Use random salt when:**
+- You're storing passwords or authentication tokens (you verify by re-hashing with the stored salt, you never need to join)
+- Each record is self-contained and never needs to match to another row
+- Maximum security per record matters more than joinability
+
+For most data engineering pipelines — fixed salt. For authentication systems — random salt.
+
+SantéFlux uses fixed salt because the Health Trends Report joins patient data across Paris, Lyon, and Marseille. Random salt would break every cross-city join.
+
+---
+
+## Types of salt (reference)
 
 | Type | How it works | Best for |
 |------|-------------|----------|
-| Static salt | One secret for all records | Small teams, single pipeline |
-| Per-record salt | Different salt per row, stored alongside | Maximum security |
-| Per-team salt | Each team holds their own secret | Multi-team setups |
-| Time-based salt | Salt rotates on a schedule | Regulatory environments |
+| Fixed / static | One secret for all records, stored in config or Key Vault | Pipelines, cross-table joins |
+| Random / per-record | Fresh random value per row, stored in the table | Passwords, credentials, one-way verification |
+| Per-team | Each team holds their own secret | Multi-team setups where teams never need to join across each other |
+| Time-based / rotating | Salt changes on a schedule | Regulatory environments requiring periodic re-hashing |
 
-For SantéFlux on Databricks Free Edition, static salt is the call. The pipeline joins data across Paris, Lyon, and Marseille — per-team salt would break those joins. One shared salt keeps everything connected.
+For SantéFlux on Databricks Free Edition, fixed salt is the call. The pipeline joins data across Paris, Lyon, and Marseille — per-team or random salt would break those joins. One shared secret keeps everything connected.
 
 ---
 

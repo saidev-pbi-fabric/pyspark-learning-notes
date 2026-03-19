@@ -28,7 +28,11 @@ markdown_extensions:
   - admonition
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.details
@@ -39,21 +43,28 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Concepts:
-    - Unity Catalog: concepts/unity-catalog.md
-    - Data Ingestion: concepts/data-ingestion.md
-    - Schema Definition: concepts/schema-definition.md
-    - Data Quality & Quarantine: concepts/data-quality.md
-    - PII Handling: concepts/pii-handling.md
-    - Joins in PySpark: concepts/joins.md
-    - Business Logic: concepts/business-logic.md
-    - Wildcards: concepts/wildcards.md
-    - Regex: concepts/regex.md
-    - Data Masking: concepts/data-masking.md
-    - Hashing & Salting: concepts/hashing.md
-    - Window Functions: concepts/window-functions.md
-    - Select & Drop: concepts/select.md
-    - Pivot: concepts/pivot.md
-    - Column Operations: concepts/column-operations.md
+    - Layer 1 — Before you load anything:
+      - How Spark Works: concepts/spark-architecture.md
+      - Schema Definition: concepts/schema-definition.md
+    - Layer 2 — Getting data in:
+      - Data Ingestion: concepts/data-ingestion.md
+      - Unity Catalog: concepts/unity-catalog.md
+    - Layer 3 — Basic transformations:
+      - Select & Drop: concepts/select.md
+      - Column Operations: concepts/column-operations.md
+      - Wildcards: concepts/wildcards.md
+    - Layer 4 — Cleaning & validation:
+      - Regex: concepts/regex.md
+      - Data Quality & Quarantine: concepts/data-quality.md
+      - Business Logic: concepts/business-logic.md
+    - Layer 5 — Security & compliance:
+      - PII Handling: concepts/pii-handling.md
+      - Data Masking: concepts/data-masking.md
+      - Hashing & Salting: concepts/hashing.md
+    - Layer 6 — Advanced operations:
+      - Joins in PySpark: concepts/joins.md
+      - Pivot: concepts/pivot.md
+      - Window Functions: concepts/window-functions.md
   - Case Studies:
     - Case Study 1 — Green Grid: case-studies/green-grid.md
     - Case Study 2 — SantéFlux: case-studies/santeflux.md
