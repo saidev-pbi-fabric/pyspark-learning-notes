@@ -1,8 +1,8 @@
-# Business Logic in PySpark
+# Business logic in PySpark
 
 ## `when().otherwise()` = CASE WHEN
 
-If you know `CASE WHEN` in SQL, you already know this. PySpark's version is called `when().otherwise()` — it does the exact same thing.
+If you know `CASE WHEN` in SQL, you already know this. PySpark's version is `when().otherwise()` — it does the exact same thing.
 
 ```sql
 -- SQL
@@ -32,7 +32,7 @@ Direct mapping:
 
 ---
 
-## Multiple Conditions (Multiple WHEN clauses)
+## Multiple conditions (multiple WHEN clauses)
 
 ```sql
 -- SQL
@@ -57,7 +57,7 @@ Spark evaluates top to bottom and stops at the first match — same as SQL.
 
 ---
 
-## Adding a New Column — `withColumn()`
+## Adding a new column with `withColumn()`
 
 In SQL, calculated columns live in the SELECT:
 ```sql
@@ -77,9 +77,9 @@ It doesn't change the original DataFrame — it returns a new one with the extra
 
 ---
 
-## Extracting Parts of a Timestamp
+## Extracting parts of a timestamp
 
-This is like `DATEPART()` or `HOUR()` in SQL:
+This is like `DATEPART()` in SQL:
 
 ```sql
 -- SQL
@@ -104,11 +104,11 @@ Other equivalents:
 | `DATEPART(WEEKDAY, col)` | `dayofweek(col)` | 1=Sunday |
 | `FORMAT(col, 'yyyy-MM-dd')` | `date_format(col, 'yyyy-MM-dd')` | "2024-03-15" |
 
-**Important:** These functions only work if the column is `TimestampType`. If it's a string (which happens when you don't define a schema), they'll fail or return null. This is one of the main reasons we define schemas explicitly.
+These functions only work if the column is `TimestampType`. If it's a string (which happens when you don't define a schema), they'll fail or return null. This is one of the main reasons we define schemas explicitly.
 
 ---
 
-## Rounding Numbers — `round()`
+## Rounding numbers with `round()`
 
 ```sql
 -- SQL
@@ -125,11 +125,11 @@ df = df.withColumn(
 )
 ```
 
-Exact same behaviour as SQL `ROUND()`. Always round at the final calculation step — not in intermediate steps — to avoid accumulated rounding errors.
+Same behaviour as SQL `ROUND()`. Always round at the final calculation step — not in intermediate steps — to avoid accumulated rounding errors.
 
 ---
 
-## The Green Grid Bill Calculation — All Together
+## The Green Grid bill calculation — all together
 
 ```python
 from pyspark.sql.functions import hour, when, round

@@ -1,30 +1,29 @@
 # Wildcards
 
-## What Is a Wildcard?
+## What is a wildcard?
 
-A wildcard is a **stand-in character that means "anything can go here"**.
+A wildcard is a stand-in character that means "anything can go here."
 
 Think of it like a blank tile in Scrabble — it can represent anything. In data, you use a wildcard when you want to match a pattern rather than an exact value.
 
 ---
 
-## You Already Know This — SQL `LIKE`
+## You already know this: SQL `LIKE`
 
 ```sql
--- Find all customers with a Gmail address
 SELECT * FROM customers
 WHERE email LIKE '%@gmail.com'
 ```
 
-The `%` is the wildcard. It means *"I don't care what comes before @gmail.com — match anything."*
+The `%` is the wildcard. It means "I don't care what comes before @gmail.com — match anything."
 
-| Pattern | Matches | Doesn't Match |
+| Pattern | Matches | Doesn't match |
 |---------|---------|---------------|
 | `'%@gmail.com'` | `john@gmail.com`, `x@gmail.com` | `john@hotmail.com` |
 | `'john%'` | `john`, `johnny`, `johnson` | `mr.john` |
 | `'%error%'` | `critical_error_log`, `my_error_2` | `warning` |
 
-There's also `_` — which means exactly **one** character:
+There's also `_` — exactly one character:
 
 ```sql
 WHERE code LIKE 'A_C'   -- matches ABC, A1C, ACC — not AC, not ABBC
@@ -32,11 +31,9 @@ WHERE code LIKE 'A_C'   -- matches ABC, A1C, ACC — not AC, not ABBC
 
 ---
 
-## Wildcards in PySpark — Two Places You'll Use Them
+## Wildcards in PySpark: two places you'll use them
 
-### 1. When Reading Files — Load Multiple Files at Once
-
-Instead of loading files one by one, use `*` to say "match everything with this pattern":
+### 1. When reading files: load multiple files at once
 
 ```python
 # Load just one specific file
@@ -51,9 +48,9 @@ df = spark.read.csv("/Volumes/workspace/project/raw_files/sales_*.csv")
 
 Think of it like selecting files in Windows Explorer — instead of Ctrl+clicking each one, you just say "give me everything ending in `.csv`."
 
-Spark loads all matching files and combines them into **one DataFrame automatically**.
+Spark loads all matching files and combines them into one DataFrame automatically.
 
-### 2. When Filtering Data — `like()` (Same as SQL `LIKE`)
+### 2. When filtering data: `like()` (same as SQL `LIKE`)
 
 ```python
 # SQL:     WHERE email LIKE '%@gmail.com'
@@ -65,13 +62,13 @@ df.filter(df.email.like('%@gmail.com'))
 df.filter(df.status.like('ERR%'))
 ```
 
-Exact same logic as SQL — just written as a method on the column instead of a keyword.
+Same logic as SQL — just written as a method on the column.
 
 ---
 
-## Why This Matters in Real Pipelines
+## Why this matters in real pipelines
 
-Imagine Green Grid delivers a new meter readings file every single day:
+Imagine Green Grid delivers a new meter readings file every day:
 
 ```
 meter_readings_2024_01_01.json
@@ -83,7 +80,6 @@ meter_readings_2024_01_03.json
 Without wildcards you'd write 365 separate read statements. With a wildcard:
 
 ```python
-# Load an entire year of data in one line
 df_readings = spark.read.json(
     "/Volumes/workspace/green_grid/raw_files/meter_readings_*.json",
     multiLine=True,
@@ -91,30 +87,25 @@ df_readings = spark.read.json(
 )
 ```
 
-Spark finds every file matching that pattern and combines them all into one DataFrame. This is how production pipelines actually work — files land daily and the pipeline picks them all up without you changing any code.
+Spark finds every matching file and combines them all into one DataFrame. This is how production pipelines actually work — files land daily and the pipeline picks them all up without you changing any code.
 
 ---
 
-## The `SELECT *` Wildcard
-
-You use this one without thinking about it:
+## The `SELECT *` wildcard
 
 ```sql
--- SQL
 SELECT * FROM table    -- * means "give me all columns"
 ```
 
 ```python
-# PySpark — all columns
+# PySpark
 df.select("*")
-
 # In practice, display(df) already shows all columns
-display(df)
 ```
 
 ---
 
-## Quick Reference
+## Quick reference
 
 | Context | Wildcard | Meaning |
 |---------|----------|---------|
@@ -127,8 +118,8 @@ display(df)
 
 ---
 
-## One Thing to Watch Out For
+## One thing to watch out for
 
-When using `*` to load multiple files, **all files must have the same structure** — same columns, same types. If one file has an extra column or a different column name, Spark will either error or fill missing columns with nulls.
+When using `*` to load multiple files, all files must have the same structure — same columns, same types. If one file has an extra column or a different name, Spark will either error or fill missing columns with nulls.
 
 This is another reason explicit schemas matter — when loading 365 files at once, you want Spark enforcing the structure, not guessing it from each file.

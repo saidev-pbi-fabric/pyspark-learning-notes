@@ -53,6 +53,7 @@ nav:
     - Window Functions: concepts/window-functions.md
     - Select & Drop: concepts/select.md
     - Pivot: concepts/pivot.md
+    - Column Operations: concepts/column-operations.md
   - Case Studies:
     - Case Study 1 — Green Grid: case-studies/green-grid.md
     - Case Study 2 — SantéFlux: case-studies/santeflux.md

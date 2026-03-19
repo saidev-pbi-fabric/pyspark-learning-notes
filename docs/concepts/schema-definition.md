@@ -1,18 +1,18 @@
-# Schema Definition
+# Schema definition
 
-## The Problem — Spark Is Guessing
+## The problem: Spark is guessing
 
-When you use `inferSchema=True`, Spark reads through your entire file and **guesses** what type each column should be. Sometimes it guesses right. Sometimes it doesn't.
+When you use `inferSchema=True`, Spark reads through your entire file and guesses what type each column should be. Sometimes it guesses right. Sometimes it doesn't.
 
 The most common failure: timestamps come in as `string` instead of `TimestampType`. You only find out later when a date calculation fails and you're wondering why.
 
-It also means Spark reads the file **twice** — once to guess types, once to actually load the data. On large files, that matters.
+It also means Spark reads the file twice — once to guess types, once to actually load the data. On large files, that matters.
 
 The fix is to just tell Spark exactly what types you want. No guessing.
 
 ---
 
-## Think of It Like Column Definitions in SQL
+## Think of it like column definitions in SQL
 
 In SQL, when you create a table you define what type each column is:
 
@@ -29,7 +29,7 @@ An explicit schema in PySpark is exactly the same thing — you're defining the 
 
 ---
 
-## How to Write an Explicit Schema
+## How to write an explicit schema
 
 You use two things: `StructType` (the whole schema) and `StructField` (one column).
 
@@ -50,9 +50,9 @@ Each `StructField` has three things:
 StructField( "column_name" ,  DataType() ,  nullable? )
 ```
 
-- **column_name** — must match exactly what's in the file
-- **DataType()** — what type you want
-- **True/False** — `True` means nulls are allowed, `False` means they're not
+- `"column_name"` — must match exactly what's in the file
+- `DataType()` — what type you want
+- `True/False` — `True` means nulls are allowed, `False` means they're not
 
 Then pass the schema when you read the file:
 
@@ -68,9 +68,9 @@ Spark now reads the file once, applies your types, done.
 
 ---
 
-## Common Data Types — SQL vs PySpark
+## Common data types: SQL vs PySpark
 
-| SQL | PySpark | Use For |
+| SQL | PySpark | Use for |
 |-----|---------|---------|
 | `VARCHAR` / `NVARCHAR` | `StringType()` | Text, IDs, codes |
 | `INT` | `IntegerType()` | Whole numbers |
@@ -81,7 +81,17 @@ Spark now reads the file once, applies your types, done.
 
 ---
 
-## When to Use Which
+### One thing to watch out for with ID columns
+
+If your data has a `user_id` like `00123`, and you define it as `IntegerType()`, Spark stores it as `123`. The leading zeros are gone — silently, no error.
+
+Same problem with any ID that looks numeric but isn't really a number: account numbers, meter IDs, postal codes, IFSC codes.
+
+Rule: if a column is an ID or code — even if it contains only digits — use `StringType()`. You'll never do maths on a user_id, so there's no reason to store it as a number.
+
+---
+
+## When to use which
 
 | Situation | Use |
 |-----------|-----|
@@ -89,12 +99,12 @@ Spark now reads the file once, applies your types, done.
 | Any pipeline you're actually building | Explicit schema — every time |
 | File has timestamps or specific decimal precision | Explicit schema — always |
 
-The rule of thumb: `inferSchema` for exploration, explicit schema for anything you'll run again.
+Rule of thumb: `inferSchema` for exploration, explicit schema for anything you'll run again.
 
 ---
 
-## Why This Matters
+## Why this matters
 
-In Green Grid, `meter_readings.json` had a `timestamp` column. Without an explicit schema, it would have loaded as `string`. Then when we tried to extract the hour (`hour(df.timestamp)`), it would have failed — because `hour()` only works on `TimestampType`, not text.
+In Green Grid, `meter_readings.json` had a `timestamp` column. Without an explicit schema, it would have loaded as `string`. Then when we tried to extract the hour with `hour(df.timestamp)`, it would have failed — because `hour()` only works on `TimestampType`, not text.
 
 Defining the schema upfront saved us from a confusing error three steps later.

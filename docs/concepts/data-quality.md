@@ -1,16 +1,16 @@
-# Data Quality & Quarantine
+# Data quality & quarantine
 
-## The Real-World Problem
+## The real-world problem
 
 Imagine a smart meter on someone's wall. It sends a reading every hour. But sometimes the sensor glitches — it sends `-500 kWh` or `9999 kWh`. Those numbers aren't real. If you use them to calculate a bill, the customer gets charged nonsense.
 
-You can't control what comes in from the real world. You CAN control what you let through into your pipeline.
+You can't control what comes in from the real world. You can control what you let through into your pipeline.
 
 ---
 
-## The Quarantine Pattern — The Bouncer Analogy
+## The quarantine pattern: the bouncer analogy
 
-Think of a nightclub bouncer. They check everyone at the door. People who don't meet the rules don't get in — but they're not disappeared. They go on a list (for the venue's records). The people inside are all legitimate.
+Think of a nightclub bouncer. They check everyone at the door. People who don't meet the rules don't get in — but they're not disappeared. They go on a list for the venue's records. The people inside are all legitimate.
 
 That's the quarantine pattern:
 
@@ -22,13 +22,11 @@ All incoming records
       └──  Good records  →  Continue the pipeline
 ```
 
-The bad records don't get deleted. They get written to a separate table so you can audit them later. This is important — someone might need to investigate why 200 records were rejected.
+The bad records don't get deleted. They get written to a separate table so you can audit them later. Someone might need to investigate why 200 records were rejected.
 
 ---
 
-## In SQL Terms
-
-This is equivalent to:
+## In SQL terms
 
 ```sql
 -- Bad records → quarantine table
@@ -48,7 +46,7 @@ In PySpark, you do the same thing with `.filter()`:
 
 ---
 
-## The PySpark Code
+## The PySpark code
 
 ```python
 # Step 1: Capture the bad records
@@ -71,12 +69,11 @@ df_clean = df_readings.filter(
 )
 ```
 
-**Important — always wrap each condition in parentheses `()`.**
-Without them, PySpark's operator order gets confused. This is one of those "just always do it" rules.
+Always wrap each condition in parentheses `()`. Without them, PySpark's operator order gets confused. This is one of those "just always do it" rules.
 
 ---
 
-## The Null Trap
+## The null trap
 
 Here's something that surprises people:
 
@@ -85,9 +82,9 @@ Here's something that surprises people:
 df.filter(df.kwh >= 0)
 ```
 
-In SQL: `WHERE kwh >= 0` also silently excludes nulls. It's the same behaviour.
+In SQL: `WHERE kwh >= 0` also silently excludes nulls. Same behaviour.
 
-A null compared to a number returns null — not True, not False. So the row just disappears silently.
+A null compared to a number returns null — not True, not False. So the row disappears silently.
 
 If you want to be explicit about what you're keeping, always add `.isNotNull()`:
 
@@ -101,19 +98,18 @@ df.filter(
 
 ---
 
-## Always Validate Your Writes
+## Always validate your writes
 
 After writing any table, read it back and check the row count matches. This catches cases where the write failed silently.
 
 ```python
-# Read the table back
 df_test = spark.read.table("workspace.green_grid_case_study.Quarantine_Readings")
 
-# Count should match — if False, something went wrong
+# Should return True — if False, something went wrong
 df_quarantine.count() == df_test.count()
 ```
 
-This is the equivalent of:
+The SQL equivalent:
 ```sql
 SELECT COUNT(*) FROM quarantine_readings  -- should match what you inserted
 ```
@@ -122,7 +118,7 @@ Make it a habit. It takes 2 seconds and saves you from debugging a corrupt table
 
 ---
 
-## Filter Quick Reference
+## Filter quick reference
 
 | What you want | PySpark |
 |---------------|---------|

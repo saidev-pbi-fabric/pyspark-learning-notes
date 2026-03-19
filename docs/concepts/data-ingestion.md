@@ -1,16 +1,16 @@
-# Data Ingestion
+# Data ingestion
 
-## What Does "Ingestion" Actually Mean?
+## What does "ingestion" actually mean?
 
-It just means **reading a file and loading it into PySpark** so you can work with it.
+It just means reading a file and loading it into PySpark so you can work with it.
 
-Think of it like opening a spreadsheet in Excel — except instead of Excel, it's PySpark, and instead of clicking File → Open, you write one line of code.
+Think of it like opening a spreadsheet in Excel — except instead of clicking File → Open, you write one line of code.
 
 In SQL terms: it's like doing a bulk import or loading data into a staging table. Once it's loaded, you can query and transform it.
 
 ---
 
-## Reading a CSV File
+## Reading a CSV file
 
 ```python
 df_pii = spark.read.csv(
@@ -29,7 +29,7 @@ Breaking this down:
 | `header=True` | "The first row is column names, not data" |
 | `inferSchema=True` | "Have a guess at the data types for me" |
 
-After loading, **always run these two lines:**
+After loading, always run these two lines:
 ```python
 display(df_pii)       # preview the data — like SELECT TOP 10
 df_pii.printSchema()  # check what types Spark assigned to each column
@@ -39,7 +39,7 @@ df_pii.printSchema()  # check what types Spark assigned to each column
 
 ---
 
-## Reading a JSON File
+## Reading a JSON file
 
 ```python
 df_readings = spark.read.json(
@@ -50,15 +50,15 @@ df_readings = spark.read.json(
 
 The only extra thing here is `multiLine=True`.
 
-**Why?** JSON files come in two formats:
+Why? JSON files come in two formats:
 
-**Format 1 — One record per line** (Spark reads this by default):
+Format 1 — one record per line (Spark reads this by default):
 ```json
 {"id": 1, "kwh": 45.2}
 {"id": 2, "kwh": 30.1}
 ```
 
-**Format 2 — Standard JSON array** (needs `multiLine=True`):
+Format 2 — standard JSON array (needs `multiLine=True`):
 ```json
 [
   {"id": 1, "kwh": 45.2},
@@ -70,24 +70,22 @@ The Green Grid file was a standard JSON array, so we needed `multiLine=True`. If
 
 ---
 
-## CSV vs JSON — What Gets Inferred Correctly?
+## CSV vs JSON — what gets inferred correctly?
 
 This trips people up. Here's the honest truth:
 
-| Data Type | CSV | JSON |
+| Data type | CSV | JSON |
 |-----------|-----|------|
 | Numbers | Usually correct | Correct |
 | Text | Correct | Correct |
-| Dates/Timestamps | **Comes in as text** | **Comes in as text** |
+| Dates/Timestamps | Comes in as text | Comes in as text |
 | True/False | Comes in as text | Correct |
 
-**The big one to remember:** Timestamps almost always come in as text (string), regardless of the file format. You'll need to either cast them manually or use an explicit schema (see [Schema Definition](schema-definition.md)).
+Timestamps almost always come in as text (string), regardless of the file format. You'll need to either cast them manually or use an explicit schema — see [Schema Definition](schema-definition.md).
 
 ---
 
-## The SQL Equivalent
-
-Loading a file in PySpark is like this in SQL:
+## The SQL equivalent
 
 ```sql
 -- SQL
