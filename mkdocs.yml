@@ -45,6 +45,7 @@ nav:
   - Concepts:
     - Layer 1 — Before you load anything:
       - How Spark Works: concepts/spark-architecture.md
+      - How Spark Executes Code: concepts/spark-execution-model.md
       - Schema Definition: concepts/schema-definition.md
     - Layer 2 — Getting data in:
       - Data Ingestion: concepts/data-ingestion.md

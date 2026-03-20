@@ -127,13 +127,90 @@ df.show()  # Driver asked workers → workers sent results back → Driver displ
 
 ## Worker Nodes — the development team
 
-Workers are the machines that actually process data. A cluster can have 2, 10, or 100+ workers depending on the workload. Each worker:
+Workers are the machines in the cluster. A cluster can have 2, 10, or 100+ workers depending on the workload. Each worker:
 
 - Gets assigned a subset of the data (called a partition)
-- Runs its task independently of other workers
-- Sends results back to the Driver
+- Reads files from storage
+- Runs transformations on its partition
+- Writes output directly to storage (Delta table, parquet, etc.)
+- Works in parallel with all other workers
+- Sends results or metadata back to the Driver when done
 
 Using the class analogy: the Driver (Tech Lead) gives each Worker (developer) a specific ticket to handle. The developer does their work independently and reports back. No worker waits for another worker to finish before starting.
+
+One important point on "Write Output": when your job writes a Delta table or parquet file, the Executors write directly to storage in parallel — they don't send data back to the Driver first. The Driver only receives a success/failure confirmation, not the actual data. This is what makes large writes fast.
+
+---
+
+## Executor — the process that actually runs your code
+
+There are two things on every worker machine, and it's worth being precise about both.
+
+- **Worker Node** — the physical machine. It provides CPU, RAM, disk, and network. It knows nothing about Spark.
+- **Executor** — a Spark process that runs on the worker node. This is what reads partitions, runs tasks, and sends results back to the Driver.
+
+The Worker Node is the office building. The Executor is the employee working inside it. The building provides space and power — the employee does the work.
+
+```
+Worker Node (the machine)
+└── Executor (Spark process)
+    ├── Task 1 → processes partition 1
+    ├── Task 2 → processes partition 2
+    └── Task 3 → processes partition 3
+```
+
+Each executor can run multiple tasks simultaneously — one per CPU core. An executor with 4 cores runs 4 tasks in parallel.
+
+Executors:
+- Hold data in memory while processing
+- Write to disk if memory runs out (spill)
+- Send results back to the Driver when done
+
+In the Spark UI and in error logs, "executor" appears constantly. Now you know exactly what it refers to.
+
+---
+
+## Core, Parallelism, and MPP
+
+A **core** is a CPU slot on an executor. One core runs one task at a time.
+
+If an executor has 4 cores, it runs 4 tasks simultaneously. 10 executors × 4 cores = 40 tasks running in parallel across the cluster.
+
+```
+10 executors × 4 cores = 40 parallel tasks
+200 partitions ÷ 40 cores = 5 waves to complete the job
+```
+
+This is what **Massively Parallel Processing (MPP)** means in practice. Large data gets split into many partitions. Each partition becomes a task. Tasks run simultaneously across all available cores. More cores = faster job.
+
+| Term | What it means |
+|------|--------------|
+| Core | One CPU slot — runs one task at a time |
+| Parallelism | Number of tasks running simultaneously across all cores |
+| MPP | Processing large data by splitting into partitions and running them in parallel |
+
+The cluster sizing question — "how many workers do I need?" — comes down to: how many cores do I need running in parallel to finish this job in an acceptable time?
+
+---
+
+## How Executors and the Driver communicate
+
+The Driver doesn't just hand out tasks and forget. There's constant back-and-forth:
+
+- Driver assigns tasks to Executors
+- Executors send status updates back to the Driver as tasks run
+- When a task completes, the Executor sends results back to the Driver
+- If a task fails, the Executor reports the failure — the Driver decides whether to retry
+
+```mermaid
+flowchart LR
+    D["Driver"] -->|"assigns tasks"| E["Executors"]
+    E -->|"status updates + results"| D
+    E -->|"task failure"| D
+    D -->|"retry or abort"| E
+```
+
+This communication happens over the network. It's also why the Driver should never do heavy computation itself — it's too busy coordinating.
 
 ---
 
@@ -152,6 +229,27 @@ flowchart TD
 ```
 
 You never write this split logic yourself — Spark handles it automatically. This is why PySpark is fast on large data: the work runs in parallel across all workers instead of sequentially on one machine.
+
+---
+
+## Task Scheduling — how tasks run in waves
+
+When a Job has more tasks than available cores, Spark doesn't wait for everything to be ready. It schedules in **waves** — the first batch fills all available cores, and as each task completes, the next one is immediately assigned.
+
+```mermaid
+flowchart TD
+    A["200 tasks · 40 cores available"]
+    B["Wave 1: tasks 1–40 run simultaneously"]
+    C["Wave 2: tasks 41–80 run"]
+    D["Wave 3: tasks 81–120 run"]
+    E["... continues until all 200 tasks done"]
+    F["Driver assembles final result"]
+    A --> B --> C --> D --> E --> F
+```
+
+This is why adding more cores (bigger cluster) speeds up a job — each wave processes more tasks, so fewer waves are needed to finish.
+
+The Driver manages this scheduling. It tracks which executors are free and assigns the next task as soon as a core becomes available. You can see each wave in the Spark UI as a set of tasks running at the same time.
 
 ---
 
@@ -193,6 +291,37 @@ flowchart TD
 ```
 
 This is why PySpark code looks so different from regular Python. You're not writing instructions for one machine running top to bottom. You're writing a plan that Spark will execute in parallel across many machines, with the Driver coordinating everything.
+
+---
+
+## Photon Engine — Databricks' native execution layer
+
+When you open the Spark UI or look at a physical plan in Databricks, you'll see references to **Photon**. This is Databricks' own query engine that sits underneath your PySpark code.
+
+Standard Apache Spark runs on the JVM (Java Virtual Machine) and processes data row by row. Photon is rewritten in C++ and processes data in column-batches — much lower overhead, significantly faster for SQL and DataFrame operations.
+
+```
+Your PySpark code
+      ↓
+Databricks Runtime
+      ↓
+Photon Engine (C++)   ← replaces standard Spark JVM execution
+      ↓
+Results
+```
+
+**What this means for you:**
+
+- You write nothing differently — same PySpark code, same DataFrame API
+- Photon runs automatically when available. No configuration needed.
+- In the Spark UI, operations show as "Photon" or fall back to standard Spark labels — you can see per-operation which engine ran it
+- Not every operation uses Photon — Python UDFs and some streaming operations fall back to standard Spark
+
+**Why it matters:**
+
+If you're comparing job times between Databricks and another Spark environment, Photon is part of why Databricks is faster. It's not a Spark improvement — it's a Databricks layer on top.
+
+Available on Databricks Runtime 9.1+ including Free Edition on compatible cluster types.
 
 ---
 
