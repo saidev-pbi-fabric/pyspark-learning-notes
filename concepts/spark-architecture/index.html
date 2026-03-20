@@ -690,6 +690,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tungsten-engine-how-standard-spark-manages-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tungsten Engine — how standard Spark manages memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#photon-engine-databricks-native-execution-layer" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1839,6 +1850,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tungsten-engine-how-standard-spark-manages-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tungsten Engine — how standard Spark manages memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#photon-engine-databricks-native-execution-layer" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2132,16 +2154,28 @@
     R --&gt; S</code></pre>
 <p>This is why PySpark code looks so different from regular Python. You're not writing instructions for one machine running top to bottom. You're writing a plan that Spark will execute in parallel across many machines, with the Driver coordinating everything.</p>
 <hr />
+<h2 id="tungsten-engine-how-standard-spark-manages-memory">Tungsten Engine — how standard Spark manages memory<a class="headerlink" href="#tungsten-engine-how-standard-spark-manages-memory" title="Permanent link">&para;</a></h2>
+<p>Before Photon existed, Apache Spark used the Tungsten execution engine to handle memory and CPU efficiency on the JVM.</p>
+<p>The JVM manages memory through a process called garbage collection (GC). Periodically, the JVM stops all processing, scans everything in memory, frees what's no longer needed, and then resumes. This is called a GC pause. On a cluster processing large data, these pauses can be seconds long — your job is running, then everything freezes, then it resumes.</p>
+<p>Tungsten was Spark's answer to this. It manages memory directly outside the JVM heap — called <strong>off-heap memory</strong> — in a region the GC never touches. No GC involvement means no GC pauses.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>JVM Heap (on-heap)        Off-heap memory
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>├── your code             ├── Tungsten data storage
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├── JVM objects           ├── shuffle buffers
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>└── GC tracks all of it   └── GC never sees this
+</code></pre></div>
+<p>Tungsten also generates optimised bytecode at runtime for specific queries rather than using generic interpreted code — faster CPU execution.</p>
+<p>Understanding Tungsten matters because off-heap memory is still bounded. When you broadcast a table to every executor, that copy sits in memory. If the table is too large, the executor runs out of memory and the job fails — not slows, fails.</p>
+<hr />
 <h2 id="photon-engine-databricks-native-execution-layer">Photon Engine — Databricks' native execution layer<a class="headerlink" href="#photon-engine-databricks-native-execution-layer" title="Permanent link">&para;</a></h2>
 <p>When you open the Spark UI or look at a physical plan in Databricks, you'll see references to <strong>Photon</strong>. This is Databricks' own query engine that sits underneath your PySpark code.</p>
-<p>Standard Apache Spark runs on the JVM (Java Virtual Machine) and processes data row by row. Photon is rewritten in C++ and processes data in column-batches — much lower overhead, significantly faster for SQL and DataFrame operations.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Your PySpark code
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>      ↓
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Databricks Runtime
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>      ↓
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Photon Engine (C++)   ← replaces standard Spark JVM execution
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>      ↓
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Results
+<p>Standard Apache Spark runs on the JVM and uses Tungsten for memory management. Photon goes further — it is rewritten entirely in C++, which manages memory directly at the OS level with no JVM involved at all. It processes data in column-batches rather than row by row.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Your PySpark code
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>      ↓
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Databricks Runtime
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>      ↓
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Photon Engine (C++)   ← replaces standard Spark JVM execution
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>      ↓
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>Results
 </code></pre></div>
 <p><strong>What this means for you:</strong></p>
 <ul>
@@ -2150,6 +2184,44 @@
 <li>In the Spark UI, operations show as "Photon" or fall back to standard Spark labels — you can see per-operation which engine ran it</li>
 <li>Not every operation uses Photon — Python UDFs and some streaming operations fall back to standard Spark</li>
 </ul>
+<p><strong>Photon vs Tungsten:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Tungsten</th>
+<th>Photon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td>JVM (Java/Scala)</td>
+<td>C++</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Off-heap via Unsafe API</td>
+<td>Direct OS memory</td>
+</tr>
+<tr>
+<td>GC pauses</td>
+<td>Eliminated via off-heap</td>
+<td>No JVM — no GC at all</td>
+</tr>
+<tr>
+<td>Processing</td>
+<td>Row-based</td>
+<td>Columnar batches</td>
+</tr>
+<tr>
+<td>Where</td>
+<td>Standard Apache Spark</td>
+<td>Databricks only</td>
+</tr>
+</tbody>
+</table>
+<p>On Databricks with Photon enabled, Photon replaces Tungsten's execution. The off-heap memory concern still applies — executor memory is still finite — but Photon handles it more efficiently than Tungsten did.</p>
 <p><strong>Why it matters:</strong></p>
 <p>If you're comparing job times between Databricks and another Spark environment, Photon is part of why Databricks is faster. It's not a Spark improvement — it's a Databricks layer on top.</p>
 <p>Available on Databricks Runtime 9.1+ including Free Edition on compatible cluster types.</p>

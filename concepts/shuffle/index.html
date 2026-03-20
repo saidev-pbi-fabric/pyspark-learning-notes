@@ -1409,6 +1409,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#two-phase-aggregation-how-groupby-reduces-shuffle-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-phase aggregation — how groupBy reduces shuffle cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aqe-adaptive-query-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AQE — Adaptive Query Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-to-reduce-shuffles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1857,6 +1879,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#two-phase-aggregation-how-groupby-reduces-shuffle-cost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two-phase aggregation — how groupBy reduces shuffle cost
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aqe-adaptive-query-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AQE — Adaptive Query Execution
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-to-reduce-shuffles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2101,25 +2145,62 @@
 </code></pre></div>
 <p>A good starting point: set shuffle partitions to roughly 2–4× your number of cores. On Free Edition with 2 workers and 4 cores each = 8 cores → set to 8 or 16.</p>
 <hr />
+<h2 id="two-phase-aggregation-how-groupby-reduces-shuffle-cost">Two-phase aggregation — how groupBy reduces shuffle cost<a class="headerlink" href="#two-phase-aggregation-how-groupby-reduces-shuffle-cost" title="Permanent link">&para;</a></h2>
+<p>When you run a <code>groupBy</code>, Spark doesn't shuffle raw rows directly. It runs aggregation in two phases to reduce the volume of data crossing the network.</p>
+<p>Think of a national election count. Each constituency counts their own local votes first, then sends only the totals to the central office — not every individual ballot. The central office merges the totals. Far less data travels.</p>
+<p>Spark does the same:</p>
+<p><strong>Phase 1 (partial):</strong> Each executor computes a partial result on its own partition. For a <code>groupBy("ville").avg("Heart_Rate")</code>, each executor finds the local sum and count of Heart_Rate for each city it holds.</p>
+<p><strong>Phase 2 (finalmerge):</strong> After the shuffle, each executor receives partial results from all other executors for its assigned cities, and merges them into the final answer.</p>
+<p>Visible in the physical plan as two <code>GroupingAgg</code> nodes — one with <code>partial_</code> prefix before the shuffle, one with <code>finalmerge_</code> prefix after:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>PhotonGroupingAgg ... finalmerge_avg(...)    ← Phase 2: merge after shuffle
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>   +- PhotonShuffleExchangeSource
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>      +- PhotonShuffleExchangeSink hashpartitioning(ville, 41)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>         +- PhotonGroupingAgg ... partial_avg(...)   ← Phase 1: local compute before shuffle
+</code></pre></div>
+<p>Only the compact partial summaries cross the network — not every row. This is why <code>groupBy</code> is less expensive than it first appears.</p>
+<hr />
+<h2 id="aqe-adaptive-query-execution">AQE — Adaptive Query Execution<a class="headerlink" href="#aqe-adaptive-query-execution" title="Permanent link">&para;</a></h2>
+<p>Spark builds a plan before your job runs, but with AQE enabled it can revise that plan mid-execution based on what it actually sees in the data.</p>
+<p>Think of a GPS that recalculates based on live traffic rather than only predicted traffic. The initial route was sensible — but once you're driving and real conditions are visible, it adjusts.</p>
+<p>The most visible effect of AQE is shuffle partition count. The default is 200, but AQE measures the actual data volume after the shuffle write and picks a more appropriate number. A small dataset might get 8 or 41 partitions instead of 200 — fewer tasks, less overhead.</p>
+<p>Visible in the physical plan as:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>AdaptiveSparkPlan isFinalPlan=false
+</code></pre></div>
+<p><code>isFinalPlan=false</code> means the plan is still the initial version — AQE hasn't finished optimising. By the time the job completes, the plan may have changed. <code>isFinalPlan=true</code> means AQE has locked in its final decisions.</p>
+<p>AQE is enabled by default on Databricks. You don't configure it — it works automatically.</p>
+<hr />
 <h2 id="how-to-reduce-shuffles">How to reduce shuffles<a class="headerlink" href="#how-to-reduce-shuffles" title="Permanent link">&para;</a></h2>
 <h3 id="1-broadcast-join-eliminate-the-shuffle-entirely">1. Broadcast join — eliminate the shuffle entirely<a class="headerlink" href="#1-broadcast-join-eliminate-the-shuffle-entirely" title="Permanent link">&para;</a></h3>
 <p>When one side of a join is small (a few hundred rows to a few hundred MB), broadcast it. Spark sends a full copy to every executor — no shuffle needed.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Without broadcast — both tables shuffle</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">,</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># With broadcast — df_state_codes goes to every executor, no shuffle</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">),</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Without broadcast — both tables shuffle</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">,</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># With broadcast — df_state_codes goes to every executor, no shuffle</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">),</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Real example: 10 crore transaction rows joined to a 500-row state codes table. Without broadcast, both tables shuffle — that's 10 crore rows moving across the network. With broadcast, the 500 rows get copied to every executor, and only the large table moves (to its own executors for processing). The 500-row copy is negligible.</p>
+<p><strong>The broadcast size limit</strong></p>
+<p>The broadcast table has to fit in memory on every executor simultaneously. If it's too large, the executor runs out of memory and the job fails.</p>
+<p>Spark controls this with a threshold setting:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">)</span>  <span class="c1"># default: 10MB</span>
+</code></pre></div>
+<p>Below this threshold, Spark automatically broadcasts the small table even without you explicitly calling <code>broadcast()</code>. Above it, Spark falls back to a regular shuffle join. You can tune this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Allow broadcast for tables up to 100MB</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="s2">&quot;104857600&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Disable auto-broadcast entirely</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="s2">&quot;-1&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Rule of thumb: broadcast is safe up to ~200MB per executor. Beyond that, use a shuffle join. A few hundred rows to a few thousand rows is always safe.</p>
 <h3 id="2-filter-before-you-shuffle">2. Filter before you shuffle<a class="headerlink" href="#2-filter-before-you-shuffle" title="Permanent link">&para;</a></h3>
 <p>The less data going into a shuffle, the cheaper it is. Push filters as early as possible — before any groupBy or join.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Worse — shuffle happens on all rows, then filter</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Better — filter first, then shuffle only Mumbai rows</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Worse — shuffle happens on all rows, then filter</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Better — filter first, then shuffle only Mumbai rows</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
 <p>Spark's optimizer often does this automatically (predicate pushdown), but being explicit never hurts.</p>
 <h3 id="3-avoid-unnecessary-wide-operations">3. Avoid unnecessary wide operations<a class="headerlink" href="#3-avoid-unnecessary-wide-operations" title="Permanent link">&para;</a></h3>
@@ -2128,7 +2209,7 @@
 <hr />
 <h2 id="shuffle-and-the-physical-plan-the-connection">Shuffle and the physical plan — the connection<a class="headerlink" href="#shuffle-and-the-physical-plan-the-connection" title="Permanent link">&para;</a></h2>
 <p>Your class notes made this connection:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>explain command → groupBy → Exchange (shuffle)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>explain command → groupBy → Exchange (shuffle)
 </code></pre></div>
 <p>Now the full picture:</p>
 <pre class="mermaid"><code>flowchart LR
@@ -2174,6 +2255,14 @@
 <tr>
 <td>Shuffle partitions</td>
 <td>Default 200 — reduce for small clusters (<code>spark.sql.shuffle.partitions</code>)</td>
+</tr>
+<tr>
+<td>Two-phase aggregation</td>
+<td>groupBy computes partial results locally before shuffling — reduces data crossing the network</td>
+</tr>
+<tr>
+<td>AQE</td>
+<td>Adaptive Query Execution — Spark revises the plan mid-run based on actual data; auto-tunes shuffle partitions</td>
 </tr>
 </tbody>
 </table>

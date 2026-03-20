@@ -675,6 +675,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#why-production-pipelines-use-coalesce-before-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why production pipelines use coalesce before writes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-databricks-free-edition-use-case" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -737,6 +748,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-optimizer-does-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the optimizer does automatically
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What the optimizer does automatically">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predicate-pushdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predicate pushdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column pruning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1858,6 +1908,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#why-production-pipelines-use-coalesce-before-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why production pipelines use coalesce before writes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-databricks-free-edition-use-case" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1920,6 +1981,45 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-the-optimizer-does-automatically" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the optimizer does automatically
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What the optimizer does automatically">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predicate-pushdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predicate pushdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column-pruning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Column pruning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2310,6 +2410,8 @@
 </tr>
 </tbody>
 </table>
+<h3 id="why-production-pipelines-use-coalesce-before-writes">Why production pipelines use coalesce before writes<a class="headerlink" href="#why-production-pipelines-use-coalesce-before-writes" title="Permanent link">&para;</a></h3>
+<p>Spark decides partition count to maximise compute parallelism — more partitions means more tasks running in parallel, which is the right call during processing. But when you write output, each partition becomes a file. 200 shuffle partitions means 200 output files — tiny files that are slow to read downstream, expensive on cloud storage (more API calls per read), and hard to work with. In production pipelines, coalesce before a write is standard practice specifically to control output file count. The partition count that was right for compute is often wrong for storage.</p>
 <h3 id="the-databricks-free-edition-use-case">The Databricks Free Edition use case<a class="headerlink" href="#the-databricks-free-edition-use-case" title="Permanent link">&para;</a></h3>
 <p>In Free Edition with limited workers, your trainer explicitly used <code>coalesce</code> to demonstrate distributed computing — making it visible how many partitions exist and which worker handles which chunk.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Read data — Spark decides partition count automatically</span>
@@ -2391,6 +2493,25 @@
 </code></pre></div>
 <p><code>.explain()</code> is your first debugging tool when a job runs slow. If you see more <code>Exchange</code> steps than expected, you have more shuffles than needed — and that's where the time is going.</p>
 <hr />
+<h2 id="what-the-optimizer-does-automatically">What the optimizer does automatically<a class="headerlink" href="#what-the-optimizer-does-automatically" title="Permanent link">&para;</a></h2>
+<p>Before running anything, Spark's Catalyst optimizer looks at your plan and applies transformations to make it faster. Two of the most impactful are visible in every physical plan.</p>
+<h3 id="predicate-pushdown">Predicate pushdown<a class="headerlink" href="#predicate-pushdown" title="Permanent link">&para;</a></h3>
+<p>A predicate is a filter condition — <code>ville = Paris</code>, <code>Heart_Rate &gt; 100</code>, <code>status = active</code>. Spark pushes these as close to the data source as possible — ideally into the file scan itself.</p>
+<p>Think of it like searching for a specific file in a cabinet. Instead of pulling every file out and reading each one, you read the folder labels first and only pull the relevant folder. The irrelevant files never leave the cabinet.</p>
+<p>Without predicate pushdown: all rows load into memory, filter runs after.
+With predicate pushdown: the data source is told to return only matching rows. Non-matching rows never enter memory.</p>
+<p>Visible in the physical plan as <code>PushedFilters</code> on the <code>FileScan</code> node:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>FileScan csv [...] PushedFilters: [IsNotNull(ville), EqualTo(ville,Paris)]
+</code></pre></div>
+<p>When <code>PushedFilters</code> is empty, there was no filter to push — or the source format doesn't support it.</p>
+<p>Note that Spark also automatically adds <code>IsNotNull</code> alongside your filter — it won't attempt to match null values against a string condition.</p>
+<h3 id="column-pruning">Column pruning<a class="headerlink" href="#column-pruning" title="Permanent link">&para;</a></h3>
+<p>The column equivalent of predicate pushdown. If your query only needs <code>ville</code> and <code>Heart_Rate</code>, Spark reads only those two columns at the source — even if the file has 20 others. The unused columns never enter memory.</p>
+<p>Visible in the <code>FileScan</code> node — it only lists the columns it actually needs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>FileScan csv [ville#13186, Heart_Rate#13187]
+</code></pre></div>
+<p>Both optimisations happen automatically. You write the query clearly — the optimizer handles reducing the data volume before any processing begins.</p>
+<hr />
 <h2 id="what-is-a-job">What is a Job?<a class="headerlink" href="#what-is-a-job" title="Permanent link">&para;</a></h2>
 <p>Every time an action fires, Spark creates a <strong>Job</strong>.</p>
 <p>One action = one Job. Three <code>.show()</code> calls in your notebook = three Jobs.</p>
@@ -2463,6 +2584,18 @@
 <tr>
 <td><code>explain()</code></td>
 <td>Shows the physical plan — look for <code>Exchange</code> to find shuffles</td>
+</tr>
+<tr>
+<td><code>explain(True)</code></td>
+<td>Shows all three stages: unresolved logical, optimised logical, physical</td>
+</tr>
+<tr>
+<td>Predicate pushdown</td>
+<td>Optimizer pushes filters to the data source — non-matching rows never enter memory</td>
+</tr>
+<tr>
+<td>Column pruning</td>
+<td>Optimizer drops unused columns at read time — only needed columns are loaded</td>
 </tr>
 <tr>
 <td><code>coalesce(n)</code></td>
