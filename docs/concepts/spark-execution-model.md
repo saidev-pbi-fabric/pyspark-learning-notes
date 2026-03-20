@@ -210,6 +210,10 @@ df_result.coalesce(1).write.parquet("/output/transactions")
 | Partition balance | Uneven (merges nearby) | Even (redistributes globally) |
 | Use when | Reducing for output | Rebalancing for better parallelism |
 
+### Why production pipelines use coalesce before writes
+
+Spark decides partition count to maximise compute parallelism — more partitions means more tasks running in parallel, which is the right call during processing. But when you write output, each partition becomes a file. 200 shuffle partitions means 200 output files — tiny files that are slow to read downstream, expensive on cloud storage (more API calls per read), and hard to work with. In production pipelines, coalesce before a write is standard practice specifically to control output file count. The partition count that was right for compute is often wrong for storage.
+
 ### The Databricks Free Edition use case
 
 In Free Edition with limited workers, your trainer explicitly used `coalesce` to demonstrate distributed computing — making it visible how many partitions exist and which worker handles which chunk.
@@ -333,6 +337,43 @@ df.groupBy("city").count().explain()
 
 ---
 
+## What the optimizer does automatically
+
+Before running anything, Spark's Catalyst optimizer looks at your plan and applies transformations to make it faster. Two of the most impactful are visible in every physical plan.
+
+### Predicate pushdown
+
+A predicate is a filter condition — `ville = Paris`, `Heart_Rate > 100`, `status = active`. Spark pushes these as close to the data source as possible — ideally into the file scan itself.
+
+Think of it like searching for a specific file in a cabinet. Instead of pulling every file out and reading each one, you read the folder labels first and only pull the relevant folder. The irrelevant files never leave the cabinet.
+
+Without predicate pushdown: all rows load into memory, filter runs after.
+With predicate pushdown: the data source is told to return only matching rows. Non-matching rows never enter memory.
+
+Visible in the physical plan as `PushedFilters` on the `FileScan` node:
+
+```
+FileScan csv [...] PushedFilters: [IsNotNull(ville), EqualTo(ville,Paris)]
+```
+
+When `PushedFilters` is empty, there was no filter to push — or the source format doesn't support it.
+
+Note that Spark also automatically adds `IsNotNull` alongside your filter — it won't attempt to match null values against a string condition.
+
+### Column pruning
+
+The column equivalent of predicate pushdown. If your query only needs `ville` and `Heart_Rate`, Spark reads only those two columns at the source — even if the file has 20 others. The unused columns never enter memory.
+
+Visible in the `FileScan` node — it only lists the columns it actually needs:
+
+```
+FileScan csv [ville#13186, Heart_Rate#13187]
+```
+
+Both optimisations happen automatically. You write the query clearly — the optimizer handles reducing the data volume before any processing begins.
+
+---
+
 ## What is a Job?
 
 Every time an action fires, Spark creates a **Job**.
@@ -396,6 +437,9 @@ When you see a job that runs slowly despite having enough workers, spill is a co
 | Wide transformation | Data moves across partitions — causes a shuffle, slower (groupBy, join, orderBy) |
 | Shuffle | Network movement of data between partitions caused by wide transformations |
 | `explain()` | Shows the physical plan — look for `Exchange` to find shuffles |
+| `explain(True)` | Shows all three stages: unresolved logical, optimised logical, physical |
+| Predicate pushdown | Optimizer pushes filters to the data source — non-matching rows never enter memory |
+| Column pruning | Optimizer drops unused columns at read time — only needed columns are loaded |
 | `coalesce(n)` | Reduces partition count without shuffling — controls number of output files |
 | `repartition(n)` | Redistributes data evenly into n partitions — causes a shuffle |
 | Job | Created when an action fires — one action = one Job |

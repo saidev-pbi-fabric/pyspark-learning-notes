@@ -155,6 +155,51 @@ A good starting point: set shuffle partitions to roughly 2–4× your number of 
 
 ---
 
+## Two-phase aggregation — how groupBy reduces shuffle cost
+
+When you run a `groupBy`, Spark doesn't shuffle raw rows directly. It runs aggregation in two phases to reduce the volume of data crossing the network.
+
+Think of a national election count. Each constituency counts their own local votes first, then sends only the totals to the central office — not every individual ballot. The central office merges the totals. Far less data travels.
+
+Spark does the same:
+
+**Phase 1 (partial):** Each executor computes a partial result on its own partition. For a `groupBy("ville").avg("Heart_Rate")`, each executor finds the local sum and count of Heart_Rate for each city it holds.
+
+**Phase 2 (finalmerge):** After the shuffle, each executor receives partial results from all other executors for its assigned cities, and merges them into the final answer.
+
+Visible in the physical plan as two `GroupingAgg` nodes — one with `partial_` prefix before the shuffle, one with `finalmerge_` prefix after:
+
+```
+PhotonGroupingAgg ... finalmerge_avg(...)    ← Phase 2: merge after shuffle
+   +- PhotonShuffleExchangeSource
+      +- PhotonShuffleExchangeSink hashpartitioning(ville, 41)
+         +- PhotonGroupingAgg ... partial_avg(...)   ← Phase 1: local compute before shuffle
+```
+
+Only the compact partial summaries cross the network — not every row. This is why `groupBy` is less expensive than it first appears.
+
+---
+
+## AQE — Adaptive Query Execution
+
+Spark builds a plan before your job runs, but with AQE enabled it can revise that plan mid-execution based on what it actually sees in the data.
+
+Think of a GPS that recalculates based on live traffic rather than only predicted traffic. The initial route was sensible — but once you're driving and real conditions are visible, it adjusts.
+
+The most visible effect of AQE is shuffle partition count. The default is 200, but AQE measures the actual data volume after the shuffle write and picks a more appropriate number. A small dataset might get 8 or 41 partitions instead of 200 — fewer tasks, less overhead.
+
+Visible in the physical plan as:
+
+```
+AdaptiveSparkPlan isFinalPlan=false
+```
+
+`isFinalPlan=false` means the plan is still the initial version — AQE hasn't finished optimising. By the time the job completes, the plan may have changed. `isFinalPlan=true` means AQE has locked in its final decisions.
+
+AQE is enabled by default on Databricks. You don't configure it — it works automatically.
+
+---
+
 ## How to reduce shuffles
 
 ### 1. Broadcast join — eliminate the shuffle entirely
@@ -172,6 +217,28 @@ df_result = df_transactions.join(broadcast(df_state_codes), "state_code", "left"
 ```
 
 Real example: 10 crore transaction rows joined to a 500-row state codes table. Without broadcast, both tables shuffle — that's 10 crore rows moving across the network. With broadcast, the 500 rows get copied to every executor, and only the large table moves (to its own executors for processing). The 500-row copy is negligible.
+
+**The broadcast size limit**
+
+The broadcast table has to fit in memory on every executor simultaneously. If it's too large, the executor runs out of memory and the job fails.
+
+Spark controls this with a threshold setting:
+
+```python
+spark.conf.get("spark.sql.autoBroadcastJoinThreshold")  # default: 10MB
+```
+
+Below this threshold, Spark automatically broadcasts the small table even without you explicitly calling `broadcast()`. Above it, Spark falls back to a regular shuffle join. You can tune this:
+
+```python
+# Allow broadcast for tables up to 100MB
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", "104857600")
+
+# Disable auto-broadcast entirely
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", "-1")
+```
+
+Rule of thumb: broadcast is safe up to ~200MB per executor. Beyond that, use a shuffle join. A few hundred rows to a few thousand rows is always safe.
 
 ### 2. Filter before you shuffle
 
@@ -228,3 +295,5 @@ flowchart LR
 | How to spot it | `Exchange` in `explain()`, shuffle read/write in Spark UI |
 | How to reduce it | Broadcast join, filter early, avoid unnecessary orderBy/distinct |
 | Shuffle partitions | Default 200 — reduce for small clusters (`spark.sql.shuffle.partitions`) |
+| Two-phase aggregation | groupBy computes partial results locally before shuffling — reduces data crossing the network |
+| AQE | Adaptive Query Execution — Spark revises the plan mid-run based on actual data; auto-tunes shuffle partitions |
