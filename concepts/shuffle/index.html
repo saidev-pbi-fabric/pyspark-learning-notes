@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../pivot/">
+        <link rel="prev" href="../joins/">
       
       
-        <link rel="next" href="../../case-studies/green-grid/">
+        <link rel="next" href="../pivot/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Window Functions - PySpark Learning Notes</title>
+        <title>Shuffle - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#window-functions" class="md-skip">
+        <a href="#shuffle-in-spark" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Window Functions
+              Shuffle
             
           </span>
         </div>
@@ -1191,10 +1191,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../shuffle/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shuffle
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1210,6 +1237,253 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-single-biggest-cause-of-slow-spark-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The single biggest cause of slow Spark jobs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-a-shuffle-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a shuffle is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-actually-happens-during-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What actually happens during a shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-triggers-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What triggers a shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-does-not-trigger-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What does NOT trigger a shuffle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-shuffle-is-expensive-the-three-costs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why shuffle is expensive — the three costs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why shuffle is expensive — the three costs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-disk-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Disk writes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-network-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Network I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-re-partitioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Re-partitioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-spot-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to spot a shuffle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to spot a shuffle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1 — explain()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-spark-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2 — Spark UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shuffle-partition-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The shuffle partition setting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-reduce-shuffles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to reduce shuffles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to reduce shuffles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-broadcast-join-eliminate-the-shuffle-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Broadcast join — eliminate the shuffle entirely
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-filter-before-you-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Filter before you shuffle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-avoid-unnecessary-wide-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Avoid unnecessary wide operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shuffle-and-the-physical-plan-the-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shuffle and the physical plan — the connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1247,37 +1521,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Window Functions
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../window-functions/" class="md-nav__link">
         
   
   
@@ -1293,92 +1540,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#already-familiar-from-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Already familiar from SQL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-frozen-sensor-problem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The frozen sensor problem
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#detecting-frozen-sensors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Detecting frozen sensors
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#one-gotcha-use-window-directly-in-groupby" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        One gotcha — use window() directly in groupBy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#groupby-vs-window" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        groupBy vs window()
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-this-fits-in-the-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Where this fits in the pipeline
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1541,10 +1702,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#already-familiar-from-sql" class="md-nav__link">
+  <a href="#the-single-biggest-cause-of-slow-spark-jobs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Already familiar from SQL
+        The single biggest cause of slow Spark jobs
       
     </span>
   </a>
@@ -1552,10 +1713,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-frozen-sensor-problem" class="md-nav__link">
+  <a href="#what-a-shuffle-is" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The frozen sensor problem
+        What a shuffle is
       
     </span>
   </a>
@@ -1563,10 +1724,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#detecting-frozen-sensors" class="md-nav__link">
+  <a href="#what-actually-happens-during-a-shuffle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Detecting frozen sensors
+        What actually happens during a shuffle
       
     </span>
   </a>
@@ -1574,10 +1735,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#one-gotcha-use-window-directly-in-groupby" class="md-nav__link">
+  <a href="#what-triggers-a-shuffle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        One gotcha — use window() directly in groupBy
+        What triggers a shuffle
       
     </span>
   </a>
@@ -1585,10 +1746,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#groupby-vs-window" class="md-nav__link">
+  <a href="#what-does-not-trigger-a-shuffle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        groupBy vs window()
+        What does NOT trigger a shuffle
       
     </span>
   </a>
@@ -1596,10 +1757,171 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#where-this-fits-in-the-pipeline" class="md-nav__link">
+  <a href="#why-shuffle-is-expensive-the-three-costs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Where this fits in the pipeline
+        Why shuffle is expensive — the three costs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why shuffle is expensive — the three costs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-disk-writes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Disk writes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-network-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Network I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-re-partitioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Re-partitioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-spot-a-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to spot a shuffle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to spot a shuffle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1 — explain()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-spark-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2 — Spark UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-shuffle-partition-setting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The shuffle partition setting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-reduce-shuffles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to reduce shuffles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to reduce shuffles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-broadcast-join-eliminate-the-shuffle-entirely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Broadcast join — eliminate the shuffle entirely
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-filter-before-you-shuffle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Filter before you shuffle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-avoid-unnecessary-wide-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Avoid unnecessary wide operations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shuffle-and-the-physical-plan-the-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shuffle and the physical plan — the connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
       
     </span>
   </a>
@@ -1623,80 +1945,238 @@
 
 
 
-<h1 id="window-functions">Window functions<a class="headerlink" href="#window-functions" title="Permanent link">&para;</a></h1>
-<h2 id="already-familiar-from-sql">Already familiar from SQL<a class="headerlink" href="#already-familiar-from-sql" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">AVG</span><span class="p">(</span><span class="n">Heart_Rate</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">User_ID</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">Timestamp</span><span class="p">)</span>
-</code></pre></div>
-<p>PySpark's window functions work the same way. They look at rows related to the current row without collapsing them into one. That's what separates them from <code>groupBy</code>.</p>
+<h1 id="shuffle-in-spark">Shuffle in Spark<a class="headerlink" href="#shuffle-in-spark" title="Permanent link">&para;</a></h1>
+<h2 id="the-single-biggest-cause-of-slow-spark-jobs">The single biggest cause of slow Spark jobs<a class="headerlink" href="#the-single-biggest-cause-of-slow-spark-jobs" title="Permanent link">&para;</a></h2>
+<p>Before getting into the definition — here's why shuffle matters. Every time a Spark job is slow for no obvious reason, shuffle is the first thing to check. Understanding it well means you'll know what's causing the slowness and what to do about it.</p>
 <hr />
-<h2 id="the-frozen-sensor-problem">The frozen sensor problem<a class="headerlink" href="#the-frozen-sensor-problem" title="Permanent link">&para;</a></h2>
-<p>A sensor freezes when it gets stuck sending the same heart rate over and over. SantéFlux had 150 frozen readings out of 750,000.</p>
-<p>A working sensor moves. A frozen one flatlines. Detection: bucket readings into 10-minute windows per user. If <code>min == max</code> inside a bucket, the sensor didn't change. Those records skew the city averages and need to be removed before the report runs.</p>
+<h2 id="what-a-shuffle-is">What a shuffle is<a class="headerlink" href="#what-a-shuffle-is" title="Permanent link">&para;</a></h2>
+<p>Think of a classroom exam. 300 papers are distributed across 10 tables — 30 papers per table, randomly mixed. A teacher asks everyone to mark their own papers. Each person works independently on their own 30. That's a narrow transformation — no movement, fast.</p>
+<p>Now the teacher says: "Sort all 300 papers by subject — science in one pile, maths in another, history in another."</p>
+<p>Suddenly, papers have to physically move between tables. The person at table 1 has science, maths, and history mixed together. They need to send maths papers to the maths table, history papers to the history table, and keep only science. Every table is doing this simultaneously, sending and receiving papers across the room.</p>
+<p>That movement of papers between tables — that is the shuffle.</p>
+<p>In Spark: when an operation needs data from multiple partitions to produce its result, Spark has to physically move data across the network between executors. That movement is called a shuffle.</p>
 <hr />
-<h2 id="detecting-frozen-sensors">Detecting frozen sensors<a class="headerlink" href="#detecting-frozen-sensors" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">window</span><span class="p">,</span> <span class="nb">min</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="n">col</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_hashed</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="nb">min</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">),</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="nb">max</span><span class="p">(</span><span class="s2">&quot;Heart_Rate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">)</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># frozen windows</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">df_frozen</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">))</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">df_frozen</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1"># clean data for reporting</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;min_rate&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;max_rate&quot;</span><span class="p">))</span>
-</code></pre></div>
-<p><code>window("Timestamp", "10 minutes")</code> creates buckets: 08:00–08:10, 08:10–08:20, and so on. Same user, same bucket, same group. A frozen sensor — same reading ten times in a row — comes out with identical min and max.</p>
+<h2 id="what-actually-happens-during-a-shuffle">What actually happens during a shuffle<a class="headerlink" href="#what-actually-happens-during-a-shuffle" title="Permanent link">&para;</a></h2>
+<p>A shuffle happens in two stages, and both are expensive.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph Stage1["Stage 1 — Map (write)"]
+        E1["Executor 1\nwrites its rows to disk\nsorted by destination partition"]
+        E2["Executor 2\nwrites its rows to disk\nsorted by destination partition"]
+        E3["Executor 3\nwrites its rows to disk\nsorted by destination partition"]
+    end
+    subgraph Transfer["Network Transfer"]
+        N["Data moves across the network\nbetween executors"]
+    end
+    subgraph Stage2["Stage 2 — Reduce (read)"]
+        R1["Executor 1\nreads rows it needs\nfrom all other executors"]
+        R2["Executor 2\nreads rows it needs\nfrom all other executors"]
+        R3["Executor 3\nreads rows it needs\nfrom all other executors"]
+    end
+    Stage1 --&gt; Transfer --&gt; Stage2</code></pre>
+<p><strong>Stage 1 (Map):</strong> Each executor sorts its data by destination and writes it to local disk. Not RAM — disk. This is the first cost.</p>
+<p><strong>Transfer:</strong> Executors read each other's output over the network. This is the second cost — and the slowest part. Network speed is much lower than RAM speed.</p>
+<p><strong>Stage 2 (Reduce):</strong> Each executor reads the data it received, sorts it again if needed, and processes it.</p>
+<p>Shuffle = disk write + network transfer + disk read. Three expensive operations, every time.</p>
 <hr />
-<h2 id="one-gotcha-use-window-directly-in-groupby">One gotcha — use window() directly in groupBy<a class="headerlink" href="#one-gotcha-use-window-directly-in-groupby" title="Permanent link">&para;</a></h2>
-<p><code>window()</code> creates a struct with <code>start</code> and <code>end</code> inside it. If you attach it with <code>withColumn</code> first and try to reference it by name in <code>groupBy</code>, Spark can't find it.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Fails — CANNOT_RESOLVE_DATAFRAME_COLUMN</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;tw&quot;</span><span class="p">,</span> <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">))</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span> <span class="s2">&quot;tw&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Works</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;hashed_id&quot;</span><span class="p">,</span> <span class="n">window</span><span class="p">(</span><span class="s2">&quot;Timestamp&quot;</span><span class="p">,</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">))</span>
-</code></pre></div>
-<p>Put <code>window()</code> directly in the <code>groupBy</code>. No intermediate column needed.</p>
-<hr />
-<h2 id="groupby-vs-window">groupBy vs window()<a class="headerlink" href="#groupby-vs-window" title="Permanent link">&para;</a></h2>
+<h2 id="what-triggers-a-shuffle">What triggers a shuffle<a class="headerlink" href="#what-triggers-a-shuffle" title="Permanent link">&para;</a></h2>
+<p>These operations always cause a shuffle:</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>groupBy</th>
-<th>window()</th>
+<th>Operation</th>
+<th>Why it shuffles</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Rows returned</td>
-<td>One per group</td>
-<td>Same count as input</td>
+<td><code>groupBy()</code></td>
+<td>All rows for the same group key must land on the same executor</td>
 </tr>
 <tr>
-<td>Collapses data?</td>
-<td>Yes</td>
-<td>No</td>
+<td><code>join()</code> (non-broadcast)</td>
+<td>Matching rows from both DataFrames must find each other</td>
 </tr>
 <tr>
-<td>Use case</td>
-<td>Final aggregation (avg by city)</td>
-<td>Pattern detection (frozen per bucket)</td>
+<td><code>orderBy()</code> / <code>sort()</code></td>
+<td>Global sort requires all data to be redistributed and sorted</td>
+</tr>
+<tr>
+<td><code>distinct()</code> / <code>dropDuplicates()</code></td>
+<td>Duplicates can span partitions — must compare globally</td>
+</tr>
+<tr>
+<td><code>repartition(n)</code></td>
+<td>Explicitly redistributes all data into n new partitions</td>
+</tr>
+<tr>
+<td><code>pivot()</code></td>
+<td>Requires grouping and aggregating across all partitions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-does-not-trigger-a-shuffle">What does NOT trigger a shuffle<a class="headerlink" href="#what-does-not-trigger-a-shuffle" title="Permanent link">&para;</a></h2>
+<p>These operations stay within each partition:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Why it doesn't shuffle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filter()</code> / <code>where()</code></td>
+<td>Each partition filtered independently</td>
+</tr>
+<tr>
+<td><code>select()</code></td>
+<td>Columns dropped per partition — no movement</td>
+</tr>
+<tr>
+<td><code>withColumn()</code></td>
+<td>New column computed per row — stays local</td>
+</tr>
+<tr>
+<td><code>withColumnRenamed()</code></td>
+<td>Metadata change only</td>
+</tr>
+<tr>
+<td><code>drop()</code></td>
+<td>Column removed per partition</td>
+</tr>
+<tr>
+<td><code>limit(n)</code></td>
+<td>Takes n rows from available partitions</td>
+</tr>
+<tr>
+<td><code>coalesce(n)</code></td>
+<td>Merges adjacent partitions on the same executor — no network</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="where-this-fits-in-the-pipeline">Where this fits in the pipeline<a class="headerlink" href="#where-this-fits-in-the-pipeline" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Raw ingest → mask names → hash + salt IDs → detect frozen sensors → aggregate → report
+<h2 id="why-shuffle-is-expensive-the-three-costs">Why shuffle is expensive — the three costs<a class="headerlink" href="#why-shuffle-is-expensive-the-three-costs" title="Permanent link">&para;</a></h2>
+<h3 id="1-disk-writes">1. Disk writes<a class="headerlink" href="#1-disk-writes" title="Permanent link">&para;</a></h3>
+<p>Before data can move, executors write their output to local disk. RAM is fast. Disk is slow. On every shuffle, your data goes from RAM → disk → network → disk → RAM on the other side.</p>
+<h3 id="2-network-io">2. Network I/O<a class="headerlink" href="#2-network-io" title="Permanent link">&para;</a></h3>
+<p>Data physically moves between machines. Network bandwidth is shared across the cluster. On a large job with many executors, all of them are sending and receiving simultaneously — the network becomes the bottleneck.</p>
+<h3 id="3-re-partitioning">3. Re-partitioning<a class="headerlink" href="#3-re-partitioning" title="Permanent link">&para;</a></h3>
+<p>After the transfer, data needs to be reorganised into new partitions. This takes CPU and memory. If the new partitions are uneven (data skew — many rows going to one partition and few to others), some executors do all the work while others sit idle.</p>
+<hr />
+<h2 id="how-to-spot-a-shuffle">How to spot a shuffle<a class="headerlink" href="#how-to-spot-a-shuffle" title="Permanent link">&para;</a></h2>
+<h3 id="method-1-explain">Method 1 — <code>explain()</code><a class="headerlink" href="#method-1-explain" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
 </code></pre></div>
-<p>The frozen sensor check sits between hashing and final aggregation. Clean data only goes into the Health Trends Report.</p>
-<p>See <a href="../hashing/">Hashing &amp; Salting</a> for why <code>hashed_id</code> is used instead of <code>User_ID</code> directly.</p>
+<p>Look for <code>Exchange</code> in the output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>== Physical Plan ==
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>AdaptiveSparkPlan
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>+- HashAggregate
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   +- Exchange hashpartitioning(city, 200)   ← shuffle here
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>      +- Scan parquet
+</code></pre></div>
+<p>Every <code>Exchange</code> in the physical plan is a shuffle. The <code>200</code> is the number of shuffle partitions Spark will create after the shuffle.</p>
+<h3 id="method-2-spark-ui">Method 2 — Spark UI<a class="headerlink" href="#method-2-spark-ui" title="Permanent link">&para;</a></h3>
+<p>Open the Spark UI and look at the Stage details for a slow job. You'll see:</p>
+<ul>
+<li><strong>Shuffle Write</strong> — how much data each executor wrote to disk in Stage 1</li>
+<li><strong>Shuffle Read</strong> — how much data each executor pulled over the network in Stage 2</li>
+</ul>
+<p>Large shuffle read/write numbers = expensive shuffle. If shuffle read is in the GBs, that's where your time is going.</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Spark UI\nStages tab"] --&gt; B["Click slow stage"]
+    B --&gt; C{"Shuffle Read/Write\nmetrics shown?"}
+    C --&gt;|"Yes — large values"| D["Shuffle is the bottleneck"]
+    C --&gt;|"No / small values"| E["Look elsewhere\n(CPU, spill, skew)"]</code></pre>
+<hr />
+<h2 id="the-shuffle-partition-setting">The shuffle partition setting<a class="headerlink" href="#the-shuffle-partition-setting" title="Permanent link">&para;</a></h2>
+<p>After a shuffle, Spark creates new partitions. The default number is <strong>200</strong>, controlled by:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="s2">&quot;200&quot;</span><span class="p">)</span>  <span class="c1"># default</span>
+</code></pre></div>
+<p>200 partitions made sense for large clusters. On Databricks Free Edition with 2 workers, 200 shuffle partitions means 200 tiny tasks — most of them smaller than a few KB. This is overhead without benefit.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># For small clusters or small data — reduce shuffle partitions</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Then run your groupBy / join</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p>A good starting point: set shuffle partitions to roughly 2–4× your number of cores. On Free Edition with 2 workers and 4 cores each = 8 cores → set to 8 or 16.</p>
+<hr />
+<h2 id="how-to-reduce-shuffles">How to reduce shuffles<a class="headerlink" href="#how-to-reduce-shuffles" title="Permanent link">&para;</a></h2>
+<h3 id="1-broadcast-join-eliminate-the-shuffle-entirely">1. Broadcast join — eliminate the shuffle entirely<a class="headerlink" href="#1-broadcast-join-eliminate-the-shuffle-entirely" title="Permanent link">&para;</a></h3>
+<p>When one side of a join is small (a few hundred rows to a few hundred MB), broadcast it. Spark sends a full copy to every executor — no shuffle needed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">broadcast</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Without broadcast — both tables shuffle</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">,</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1"># With broadcast — df_state_codes goes to every executor, no shuffle</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">df_result</span> <span class="o">=</span> <span class="n">df_transactions</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">df_state_codes</span><span class="p">),</span> <span class="s2">&quot;state_code&quot;</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Real example: 10 crore transaction rows joined to a 500-row state codes table. Without broadcast, both tables shuffle — that's 10 crore rows moving across the network. With broadcast, the 500 rows get copied to every executor, and only the large table moves (to its own executors for processing). The 500-row copy is negligible.</p>
+<h3 id="2-filter-before-you-shuffle">2. Filter before you shuffle<a class="headerlink" href="#2-filter-before-you-shuffle" title="Permanent link">&para;</a></h3>
+<p>The less data going into a shuffle, the cheaper it is. Push filters as early as possible — before any groupBy or join.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Worse — shuffle happens on all rows, then filter</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Better — filter first, then shuffle only Mumbai rows</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Mumbai&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;city&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div>
+<p>Spark's optimizer often does this automatically (predicate pushdown), but being explicit never hurts.</p>
+<h3 id="3-avoid-unnecessary-wide-operations">3. Avoid unnecessary wide operations<a class="headerlink" href="#3-avoid-unnecessary-wide-operations" title="Permanent link">&para;</a></h3>
+<p><code>orderBy()</code> is a full global sort — one of the most expensive operations. If you only need the top N rows, use <code>limit()</code> after ordering, or better, use a window function. If you don't need a global sort at all, don't add one.</p>
+<p><code>distinct()</code> on a large DataFrame is expensive. If you know duplicates are rare, question whether you need it.</p>
+<hr />
+<h2 id="shuffle-and-the-physical-plan-the-connection">Shuffle and the physical plan — the connection<a class="headerlink" href="#shuffle-and-the-physical-plan-the-connection" title="Permanent link">&para;</a></h2>
+<p>Your class notes made this connection:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>explain command → groupBy → Exchange (shuffle)
+</code></pre></div>
+<p>Now the full picture:</p>
+<pre class="mermaid"><code>flowchart LR
+    A["df.groupBy('city').count()"] --&gt;|"wide transformation"| B["Shuffle triggered"]
+    B --&gt;|"visible as"| C["Exchange in explain()"]
+    B --&gt;|"visible as"| D["Shuffle Read/Write\nin Spark UI"]
+    B --&gt;|"cost"| E["Disk write + Network + Disk read"]</code></pre>
+<p><code>groupBy</code> is a wide transformation → triggers a shuffle → <code>Exchange</code> appears in the physical plan → you see shuffle read/write metrics in the Spark UI. All four are describing the same thing at different levels.</p>
+<hr />
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>One line</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shuffle</td>
+<td>Data moving across the network between executors — caused by wide transformations</td>
+</tr>
+<tr>
+<td>What causes it</td>
+<td>groupBy, join (non-broadcast), orderBy, distinct, repartition</td>
+</tr>
+<tr>
+<td>What doesn't</td>
+<td>filter, select, withColumn, coalesce</td>
+</tr>
+<tr>
+<td>Three costs</td>
+<td>Disk write → network transfer → disk read</td>
+</tr>
+<tr>
+<td>How to spot it</td>
+<td><code>Exchange</code> in <code>explain()</code>, shuffle read/write in Spark UI</td>
+</tr>
+<tr>
+<td>How to reduce it</td>
+<td>Broadcast join, filter early, avoid unnecessary orderBy/distinct</td>
+</tr>
+<tr>
+<td>Shuffle partitions</td>
+<td>Default 200 — reduce for small clusters (<code>spark.sql.shuffle.partitions</code>)</td>
+</tr>
+</tbody>
+</table>
 
 
 
