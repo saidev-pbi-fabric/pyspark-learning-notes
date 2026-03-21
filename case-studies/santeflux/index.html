@@ -1546,6 +1546,78 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#discussion-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion Questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-privacy-utility-salt-coordination-across-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 — Privacy &amp; Utility: Salt Coordination Across Teams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-performance-architecture-shuffle-wall-from-pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2 — Performance &amp; Architecture: Shuffle Wall from pivot()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-join-strategy-ghost-users-and-when-to-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3 — Join Strategy: Ghost Users and When to Broadcast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-tungsten-advantage-off-heap-memory-and-cluster-sizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q4 — Tungsten Advantage: Off-Heap Memory and Cluster Sizing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-the-boardroom-pitch-one-chart-five-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q5 — The Boardroom Pitch: One Chart, Five Minutes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1723,6 +1795,78 @@
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discussion-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discussion Questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Discussion Questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-privacy-utility-salt-coordination-across-teams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q1 — Privacy &amp; Utility: Salt Coordination Across Teams
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-performance-architecture-shuffle-wall-from-pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q2 — Performance &amp; Architecture: Shuffle Wall from pivot()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-join-strategy-ghost-users-and-when-to-broadcast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q3 — Join Strategy: Ghost Users and When to Broadcast
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-tungsten-advantage-off-heap-memory-and-cluster-sizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q4 — Tungsten Advantage: Off-Heap Memory and Cluster Sizing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q5-the-boardroom-pitch-one-chart-five-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q5 — The Boardroom Pitch: One Chart, Five Minutes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1911,6 +2055,179 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="discussion-questions">Discussion Questions<a class="headerlink" href="#discussion-questions" title="Permanent link">&para;</a></h2>
+<p>These are the five preparation questions from the bootcamp session. Answers written from Chloé's perspective as the lead data engineer.</p>
+<hr />
+<h3 id="q1-privacy-utility-salt-coordination-across-teams">Q1 — Privacy &amp; Utility: Salt Coordination Across Teams<a class="headerlink" href="#q1-privacy-utility-salt-coordination-across-teams" title="Permanent link">&para;</a></h3>
+<p><strong>If different teams use different salts, how can they work together? What rules should Chloé suggest to the CPO?</strong></p>
+<p>The problem is straightforward: if Team A hashes <code>User_ID</code> with salt <code>"TeamA_2025"</code> and Team B hashes the same <code>User_ID</code> with salt <code>"TeamB_2025"</code>, the resulting hashes are completely different strings. A join between their datasets on <code>hashed_name</code> returns zero rows. The data looks clean, the join runs without errors, but the output is empty. That is worse than a visible crash — it silently produces wrong results.</p>
+<p><strong>What Chloé should propose to the CPO:</strong></p>
+<ol>
+<li>
+<p><strong>One company salt, stored in a secrets vault.</strong> Databricks Secrets (backed by Azure Key Vault) holds the salt as a named secret. No team stores it in a notebook or a config file. Every pipeline that needs to hash <code>User_ID</code> reads it from the same vault path at runtime.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">salt</span> <span class="o">=</span> <span class="n">dbutils</span><span class="o">.</span><span class="n">secrets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;santeflux&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;user_id_salt&quot;</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Access control on the vault, not on the salt string.</strong> The CPO grants access to the Databricks secret scope by team, not by individual. A team either has permission to read the salt or it doesn't. This replaces informal "share the string over Slack" workflows with a proper access log.</p>
+</li>
+<li>
+<p><strong>Salt versioning policy.</strong> If the salt ever needs to change (rotation policy or a breach), every existing hash becomes unmatchable. All historical data must be re-hashed before the new salt goes live. This is expensive, so the CPO needs to treat the salt like a primary key — stable, versioned, change only with a migration plan.</p>
+</li>
+<li>
+<p><strong>Document the dependency.</strong> Every dataset that uses a hashed ID should have a metadata note: "hashed with <code>santeflux/user_id_salt</code> v1, applied using SHA-256." Any analyst joining two hashed datasets can verify they used the same version.</p>
+</li>
+</ol>
+<p><strong>The core trade-off:</strong> Salting adds security (stops rainbow table attacks) but turns <code>User_ID</code> into a coordination contract. The salt is the shared secret that makes cross-team joins possible. Manage it like infrastructure, not like a password someone typed in a notebook three months ago.</p>
+<hr />
+<h3 id="q2-performance-architecture-shuffle-wall-from-pivot">Q2 — Performance &amp; Architecture: Shuffle Wall from pivot()<a class="headerlink" href="#q2-performance-architecture-shuffle-wall-from-pivot" title="Permanent link">&para;</a></h3>
+<p><strong>Why does pivot() create more network stress than a simple filter()? How would you explain Shuffle costs to a non-technical boss?</strong></p>
+<p><strong>The technical reason:</strong></p>
+<p>A <code>filter()</code> is a narrow transformation. Each executor looks at its own rows and decides: keep this one or drop it. No data moves between machines. Ten executors work in parallel, independently.</p>
+<p>A <code>pivot()</code> is a wide transformation. To compute <code>max(Heart_Rate)</code> for the combination of <code>ville = Paris</code> and <code>Subscription_Type = Free</code>, Spark needs <strong>every row</strong> where <code>ville = Paris</code> and <code>Subscription_Type = Free</code> to land on <strong>the same executor</strong>. Rows currently spread across 10 machines need to be sorted by their group key and sent across the network to the right executor before any aggregation can start. This cross-network movement is the shuffle.</p>
+<p>The "Shuffle Wall" in the Spark UI is the stage boundary where all tasks in Stage N must complete before Stage N+1 can begin. Nothing moves forward until the last slow executor finishes sending its data.</p>
+<p><strong>How to explain it to a non-technical boss:</strong></p>
+<blockquote>
+<p>"Imagine you have 10 employees, each with a pile of 75,000 health records on their desk. You ask them to remove any record marked 'invalid'. Each person works through their own pile. Fast — no one needs to talk to anyone else.</p>
+<p>Now you ask them to calculate the maximum heart rate for Paris users across all piles. Every person who has a Paris record has to walk across the room and hand it to one designated person. That walking is the shuffle. The more Paris records exist, the more walking happens. And everyone else has to wait for the last person to finish walking before the calculation can start.</p>
+<p>Pivot is that second task. We reduced the data before the pivot — removed frozen sensors and ghost users first — so fewer records needed to walk across the room."</p>
+</blockquote>
+<p><strong>The Spark UI confirms this:</strong> the pivot stage shows an Exchange node (shuffle) in the physical plan, a spike in network I/O, and a clear stage boundary. The filter stage before it shows no Exchange node at all.</p>
+<hr />
+<h3 id="q3-join-strategy-ghost-users-and-when-to-broadcast">Q3 — Join Strategy: Ghost Users and When to Broadcast<a class="headerlink" href="#q3-join-strategy-ghost-users-and-when-to-broadcast" title="Permanent link">&para;</a></h3>
+<p><strong>Which join type finds Ghost Users? When is broadcast() the right choice?</strong></p>
+<p><strong>Finding Ghost Users — two valid approaches:</strong></p>
+<p>Ghost users are rows in <code>vitals</code> with no matching record in <code>subs</code>. Two ways to find them:</p>
+<p><strong>Option A — left_anti join (direct approach):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">df_ghost</span> <span class="o">=</span> <span class="n">vitals_clean_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">df_subs_upd</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">on</span><span class="o">=</span><span class="s2">&quot;hashed_name&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left_anti&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">)</span>
+</code></pre></div>
+<p><code>left_anti</code> returns only left-side rows with no match on the right. One join, no nulls to filter.</p>
+<p><strong>Option B — left join then filter nulls (what Chloé actually did):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">df_joined</span> <span class="o">=</span> <span class="n">vitals_clean_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">broadcast</span><span class="p">(</span><span class="n">df_subs_upd</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">df_ghost</span> <span class="o">=</span> <span class="n">df_joined</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Subscription_Type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_joined</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;Subscription_Type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNotNull</span><span class="p">())</span>
+</code></pre></div>
+<p>This is slightly more work but produces both <code>df_ghost</code> and <code>df_clean</code> from a single join pass, which is more efficient than running two separate joins. Chloé chose this because she needed both outputs anyway.</p>
+<p><strong>When is broadcast() the right choice?</strong></p>
+<p>Broadcast is correct when one table is small enough to fit in executor memory and the other is large. The rule:</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Use broadcast?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Small table &lt; 10 MB (Spark default threshold)</td>
+<td>Auto-broadcast — Spark does it automatically</td>
+</tr>
+<tr>
+<td>Small table 10 MB – 200 MB</td>
+<td>Manual <code>broadcast()</code> hint — safe</td>
+</tr>
+<tr>
+<td>Small table &gt; 200 MB</td>
+<td>Risky — executor memory pressure, may OOM</td>
+</tr>
+<tr>
+<td>Both tables large</td>
+<td>Sort-merge join — no broadcast</td>
+</tr>
+</tbody>
+</table>
+<p>In this case: <code>subs</code> is 10,000 rows at ~125 KB. Trivially safe to broadcast. The physical plan confirmed it: <code>PhotonBroadcastHashJoin BuildRight</code> with <code>EXECUTOR_BROADCAST</code> on the subs side and no Exchange node on the 750,000-row vitals table.</p>
+<p>The broadcast eliminates the shuffle entirely on the large table. Without it, Spark shuffles both tables by join key — 750,000 rows crossing the network unnecessarily.</p>
+<hr />
+<h3 id="q4-tungsten-advantage-off-heap-memory-and-cluster-sizing">Q4 — Tungsten Advantage: Off-Heap Memory and Cluster Sizing<a class="headerlink" href="#q4-tungsten-advantage-off-heap-memory-and-cluster-sizing" title="Permanent link">&para;</a></h3>
+<p><strong>How does off-heap memory change how Chloé picks her cluster size? What metrics should she watch?</strong></p>
+<p><strong>What off-heap means:</strong></p>
+<p>Normal Java programs store objects in JVM heap memory. The JVM's garbage collector periodically scans the heap to free memory from objects no longer in use. During a GC pause, all threads stop — the executor is frozen, tasks stall, and the whole stage slows down. On large datasets with lots of intermediate objects, GC pauses can eat 10–20% of job time.</p>
+<p>Tungsten stores data in <strong>off-heap memory</strong> — raw OS memory, outside the JVM. The garbage collector never touches it. Spark manages the memory layout directly using binary format (like a database does), which is also more CPU cache-friendly.</p>
+<p><strong>What this means for cluster sizing:</strong></p>
+<p>With standard JVM heap: you have to over-provision. If you need 16 GB of working data, you size for 24–32 GB because GC pressure grows non-linearly. You're buying headroom against pauses.</p>
+<p>With Tungsten off-heap: GC pressure drops sharply. You can size more tightly — provision for what the data actually needs, not what GC-related overhead might consume. Less wasted compute cost.</p>
+<p>The off-heap allocation is controlled by:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.memory.offHeap.enabled&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.memory.offHeap.size&quot;</span><span class="p">,</span> <span class="s2">&quot;2g&quot;</span><span class="p">)</span>  <span class="c1"># per executor</span>
+</code></pre></div>
+<p>If off-heap is too small, Spark spills intermediate data to disk — which is slow. If it's too large, you're wasting memory that the OS could use for file caching.</p>
+<p><strong>Metrics to watch in the Spark UI:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Where</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GC Time</td>
+<td>Executor tab</td>
+<td>Should be near zero; spikes mean heap pressure</td>
+</tr>
+<tr>
+<td>Spill (Memory)</td>
+<td>Stage tab</td>
+<td>Data spilling from RAM to disk — add off-heap or reduce partition size</td>
+</tr>
+<tr>
+<td>Spill (Disk)</td>
+<td>Stage tab</td>
+<td>Worse than memory spill — serious memory shortage</td>
+</tr>
+<tr>
+<td>Executor Memory Used</td>
+<td>Executor tab</td>
+<td>If consistently &lt; 60%, you're over-provisioned</td>
+</tr>
+<tr>
+<td>Task Duration Variance</td>
+<td>Stage tab</td>
+<td>High variance = some executors are GC-pausing or spilling while others finish</td>
+</tr>
+<tr>
+<td>Shuffle Read/Write</td>
+<td>Stage tab</td>
+<td>High shuffle volume + GC time together = resize the cluster</td>
+</tr>
+</tbody>
+</table>
+<p>For SantéFlux on serverless Databricks, Photon Engine handles much of this automatically — it runs on native code entirely, so Tungsten's off-heap benefit is built in. On a standard cluster, these settings matter more.</p>
+<hr />
+<h3 id="q5-the-boardroom-pitch-one-chart-five-minutes">Q5 — The Boardroom Pitch: One Chart, Five Minutes<a class="headerlink" href="#q5-the-boardroom-pitch-one-chart-five-minutes" title="Permanent link">&para;</a></h3>
+<p><strong>What one chart shows that Chloé's work keeps the data safe AND delivers the business answer?</strong></p>
+<p><strong>The chart: the City Stress Matrix filtered to one city via the widget.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>| ville  | Free_max_Heart_Rate | Free_min_Heart_Rate | Premium_max_Heart_Rate | Premium_min_Heart_Rate |
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>|--------|---------------------|---------------------|------------------------|------------------------|
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>| Paris  | 120                 | 60                  | 98                     | 55                     |
+</code></pre></div>
+<p><strong>Why this one output proves both things at once:</strong></p>
+<ul>
+<li>
+<p><strong>Data safety:</strong> There are no names, no IDs, no individual records in this table. It is aggregated ranges. No one can reverse-engineer a person from a maximum heart rate. The pipeline stripped every piece of PII before this result was ever computed. The board is looking at the proof of GDPR compliance — not a policy document, the actual output.</p>
+</li>
+<li>
+<p><strong>Business value:</strong> The table answers the question the CPO blocked analytics from answering. Paris Free-tier users hit a max of 120 bpm vs Premium users at 98 bpm. That is a product insight. Are Free users more physically active? Are Premium features attracting a different demographic? The data now supports that conversation.</p>
+</li>
+<li>
+<p><strong>The widget adds one more proof point:</strong> Chloé can toggle between Paris, Lyon, and Marseille live in the room without re-running anything. The pipeline already finished. The board sees that the system is interactive, not a one-time report.</p>
+</li>
+</ul>
+<p><strong>The five-minute pitch structure:</strong></p>
+<ol>
+<li>"750,000 health records. Names masked at ingestion, IDs replaced with cryptographic hashes, stuck sensors removed. Nothing identifiable enters any output." (30 seconds — safety first, because that is what blocked analytics)</li>
+<li>Show the table. "This is what 750,000 records look like after the pipeline — city-level ranges, subscription tier split." (1 minute)</li>
+<li>Toggle the widget. "The board can slice by city. No re-run, no IT ticket." (30 seconds)</li>
+<li>One question back to the room: "Which city do you want to look at first?" (the rest of the five minutes)</li>
+</ol>
+<p>The chart does not need annotations or a legend. The absence of names and IDs is the story. A table of numbers with no personal data in it is the deliverable the CPO asked for.</p>
 
 
 
