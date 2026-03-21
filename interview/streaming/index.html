@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../delta-lake/">
+        <link rel="prev" href="../window-functions/">
       
       
-        <link rel="next" href="../window-functions/">
+        <link rel="next" href="../databricks-fabric/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Performance & Debugging - PySpark Learning Notes</title>
+        <title>Structured Streaming - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#performance-debugging" class="md-skip">
+        <a href="#structured-streaming" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Performance & Debugging
+              Structured Streaming
             
           </span>
         </div>
@@ -1595,37 +1595,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance & Debugging
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../performance-debugging/" class="md-nav__link">
         
   
   
@@ -1641,59 +1614,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#23-spark-caching-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        23. Spark Caching Strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#24-spark-checkpointing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        24. Spark Checkpointing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#25-spark-debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        25. Spark Debugging
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1731,10 +1651,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../streaming/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Structured Streaming
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1750,6 +1697,37 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#22-structured-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        22. Structured Streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1845,32 +1823,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#23-spark-caching-strategy" class="md-nav__link">
+  <a href="#22-structured-streaming" class="md-nav__link">
     <span class="md-ellipsis">
       
-        23. Spark Caching Strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#24-spark-checkpointing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        24. Spark Checkpointing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#25-spark-debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        25. Spark Debugging
+        22. Structured Streaming
       
     </span>
   </a>
@@ -1894,220 +1850,134 @@
 
 
 
-<h1 id="performance-debugging">Performance &amp; Debugging<a class="headerlink" href="#performance-debugging" title="Permanent link">&para;</a></h1>
+<h1 id="structured-streaming">Structured Streaming<a class="headerlink" href="#structured-streaming" title="Permanent link">&para;</a></h1>
 <hr />
-<h2 id="23-spark-caching-strategy">23. Spark Caching Strategy<a class="headerlink" href="#23-spark-caching-strategy" title="Permanent link">&para;</a></h2>
-<p><strong>Q: When should caching be used?</strong></p>
+<h2 id="22-structured-streaming">22. Structured Streaming<a class="headerlink" href="#22-structured-streaming" title="Permanent link">&para;</a></h2>
+<p><strong>Q: How does PySpark support real-time pipelines?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Cache when you reuse the same DataFrame multiple times in a pipeline and the computation to produce it is expensive. Don't cache raw source tables — Delta already handles file skipping and pushdown efficiently. Don't cache data you'll only use once. Cache intermediate aggregations or filtered datasets that feed multiple downstream steps.</p>
+<p>PySpark's Structured Streaming treats a live data stream as an unbounded table — you write the same DataFrame transformations you'd use for batch, and Spark continuously processes new data as it arrives. The output is written incrementally to Delta tables or other sinks, and a checkpoint tracks exactly where the stream is at all times.</p>
 </details>
 <p><strong>Deep dive</strong></p>
-<p>Caching stores a DataFrame in executor memory (or memory + disk) so it doesn't need to be recomputed on each action.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Without cache — df_filtered is computed twice</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;active&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_lookup</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">count</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>           <span class="c1"># Spark runs the full pipeline</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">))</span>  <span class="c1"># Runs again</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># With cache — computed once, reused</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>      <span class="c1"># First action triggers computation and caches result</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">))</span>  <span class="c1"># Read from cache</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Always unpersist when done</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<p>Structured Streaming builds on the DataFrame API, so the transformation code looks almost identical to batch:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Batch version</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df_batch</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;parquet&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/mnt/raw/events&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df_batch</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;active&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Streaming version — same transformations, different read/write</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">df_stream</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;cloudFiles&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;cloudFiles.format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/mnt/raw/events&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">result</span> <span class="o">=</span> <span class="n">df_stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;active&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">result</span><span class="o">.</span><span class="n">writeStream</span> \
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/checkpoints/region_counts&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;/mnt/silver/region_counts&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Cache storage levels:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageLevel</span>
+<p><strong>Common streaming sources:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Platform</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kafka</td>
+<td>Databricks / open</td>
+<td>High-throughput event streams</td>
+</tr>
+<tr>
+<td>Event Hubs</td>
+<td>Azure / Fabric</td>
+<td>Azure-native event ingestion</td>
+</tr>
+<tr>
+<td>Auto Loader (<code>cloudFiles</code>)</td>
+<td>Databricks / Fabric</td>
+<td>File-based incremental ingestion</td>
+</tr>
+<tr>
+<td>Delta table as source</td>
+<td>Both</td>
+<td>Stream from one Delta table to another</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Output modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Behaviour</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>append</code></td>
+<td>Only new rows written</td>
+<td>Immutable event streams</td>
+</tr>
+<tr>
+<td><code>complete</code></td>
+<td>Full result rewritten every trigger</td>
+<td>Aggregations (count, sum)</td>
+</tr>
+<tr>
+<td><code>update</code></td>
+<td>Only changed rows written</td>
+<td>Aggregations with updates</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Triggers — controlling how often Spark processes:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.streaming</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trigger</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>           <span class="c1"># Fastest, drops if OOM</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK</span><span class="p">)</span>       <span class="c1"># Spills to disk if OOM (safer)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">DISK_ONLY</span><span class="p">)</span>             <span class="c1"># Slow, use only for very large data</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>                                      <span class="c1"># Shortcut for MEMORY_AND_DISK_DESER</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Process available data, then stop (good for scheduled runs)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">availableNow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># Process every 5 minutes</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">&quot;5 minutes&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Continuous processing (low latency, experimental)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">continuous</span><span class="o">=</span><span class="s2">&quot;1 second&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>What not to cache:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Don't cache</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Raw Delta tables</td>
-<td>Delta's data skipping + pushdown is already efficient</td>
-</tr>
-<tr>
-<td>DataFrames used only once</td>
-<td>Caching has overhead — wastes memory</td>
-</tr>
-<tr>
-<td>Streaming DataFrames</td>
-<td>Not supported in the same way</td>
-</tr>
-<tr>
-<td>Very large DataFrames</td>
-<td>Risk of OOM or excessive GC pressure</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Signs you need caching:</strong>
-- The same DataFrame appears in multiple branches of your pipeline
-- Spark UI shows the same stage running twice with identical plans
-- Job has iterative computation (loops, graph algorithms)</p>
-<hr />
-<p><strong>Follow-up: What should not be cached?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Raw Delta tables — they already benefit from file skipping, column pruning, and predicate pushdown at the storage layer, so caching them just wastes executor memory. Also avoid caching DataFrames you only read once — the overhead of writing to cache storage isn't worth it for single-use data.</p>
-</details>
-<hr />
-<h2 id="24-spark-checkpointing">24. Spark Checkpointing<a class="headerlink" href="#24-spark-checkpointing" title="Permanent link">&para;</a></h2>
-<p><strong>Q: What is checkpointing?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Checkpointing saves a DataFrame's computed state to durable storage, breaking the lineage chain. Unlike caching (which is memory-based and lost on failure), checkpoints are written to a reliable filesystem and survive executor failures or context resets.</p>
-</details>
-<p><strong>Deep dive</strong></p>
-<p>Every transformation adds a node to the RDD lineage graph. In long-running or iterative jobs, that lineage can become extremely long:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>read → filter → join → groupBy → window → join → groupBy → join → ...
+<p><strong>Watermarking — handling late data:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Allow events to arrive up to 30 minutes late</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">df_watermarked</span> <span class="o">=</span> <span class="n">df_stream</span> \
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">,</span> <span class="s2">&quot;30 minutes&quot;</span><span class="p">)</span> \
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">window</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;event_time&quot;</span><span class="p">),</span> <span class="s2">&quot;10 minutes&quot;</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">))</span> \
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </code></pre></div>
-<p>If any step fails, Spark recomputes the entire lineage from scratch. Checkpointing truncates that chain:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Set checkpoint directory (persistent storage)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setCheckpointDir</span><span class="p">(</span><span class="s2">&quot;/mnt/checkpoints/job_xyz&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Checkpoint a DataFrame — writes to disk and breaks lineage</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">df_intermediate</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Truncated lineage — recovery only goes back to checkpoint, not original source</span>
+<p><strong>Auto Loader (Databricks / Fabric) — the preferred file ingestion pattern:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;cloudFiles&quot;</span><span class="p">)</span> \
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;cloudFiles.format&quot;</span><span class="p">,</span> <span class="s2">&quot;parquet&quot;</span><span class="p">)</span> \
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;cloudFiles.schemaLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/schemas/events&quot;</span><span class="p">)</span> \
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/mnt/raw/events/&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Checkpoint vs Cache:</strong></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Cache</th>
-<th>Checkpoint</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Storage</td>
-<td>Executor memory/disk</td>
-<td>Durable filesystem (HDFS, ADLS, S3)</td>
-</tr>
-<tr>
-<td>Lineage</td>
-<td>Preserved</td>
-<td>Truncated</td>
-</tr>
-<tr>
-<td>Fault tolerant</td>
-<td>No (lost on executor failure)</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Use case</td>
-<td>Reuse within a session</td>
-<td>Long lineage, iterative jobs, streaming</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Structured Streaming checkpoints:</strong></p>
-<p>In streaming, checkpoints are mandatory — they store the stream's current offset and state:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df_stream</span><span class="o">.</span><span class="n">writeStream</span> \
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/checkpoints/stream_xyz&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;/mnt/silver/events&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Without a checkpoint, a streaming job that restarts loses track of where it was in the source and reprocesses data.</p>
-<hr />
-<p><strong>Follow-up: When is checkpointing used?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Two main scenarios: streaming pipelines (mandatory — stores offset and state so restarts resume where they left off) and iterative batch computations like graph algorithms or ML training loops where lineage grows very long. In iterative jobs, checkpointing every few iterations prevents Spark from needing to replay the full history on failure.</p>
-</details>
-<hr />
-<h2 id="25-spark-debugging">25. Spark Debugging<a class="headerlink" href="#25-spark-debugging" title="Permanent link">&para;</a></h2>
-<p><strong>Q: How do you debug slow Spark jobs?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Start with the Spark UI — look at the Stages tab for tasks that are taking disproportionately long, the SQL tab for the physical execution plan, and the Executors tab for GC pressure or memory issues. Most slow jobs fall into three categories: data skew, large shuffles, or insufficient partitioning.</p>
-</details>
-<p><strong>Deep dive</strong></p>
-<p><strong>Step-by-step debug approach:</strong></p>
-<p><strong>1. Check the Spark UI — Stages tab</strong>
-- Are all tasks in a stage completing at similar times, or is one task running 10x longer? → Data skew
-- Are there many stages? → Too many shuffles
-- Is shuffle read/write size very large? → Reduce data volume before shuffle</p>
-<p><strong>2. Check the SQL tab — physical plan</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Shows logical + physical plan</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;formatted&quot;</span><span class="p">)</span>  <span class="c1"># Cleaner output in Spark 3.x</span>
-</code></pre></div>
-Look for:
-- <code>Exchange</code> nodes → shuffle operations
-- <code>BroadcastExchange</code> → broadcast join (good for small tables)
-- <code>SortMergeJoin</code> → expensive, check if broadcast is possible
-- <code>Filter</code> pushed below <code>Scan</code> → predicate pushdown working</p>
-<p><strong>3. Check the Executors tab</strong>
-- High GC time (&gt;10% of task time) → memory pressure, tune executor memory or reduce data
-- Some executors doing much more work than others → skew</p>
-<p><strong>Common root causes and fixes:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Root cause</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>One task takes 100x longer</td>
-<td>Data skew</td>
-<td>Salting, AQE skew join</td>
-</tr>
-<tr>
-<td>Many small stages</td>
-<td>Too many shuffles</td>
-<td>Reduce <code>groupBy</code>/<code>join</code> operations, pre-partition</td>
-</tr>
-<tr>
-<td>OOM errors</td>
-<td>Executor memory too small or cache overuse</td>
-<td>Tune <code>spark.executor.memory</code>, reduce cache</td>
-</tr>
-<tr>
-<td>Long GC pauses</td>
-<td>Too many objects in JVM heap</td>
-<td>Use Tungsten off-heap, increase memory</td>
-</tr>
-<tr>
-<td>Job takes forever but tasks are fast</td>
-<td>Driver bottleneck from <code>.collect()</code></td>
-<td>Avoid collecting large datasets to driver</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Quick diagnostic code:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Check partition sizes</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">it</span><span class="p">:</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">it</span><span class="p">))])</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Check data distribution on a key</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Time a specific operation</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elapsed: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<p>Auto Loader tracks which files have been processed using a checkpoint and only picks up new ones on each run — no manual bookkeeping of watermarks or file lists needed.</p>
+<p><strong>The typical streaming architecture:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Event source (Kafka / Event Hub / landing files)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        ↓
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    Structured Streaming (Spark)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        ↓
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    Bronze Delta table (raw, append-only)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        ↓
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    Streaming job (clean + transform)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        ↓
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    Silver Delta table (validated, structured)
 </code></pre></div>
 <hr />
-<p><strong>Follow-up: Most common cause of slow jobs?</strong></p>
+<p><strong>Follow-up: What does a typical streaming architecture look like?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Data skew and large shuffle operations — they account for the majority of slow job complaints in production. Data skew means one task does the work of a hundred others, making the whole stage wait. Large shuffles mean massive disk I/O and network transfer between stages. Both are visible in the Spark UI within minutes of investigation.</p>
+<p>Event source (Kafka, Event Hubs, or landing files) feeds into a Spark Structured Streaming job, which writes to a Bronze Delta table in append mode. A second streaming or batch job reads Bronze, applies transformations, and writes to Silver. Checkpoints at each stage ensure exactly-once semantics and allow restarts without reprocessing.</p>
 </details>
 
 

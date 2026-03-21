@@ -13,10 +13,8 @@
       
       
       
-        <link rel="prev" href="../delta-lake/">
+        <link rel="prev" href="../databricks-fabric/">
       
-      
-        <link rel="next" href="../window-functions/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>Performance & Debugging - PySpark Learning Notes</title>
+        <title>Pipeline Architecture - PySpark Learning Notes</title>
       
     
     
@@ -78,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#performance-debugging" class="md-skip">
+        <a href="#pipeline-architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Performance & Debugging
+              Pipeline Architecture
             
           </span>
         </div>
@@ -1595,37 +1593,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance & Debugging
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../performance-debugging/" class="md-nav__link">
         
   
   
@@ -1641,59 +1612,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#23-spark-caching-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        23. Spark Caching Strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#24-spark-checkpointing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        24. Spark Checkpointing
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#25-spark-debugging" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        25. Spark Debugging
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1787,10 +1705,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../pipeline-architecture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1806,6 +1751,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#28-incremental-data-engineering-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        28. Incremental Data Engineering Pattern
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-multi-workload-table-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        29. Multi-Workload Table Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-production-pyspark-pipeline-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30. Production PySpark Pipeline Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1845,10 +1843,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#23-spark-caching-strategy" class="md-nav__link">
+  <a href="#28-incremental-data-engineering-pattern" class="md-nav__link">
     <span class="md-ellipsis">
       
-        23. Spark Caching Strategy
+        28. Incremental Data Engineering Pattern
       
     </span>
   </a>
@@ -1856,10 +1854,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#24-spark-checkpointing" class="md-nav__link">
+  <a href="#29-multi-workload-table-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        24. Spark Checkpointing
+        29. Multi-Workload Table Strategy
       
     </span>
   </a>
@@ -1867,10 +1865,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#25-spark-debugging" class="md-nav__link">
+  <a href="#30-production-pyspark-pipeline-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        25. Spark Debugging
+        30. Production PySpark Pipeline Architecture
       
     </span>
   </a>
@@ -1894,220 +1892,222 @@
 
 
 
-<h1 id="performance-debugging">Performance &amp; Debugging<a class="headerlink" href="#performance-debugging" title="Permanent link">&para;</a></h1>
+<h1 id="pipeline-architecture">Pipeline Architecture<a class="headerlink" href="#pipeline-architecture" title="Permanent link">&para;</a></h1>
 <hr />
-<h2 id="23-spark-caching-strategy">23. Spark Caching Strategy<a class="headerlink" href="#23-spark-caching-strategy" title="Permanent link">&para;</a></h2>
-<p><strong>Q: When should caching be used?</strong></p>
+<h2 id="28-incremental-data-engineering-pattern">28. Incremental Data Engineering Pattern<a class="headerlink" href="#28-incremental-data-engineering-pattern" title="Permanent link">&para;</a></h2>
+<p><strong>Q: What is a common incremental processing pattern?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Cache when you reuse the same DataFrame multiple times in a pipeline and the computation to produce it is expensive. Don't cache raw source tables — Delta already handles file skipping and pushdown efficiently. Don't cache data you'll only use once. Cache intermediate aggregations or filtered datasets that feed multiple downstream steps.</p>
+<p>The standard pattern is watermark-based incremental loading: track a high-watermark (the max <code>load_timestamp</code> from the last run), query only new records since that mark, process them, and update the watermark. For streaming sources, Auto Loader or Structured Streaming handles this automatically via checkpoints.</p>
 </details>
 <p><strong>Deep dive</strong></p>
-<p>Caching stores a DataFrame in executor memory (or memory + disk) so it doesn't need to be recomputed on each action.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Without cache — df_filtered is computed twice</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;active&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_lookup</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">count</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>           <span class="c1"># Spark runs the full pipeline</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">))</span>  <span class="c1"># Runs again</span>
+<p><strong>Why incremental matters:</strong></p>
+<p>Full-load pipelines reprocess everything every run — as tables grow, so does compute cost. Incremental pipelines process only what changed. A table with 1 billion rows processed daily full-load vs processing only 500K new rows per day is a 2000x difference in compute.</p>
+<p><strong>Pattern 1: Watermark table approach (batch)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Read last processed timestamp from control table</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">last_watermark</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;pipeline_control&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;pipeline_name&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;customer_events&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;last_processed_ts&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># With cache — computed once, reused</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>      <span class="c1"># First action triggers computation and caches result</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">summary</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">))</span>  <span class="c1"># Read from cache</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Always unpersist when done</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">df_filtered</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Load only new data</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">df_new</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;bronze_events&quot;</span><span class="p">)</span> \
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;load_timestamp&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">last_watermark</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Process</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">df_silver</span> <span class="o">=</span> <span class="n">transform</span><span class="p">(</span><span class="n">df_new</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Write to silver</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">df_silver</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;append&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;silver_events&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Update watermark</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">new_watermark</span> <span class="o">=</span> <span class="n">df_new</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="s2">&quot;load_timestamp&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="s2">    UPDATE pipeline_control</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="s2">    SET last_processed_ts = &#39;</span><span class="si">{</span><span class="n">new_watermark</span><span class="si">}</span><span class="s2">&#39;, updated_at = current_timestamp()</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="s2">    WHERE pipeline_name = &#39;customer_events&#39;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Cache storage levels:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyspark</span><span class="w"> </span><span class="kn">import</span> <span class="n">StorageLevel</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_ONLY</span><span class="p">)</span>           <span class="c1"># Fastest, drops if OOM</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">MEMORY_AND_DISK</span><span class="p">)</span>       <span class="c1"># Spills to disk if OOM (safer)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">df</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">StorageLevel</span><span class="o">.</span><span class="n">DISK_ONLY</span><span class="p">)</span>             <span class="c1"># Slow, use only for very large data</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>                                      <span class="c1"># Shortcut for MEMORY_AND_DISK_DESER</span>
+<p><strong>Pattern 2: Auto Loader (Databricks / Fabric)</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Auto Loader tracks which files have been processed in the checkpoint</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;cloudFiles&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;cloudFiles.format&quot;</span><span class="p">,</span> <span class="s2">&quot;parquet&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;cloudFiles.schemaLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/schemas/events&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/mnt/raw/events/&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">df</span><span class="o">.</span><span class="n">writeStream</span> \
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/checkpoints/bronze_events&quot;</span><span class="p">)</span> \
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">availableNow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \   <span class="c1"># Batch-style: process all new, then stop</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;/mnt/bronze/events&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>What not to cache:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Don't cache</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Raw Delta tables</td>
-<td>Delta's data skipping + pushdown is already efficient</td>
-</tr>
-<tr>
-<td>DataFrames used only once</td>
-<td>Caching has overhead — wastes memory</td>
-</tr>
-<tr>
-<td>Streaming DataFrames</td>
-<td>Not supported in the same way</td>
-</tr>
-<tr>
-<td>Very large DataFrames</td>
-<td>Risk of OOM or excessive GC pressure</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Signs you need caching:</strong>
-- The same DataFrame appears in multiple branches of your pipeline
-- Spark UI shows the same stage running twice with identical plans
-- Job has iterative computation (loops, graph algorithms)</p>
+<p><strong>Pattern 3: CDC with Delta MERGE</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Source contains change records with operation type</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">source</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;cdc_feed&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">DeltaTable</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;silver_customers&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">source</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">),</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;t.customer_id = s.customer_id&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span><span class="o">.</span><span class="n">whenMatchedDelete</span><span class="p">(</span><span class="n">condition</span><span class="o">=</span><span class="s2">&quot;s.op = &#39;D&#39;&quot;</span><span class="p">)</span> \
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a> <span class="o">.</span><span class="n">whenMatchedUpdateAll</span><span class="p">(</span><span class="n">condition</span><span class="o">=</span><span class="s2">&quot;s.op = &#39;U&#39;&quot;</span><span class="p">)</span> \
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a> <span class="o">.</span><span class="n">whenNotMatchedInsertAll</span><span class="p">(</span><span class="n">condition</span><span class="o">=</span><span class="s2">&quot;s.op = &#39;I&#39;&quot;</span><span class="p">)</span> \
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a> <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Idempotency — important for production:</strong></p>
+<p>Incremental pipelines should be idempotent — running the same load twice should produce the same result. Design for this by:
+- Using MERGE instead of append where duplicates are possible
+- Using <code>replaceWhere</code> for partition overwrites
+- Adding deduplication before writing</p>
 <hr />
-<p><strong>Follow-up: What should not be cached?</strong></p>
+<p><strong>Follow-up: Why is incremental processing important?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Raw Delta tables — they already benefit from file skipping, column pruning, and predicate pushdown at the storage layer, so caching them just wastes executor memory. Also avoid caching DataFrames you only read once — the overhead of writing to cache storage isn't worth it for single-use data.</p>
+<p>Cost and scalability. Full reloads become unmanageable as data grows — a 10TB table that adds 1GB daily costs 10x more to process as a full reload than as an incremental load. Incremental patterns also enable near-real-time data freshness without the infrastructure complexity of full streaming pipelines.</p>
 </details>
 <hr />
-<h2 id="24-spark-checkpointing">24. Spark Checkpointing<a class="headerlink" href="#24-spark-checkpointing" title="Permanent link">&para;</a></h2>
-<p><strong>Q: What is checkpointing?</strong></p>
+<h2 id="29-multi-workload-table-strategy">29. Multi-Workload Table Strategy<a class="headerlink" href="#29-multi-workload-table-strategy" title="Permanent link">&para;</a></h2>
+<p><strong>Q: Why maintain separate tables for different workloads?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Checkpointing saves a DataFrame's computed state to durable storage, breaking the lineage chain. Unlike caching (which is memory-based and lost on failure), checkpoints are written to a reliable filesystem and survive executor failures or context resets.</p>
-</details>
-<p><strong>Deep dive</strong></p>
-<p>Every transformation adds a node to the RDD lineage graph. In long-running or iterative jobs, that lineage can become extremely long:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>read → filter → join → groupBy → window → join → groupBy → join → ...
-</code></pre></div>
-<p>If any step fails, Spark recomputes the entire lineage from scratch. Checkpointing truncates that chain:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Set checkpoint directory (persistent storage)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">setCheckpointDir</span><span class="p">(</span><span class="s2">&quot;/mnt/checkpoints/job_xyz&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Checkpoint a DataFrame — writes to disk and breaks lineage</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">df_intermediate</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Truncated lineage — recovery only goes back to checkpoint, not original source</span>
-</code></pre></div>
-<p><strong>Checkpoint vs Cache:</strong></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Cache</th>
-<th>Checkpoint</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Storage</td>
-<td>Executor memory/disk</td>
-<td>Durable filesystem (HDFS, ADLS, S3)</td>
-</tr>
-<tr>
-<td>Lineage</td>
-<td>Preserved</td>
-<td>Truncated</td>
-</tr>
-<tr>
-<td>Fault tolerant</td>
-<td>No (lost on executor failure)</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Use case</td>
-<td>Reuse within a session</td>
-<td>Long lineage, iterative jobs, streaming</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Structured Streaming checkpoints:</strong></p>
-<p>In streaming, checkpoints are mandatory — they store the stream's current offset and state:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">df_stream</span><span class="o">.</span><span class="n">writeStream</span> \
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s2">&quot;/mnt/checkpoints/stream_xyz&quot;</span><span class="p">)</span> \
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;/mnt/silver/events&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Without a checkpoint, a streaming job that restarts loses track of where it was in the source and reprocesses data.</p>
-<hr />
-<p><strong>Follow-up: When is checkpointing used?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Two main scenarios: streaming pipelines (mandatory — stores offset and state so restarts resume where they left off) and iterative batch computations like graph algorithms or ML training loops where lineage grows very long. In iterative jobs, checkpointing every few iterations prevents Spark from needing to replay the full history on failure.</p>
-</details>
-<hr />
-<h2 id="25-spark-debugging">25. Spark Debugging<a class="headerlink" href="#25-spark-debugging" title="Permanent link">&para;</a></h2>
-<p><strong>Q: How do you debug slow Spark jobs?</strong></p>
-<details class="tip" open="open">
-<summary>30-sec answer</summary>
-<p>Start with the Spark UI — look at the Stages tab for tasks that are taking disproportionately long, the SQL tab for the physical execution plan, and the Executors tab for GC pressure or memory issues. Most slow jobs fall into three categories: data skew, large shuffles, or insufficient partitioning.</p>
+<p>Different consumers have different needs. A Spark ETL job wants large Delta files, minimal metadata, and efficient sequential scans. A Power BI DirectLake report wants V-Order optimised files, small row groups, and columns ordered for dictionary encoding. These requirements conflict — optimising one table for both is a compromise that performs poorly for both.</p>
 </details>
 <p><strong>Deep dive</strong></p>
-<p><strong>Step-by-step debug approach:</strong></p>
-<p><strong>1. Check the Spark UI — Stages tab</strong>
-- Are all tasks in a stage completing at similar times, or is one task running 10x longer? → Data skew
-- Are there many stages? → Too many shuffles
-- Is shuffle read/write size very large? → Reduce data volume before shuffle</p>
-<p><strong>2. Check the SQL tab — physical plan</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Shows logical + physical plan</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">df</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;formatted&quot;</span><span class="p">)</span>  <span class="c1"># Cleaner output in Spark 3.x</span>
+<p>The Medallion architecture addresses this by maintaining different table layers with different optimisation profiles:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Bronze (raw, append-only)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    ↓ Spark ETL
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Silver (cleaned, validated — optimised for Spark processing)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    ↓ Spark aggregation
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Gold (aggregated, business-ready — optimised for BI consumption)
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    ↓
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Power BI DirectLake / SQL Endpoint
 </code></pre></div>
-Look for:
-- <code>Exchange</code> nodes → shuffle operations
-- <code>BroadcastExchange</code> → broadcast join (good for small tables)
-- <code>SortMergeJoin</code> → expensive, check if broadcast is possible
-- <code>Filter</code> pushed below <code>Scan</code> → predicate pushdown working</p>
-<p><strong>3. Check the Executors tab</strong>
-- High GC time (&gt;10% of task time) → memory pressure, tune executor memory or reduce data
-- Some executors doing much more work than others → skew</p>
-<p><strong>Common root causes and fixes:</strong></p>
+<p><strong>Silver vs Gold optimisation differences:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Symptom</th>
-<th>Root cause</th>
-<th>Fix</th>
+<th>Concern</th>
+<th>Silver (Spark-optimised)</th>
+<th>Gold (BI-optimised)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>One task takes 100x longer</td>
-<td>Data skew</td>
-<td>Salting, AQE skew join</td>
+<td>File size</td>
+<td>512MB–1GB</td>
+<td>100–256MB (smaller for DirectLake)</td>
 </tr>
 <tr>
-<td>Many small stages</td>
-<td>Too many shuffles</td>
-<td>Reduce <code>groupBy</code>/<code>join</code> operations, pre-partition</td>
+<td>Partitioning</td>
+<td>Date-based for incremental loads</td>
+<td>Minimal — pre-aggregated</td>
 </tr>
 <tr>
-<td>OOM errors</td>
-<td>Executor memory too small or cache overuse</td>
-<td>Tune <code>spark.executor.memory</code>, reduce cache</td>
+<td>Z-ordering</td>
+<td>Join keys, filter columns</td>
+<td>Dimension columns used in slicers</td>
 </tr>
 <tr>
-<td>Long GC pauses</td>
-<td>Too many objects in JVM heap</td>
-<td>Use Tungsten off-heap, increase memory</td>
+<td>Schema</td>
+<td>Granular — all fields retained</td>
+<td>Pre-joined, denormalised</td>
 </tr>
 <tr>
-<td>Job takes forever but tasks are fast</td>
-<td>Driver bottleneck from <code>.collect()</code></td>
-<td>Avoid collecting large datasets to driver</td>
+<td>Row count</td>
+<td>Millions per table</td>
+<td>Thousands to low millions</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Quick diagnostic code:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Check partition sizes</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">df</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">it</span><span class="p">:</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">it</span><span class="p">))])</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Check data distribution on a key</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Time a specific operation</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elapsed: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<p><strong>The Gold layer design principle:</strong></p>
+<p>Gold tables should answer specific business questions, not store raw data. If the question is "monthly revenue by region", the Gold table has exactly those columns — pre-aggregated, pre-joined, ready to query without further transformation.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Gold table — pre-aggregated, BI-ready</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">df_gold</span> <span class="o">=</span> <span class="n">df_silver</span> \
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">,</span> <span class="s2">&quot;product_category&quot;</span><span class="p">)</span> \
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;revenue&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;total_revenue&quot;</span><span class="p">),</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">countDistinct</span><span class="p">(</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;unique_customers&quot;</span><span class="p">),</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">avg</span><span class="p">(</span><span class="s2">&quot;order_value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;avg_order_value&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">df_gold</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span> \
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span> \
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;overwriteSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span> \
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;gold.monthly_revenue_summary&quot;</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>DirectLake considerations (Fabric):</strong></p>
+<p>DirectLake reads Delta files directly without import. For best performance:
+- Keep Gold table files small (better column group skipping in Power BI)
+- V-Order is applied automatically in Fabric
+- Avoid complex nested types — flatten structs before writing to Gold
+- Pre-calculate measures where possible — reduce DAX complexity</p>
 <hr />
-<p><strong>Follow-up: Most common cause of slow jobs?</strong></p>
+<p><strong>Follow-up: Example?</strong></p>
 <details class="tip" open="open">
 <summary>30-sec answer</summary>
-<p>Data skew and large shuffle operations — they account for the majority of slow job complaints in production. Data skew means one task does the work of a hundred others, making the whole stage wait. Large shuffles mean massive disk I/O and network transfer between stages. Both are visible in the Spark UI within minutes of investigation.</p>
+<p>Silver tables are optimised for Spark processing — large files, partitioned by date, Z-ordered on join keys. Gold tables are optimised for BI consumption — smaller files, denormalised schema, pre-aggregated to the grain a report needs. A Power BI report reading from Gold runs in seconds; reading from Silver would trigger a full aggregation scan every time.</p>
+</details>
+<hr />
+<h2 id="30-production-pyspark-pipeline-architecture">30. Production PySpark Pipeline Architecture<a class="headerlink" href="#30-production-pyspark-pipeline-architecture" title="Permanent link">&para;</a></h2>
+<p><strong>Q: What does a production PySpark pipeline look like?</strong></p>
+<details class="tip" open="open">
+<summary>30-sec answer</summary>
+<p>A production pipeline follows the Medallion pattern: raw data lands in Bronze (append-only, minimal transformation), Spark jobs clean and validate it into Silver (structured, typed, deduplicated), and further aggregation produces Gold tables for BI and analytics. Each layer is Delta, each step is orchestrated, monitored, and idempotent.</p>
+</details>
+<p><strong>Deep dive</strong></p>
+<p><strong>Full production architecture:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Landing Zone (raw files — ADLS / S3 / OneLake Files)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        ↓  Auto Loader / Structured Streaming
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Bronze Layer (Delta — raw, append-only, schema-on-read)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        ↓  PySpark batch job or streaming
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Silver Layer (Delta — clean, typed, deduplicated, validated)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        ↓  PySpark aggregation job
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Gold Layer (Delta — pre-aggregated, BI-ready, denormalised)
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        ↓
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    ├── Power BI DirectLake / SQL Endpoint
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    ├── ML feature store
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    └── Downstream APIs / exports
+</code></pre></div>
+<p><strong>What makes a pipeline "production-grade":</strong></p>
+<p><strong>1. Idempotency</strong>
+Every pipeline run produces the same result if run multiple times. Use MERGE, partition overwrites, or deduplication logic.</p>
+<p><strong>2. Data quality gates</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Count-based check</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">row_count</span> <span class="o">=</span> <span class="n">df_silver</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">assert</span> <span class="n">row_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Silver table is empty — pipeline blocked&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1"># Null check on critical columns</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">null_count</span> <span class="o">=</span> <span class="n">df_silver</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;customer_id&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isNull</span><span class="p">())</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">assert</span> <span class="n">null_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">null_count</span><span class="si">}</span><span class="s2"> null customer_ids found&quot;</span>
+</code></pre></div></p>
+<p><strong>3. Schema enforcement</strong>
+Delta rejects schema mismatches by default. Use <code>mergeSchema</code> only when intentional schema evolution is expected.</p>
+<p><strong>4. Lineage and observability</strong>
+- Log row counts at each layer
+- Track pipeline run metadata (start time, end time, rows processed, errors)
+- Use Unity Catalog or Purview for cross-table lineage</p>
+<p><strong>5. Orchestration with retry logic</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Databricks Workflow / Fabric Pipeline</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># Configure: max retries = 3, retry on timeout, alert on failure</span>
+</code></pre></div></p>
+<p><strong>6. Environment separation</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>dev/ sandbox/ (small data, frequent changes)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>staging/ (production data volume, integration testing)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>prod/ (live pipelines, monitored, alerting enabled)
+</code></pre></div></p>
+<p><strong>The mindset shift from junior to senior:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Junior thinking:
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    Write a script → process data → output a file
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Senior thinking:
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    Design for failure — what happens when the source is late?
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    Design for scale — what happens when volume 10x&#39;s?
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    Design for operations — how does oncall diagnose a failure at 2am?
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    Design for correctness — how do you know the numbers are right?
+</code></pre></div>
+<hr />
+<p><strong>Follow-up: Why use this architecture?</strong></p>
+<details class="tip" open="open">
+<summary>30-sec answer</summary>
+<p>The Medallion architecture with Delta tables gives you modularity (each layer has a clear responsibility), reliability (ACID transactions at every layer), observability (row counts, data quality checks at each boundary), and flexibility (Gold tables can be rebuilt from Silver without re-ingesting raw data). It's the architecture that scales from a prototype to a system processing billions of events daily.</p>
 </details>
 
 
